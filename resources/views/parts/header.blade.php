@@ -73,16 +73,16 @@
                                 </a>
                             </div>
                             <ul class="nav navbar-nav">	
-                                <li class="active">
+                                <li class="{{ request()->is('/') ? 'active' : '' }}">
                                     <a href="{{url('/')}}">Home</a>
                                 </li>
-                                <li>
+                                <li class="{{ request()->is('courses') ? 'active' : '' }}">
                                     <a href="{{url('courses')}}">All Courses</a>
                                 </li>
-                                <li>
+                                <li class="{{ request()->is('about') ? 'active' : '' }}">
                                     <a href="{{url('about')}}">About</a>
                                 </li>
-                                <li>
+                                <li class="{{ request()->is('contact') ? 'active' : '' }}">
                                     <a href="{{url('contact')}}">Contact Us</a>
                                 </li>
                             </ul>

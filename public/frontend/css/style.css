@@ -423,12 +423,12 @@
     font-size: 15px;
     padding: 30px 12px;
     cursor: pointer;
-	font-weight: 400;
+	font-weight: 500;
 	display: inline-block;
 }
 .menu-links .nav > li > a:hover {
     background-color: transparent;
-    color: #efbb20;
+    color: #efbb20 !important;
 }
 .menu-links .nav > li > a:active,
 .menu-links .nav > li > a:focus {
@@ -437,7 +437,7 @@
 .menu-links .nav > li.active > a,
 .menu-links .nav > li.current-menu-item > a {
     background-color: transparent;
-    color: #EFBB20;
+    color: #EFBB20 !important;
 }
 .menu-links .nav > li:hover > a {
     color: #EFBB20;
