@@ -26,7 +26,7 @@
                     <div class="container clearfix">
                         <!-- Header Logo ==== -->
                         <div class="menu-logo">
-                            <a href="index.html">
+                            <a href="{{url('/')}}">
                                 
                                 <div class="d-flex align-items-center">
                                     <div>
@@ -58,7 +58,7 @@
                         <!-- Navigation Menu ==== -->
                         <div class="menu-links navbar-collapse collapse justify-content-end" id="menuDropdown">
                             <div class="menu-logo">
-                                <a href="index.html">
+                                <a href="{{url('/')}}">
                                 
                                     <div class="d-flex align-items-center">
                                         <div>
@@ -74,16 +74,16 @@
                             </div>
                             <ul class="nav navbar-nav">	
                                 <li class="active">
-                                    <a href="index-2.html">Home</a>
+                                    <a href="{{url('/')}}">Home</a>
                                 </li>
                                 <li>
-                                    <a href="courses.html">All Courses</a>
+                                    <a href="{{url('courses')}}">All Courses</a>
                                 </li>
                                 <li>
-                                    <a href="about-2.html">About</a>
+                                    <a href="{{url('about')}}">About</a>
                                 </li>
                                 <li>
-                                    <a href="contact-1.html">Contact Us</a>
+                                    <a href="{{url('contact')}}">Contact Us</a>
                                 </li>
                             </ul>
                             

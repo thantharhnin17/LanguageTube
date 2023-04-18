@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +21,16 @@ use App\Http\Controllers\HomeController;
 //     return view('welcome');
 // });
 
+//////////Home////////////
 Route::get('/', [HomeController::class, 'index']);
+
+//////////Course////////////
+Route::resource('courses', CourseController::class);
+
+//////////Course////////////
+Route::resource('about', AboutController::class);
+
+//////////Course////////////
+Route::resource('contact', ContactController::class);
+
+

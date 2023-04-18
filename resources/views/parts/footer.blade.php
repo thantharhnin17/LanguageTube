@@ -5,7 +5,7 @@
             <div class="container">
                 <div class="d-flex align-items-stretch">
                     <div class="pt-logo mr-auto">
-                        <a href="index.html">
+                        <a href="{{url('/')}}">
                             <div class="d-flex align-items-center">
                                 <div>
                                     <i class="fa-solid fa-globe fa-3x mr-2"></i>
@@ -51,7 +51,7 @@
                             <div class="widget footer_widget">
                                 <h5 class="footer-title">School</h5>
                                 <ul>
-                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="{{url('/')}}">Home</a></li>
                                     <li><a href="all.html">All Courses</a></li>
                                     <li><a href="about-1.html">About</a></li>
                                     <li><a href="contact-1.html">Contact</a></li>
