@@ -195,6 +195,13 @@
 .topbar-right ul li a{
 	color:#000;
 }
+.topbar-left ul li a:hover,
+.topbar-right ul li a:hover,
+.topbar-left ul li.active a,
+.topbar-right ul li.active a{
+	color:#f7b205;
+	border-bottom: 1px solid #f7b205;
+}
 .topbar-left ul,
 .topbar-right ul{
 	margin:0;

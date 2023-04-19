@@ -34,3 +34,9 @@ Route::resource('about', AboutController::class);
 Route::resource('contact', ContactController::class);
 
 
+//////////Login////////////
+Route::get('/login', function () {
+        return view('login');
+    });
+
+

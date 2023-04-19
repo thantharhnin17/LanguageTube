@@ -2,7 +2,7 @@
     <div class="page-wraper">
     <div id="loading-icon-bx"></div>
         <!-- Header Top ==== -->
-        <header class="header rs-nav">
+        <header class="header rs-nav shadow">
             <div class="top-bar">
                 <div class="container">
                     <div class="row d-flex justify-content-between">
@@ -14,8 +14,9 @@
                         <div class="topbar-right">
                             <ul>
                                 
-                                <li><a href="login.html">Login</a></li>
-                                <li><a href="register.html">Register</a></li>
+                                <li class="{{ request()->is('login') ? 'active' : '' }}"><a href="/login">Login</a></li>
+                                <li class="{{ request()->is('register') ? 'active' : '' }}"><a href="register.html">Register As Student</a></li>
+                                <li class="{{ request()->is('register') ? 'active' : '' }}"><a href="register.html">Register As Teacher</a></li>
                             </ul>
                         </div>
                     </div>
