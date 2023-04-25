@@ -13,4 +13,10 @@ class Level extends Model
     {
         return $this->belongsTo(Language::class);
     }
+
+    // protected $fillable = ['name'];
+
+    // protected $casts = [
+    //     'name' => 'array',
+    // ];
 }

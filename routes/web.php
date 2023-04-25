@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\LanguageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,12 +18,15 @@ use App\Http\Controllers\ContactController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('main.home');
+});
 
 //////////Home////////////
-Route::get('/', [HomeController::class, 'index']);
+// Route::get('/', function () {
+//     return view('home');
+// });
+// Route::get('/', [HomeController::class, 'index']);
 
 //////////Course////////////
 Route::resource('courses', CourseController::class);
@@ -35,8 +39,26 @@ Route::resource('contact', ContactController::class);
 
 
 //////////Login////////////
-Route::get('/login', function () {
-        return view('login');
-    });
+// Route::get('/login', function () {
+//         return view('login');
+//     });
+
+
+//////////Backend/////////////
+
+Auth::routes();
+
+Route::group(['middleware' => 'auth'], function(){
+
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    //////////Language////////////
+    Route::resource('language', LanguageController::class);
+    Route::get('language/create',[LanguageController::class, 'create']);
+    // Route::post('languages/store',[LanguageController::class, 'create'])->name('language.store');
+
+});
+
+//////////Backend/////////////
 
 
