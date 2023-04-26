@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\BatchController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\LanguageController;
@@ -54,8 +55,20 @@ Route::group(['middleware' => 'auth'], function(){
 
     //////////Language////////////
     Route::resource('language', LanguageController::class);
-    Route::get('language/create',[LanguageController::class, 'create']);
+    // Route::get('language/create',[LanguageController::class, 'create']);
     // Route::post('languages/store',[LanguageController::class, 'create'])->name('language.store');
+
+    //////////Level////////////
+    Route::resource('Level', LevelController::class);
+
+
+     /////////Course////////////
+    Route::resource('course', CourseController::class);
+    Route::get('/get-levels/{id}',[CourseController::class, 'getLevels']);
+
+
+    //////////Batch////////////
+    Route::resource('batch', BatchController::class);
 
 });
 

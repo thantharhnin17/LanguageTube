@@ -1,14 +1,14 @@
 @extends('layouts.admin_layout')
-@section('title', 'Language Setting')
+@section('title', 'Batch Setting')
 @section('content')
 <!--Main container start -->
 <main class="ttr-wrapper">
     <div class="container-fluid">
         <div class="db-breadcrumb">
-            <h4 class="breadcrumb-title">All Languages</h4>
+            <h4 class="breadcrumb-title">All Batches</h4>
             <ul class="db-breadcrumb-list">
                 <li><a href="{{url('home')}}"><i class="fa fa-home"></i>Home</a></li>
-                <li>All Languages</li>
+                <li>All Batches</li>
             </ul>
         </div>	
         <div class="row">
@@ -16,10 +16,10 @@
             <div class="col-lg-12 m-b30">
                 <div class="widget-box">
                     <div class="wc-title">
-                        <h4>All Languages</h4>
+                        <h4>All Batches</h4>
                         <div class="">
-                            <a class="btn btn-primary" href="{{url('language/create')}}" role="button">
-                                <i class="fas fa-solid fa-plus"></i>  Add New Languages
+                            <a class="btn btn-primary" href="{{url('batch/create')}}" role="button">
+                                <i class="fas fa-solid fa-plus"></i>  Add New Batche
                             </a>
                         </div>
                     </div>
@@ -29,34 +29,26 @@
                             <tr>
                               <th>#</th>
                               <th>Name</th>
-                              <th>Levels</th>
                               <th></th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php $no=1; ?>
-                                @foreach($languages as $language)
+                                @foreach($batches as $batch)
                                 <tr>
                                     <td>{{$no++}}</td>
-                                    <td>{{$language->name}}</td>
-                                    <td>
-                                        @foreach($levels as $level)
-                                            @if ($language->id == $level->language_id)
-                                                {{$level->name}}{{ $loop->last ? '' : ',' }}
-                                            @endif
-                                        @endforeach
-                                    </td>
+                                    <td>{{$batch->batch_name}}</td>
                                     <td class="tb-action">
                                         <ul class="mailbox-toolbar">
                                             <li class="mr-2">
-                                                <a href="{{url('language/'.$language->id.'/edit')}}">
+                                                <a href="{{url('batch/'.$batch->id.'/edit')}}">
                                                     <button type="submit" class="btn-circle edit-btn btn-warning" data-toggle="tooltip" title="Edit">
                                                         <i class="fa fa-pen-to-square"></i>
                                                     </button>
                                                 </a>  
                                             </li>
                                             <li>
-                                                <form action="{{url('language/'.$language->id)}}" method="POST">
+                                                <form action="{{url('batch/'.$batch->id)}}" method="POST">
                                                     @csrf
                                                      @method('DELETE')
                                                     <button type="submit" class="btn-circle delete-btn btn-danger" data-toggle="tooltip" title="Delete">

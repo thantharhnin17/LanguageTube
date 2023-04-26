@@ -44,9 +44,13 @@ class LanguageController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'languagename' => 'required|unique:languages|max:100',
+        ]);
+        // Language::create($language);
+
         $language = new Language();
         $language->name = $request->input('languagename');
-
         $language->save();
         //dd($language->id);
 
@@ -55,21 +59,21 @@ class LanguageController extends Controller
 
         $levelNames = $request->input('levelname');
         foreach ($levelNames as $ln) {
-            $level = new Level();
-            $level->name = $ln;
-            $level->language_id = $language->id;
-
-            $level->save();
+            $language->levels()->createMany([
+                ['name' => $ln, 'language_id' => $language->id],
+            ]);
         }
 
-        // $language->save();
+        // $levelNames = $request->input('levelname');
+        // foreach ($levelNames as $ln) {
+        //     $level = new Level();
+        //     $level->name = $ln;
+        //     $level->language_id = $language->id;
 
-        // level::insert([
-        //     [
-        //         'name' => $request->input('levelname'),
-        //         'language_id' => $language->id,
-        //     ]
-        // ]);
+        //     $level->save();
+        // }
+
+        return redirect()->route('language.index')->with('success', 'Course created successfully.');
         
     }
 
@@ -86,7 +90,9 @@ class LanguageController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $language= Language::find($id);
+        $levels = Level::where('language_id', $id)->get();
+        return view('admin.language.edit',compact('language', 'levels'));
     }
 
     /**
@@ -94,7 +100,41 @@ class LanguageController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // $request->validate(
+        //     [
+        //         "name"=>'required',
+        //     ]);
+    
+        $language= Language::find($id);
+        $language->name=request('languagename');
+        $language->save();
+
+        $levelNames = $request->input('levelname');
+        foreach ($levelNames as $ln) {
+            $level = Level::updateOrInsert(
+                ['name' => $ln, 'language_id' => $language->id], 
+                ['name' => $ln, 'language_id' => $language->id]
+            );
+        }
+
+        // $levelIds = $request->input('levelid');
+        // foreach($levelIds as $levelId){
+        //     dd($levelId);
+        // }
+
+        // $levelIds = $request->input('levelid');
+        // foreach($levelIds as $levelId){
+        //     $lel = Level::where('id', $levelId)->get('name');;
+        //     // dd($lel);
+        //     $level = Level::updateOrCreate(
+        //                 ['id' => $levelId, 'name' => $lel, 'language_id' => $language->id], 
+        //                 ['name' => $lel, 'language_id' => $language->id]
+        //             );
+
+        // }
+        
+
+        return redirect()->route('language.index');
     }
 
     /**
@@ -102,6 +142,9 @@ class LanguageController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $language= Language::find($id);
+        $language->delete();
+        return redirect()->route('language.index')
+        ->withSuccess('status','language delete successfully.');
     }
 }

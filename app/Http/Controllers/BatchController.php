@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Level;
-use Illuminate\Http\Request;
+use App\Models\Batch;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
-class LevelController extends Controller
+class BatchController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -23,7 +23,8 @@ class LevelController extends Controller
      */
     public function index()
     {
-        //
+        $batches = Batch::all();
+        return view('admin.batch.show',compact('batches'));
     }
 
     /**
@@ -31,7 +32,7 @@ class LevelController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.batch.create');
     }
 
     /**
@@ -39,13 +40,21 @@ class LevelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'batch_name' => 'required|unique:batches|max:100',
+        ]);
+
+        $batch = new Batch();
+        $batch->batch_name = $request->input('batch_name');
+        $batch->save();
+
+        return redirect()->route('batch.index')->with('success', 'Batch created successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Batch $batch)
     {
         //
     }
@@ -53,7 +62,7 @@ class LevelController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Batch $batch)
     {
         //
     }
@@ -61,7 +70,7 @@ class LevelController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Batch $batch)
     {
         //
     }
@@ -69,11 +78,8 @@ class LevelController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Batch $batch)
     {
-        $level= Level::find($id);
-        $level->delete();
-        return redirect()->route('language.index')
-        ->withSuccess('status','level delete successfully.');
+        //
     }
 }
