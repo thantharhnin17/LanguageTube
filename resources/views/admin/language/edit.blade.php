@@ -27,7 +27,7 @@
                                 <div class="form-group col-12">
                                     <label class="col-form-label">Language Name</label>
                                     <div>
-                                        <input name="languagename" class="form-control" type="text" value="{{$language->name}}">
+                                        <input name="language_name" class="form-control" type="text" value="{{$language->name}}">
                                     </div>
                                 </div>
                                 
@@ -48,7 +48,7 @@
                                                         <label class="col-form-label">Level Name</label>
                                                         <div>
                                                             <input type="hidden" name="levelid[]" value="{{$level->id}}">
-                                                            <input name="levelname[]" class="form-control" type="text" value="{{$level->name}}">
+                                                            <input name="level_name[]" class="form-control" type="text" value="{{$level->name}}">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">

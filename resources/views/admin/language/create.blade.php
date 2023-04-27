@@ -27,8 +27,8 @@
                                 <div class="form-group col-12">
                                     <label class="col-form-label">Language Name</label>
                                     <div>
-                                        <input name="languagename" class="form-control" type="text" value="{{ old('languagename') }}">
-                                        <span class="help-inline">@error('languagename'){{$message}}@enderror</span>
+                                        <input name="language_name" class="form-control" type="text" value="{{ old('language_name') }}">
+                                        <span class="help-inline">@error('language_name'){{$message}}@enderror</span>
                                     </div>
                                 </div>
                                 
@@ -47,7 +47,7 @@
                                                     <div class="col-md-10">
                                                         <label class="col-form-label">Level Name</label>
                                                         <div>
-                                                            <input name="levelname[]" class="form-control" type="text" value="">
+                                                            <input name="level_name[]" class="form-control" type="text" value="">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">

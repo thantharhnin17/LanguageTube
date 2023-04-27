@@ -6,7 +6,7 @@
         <div class="db-breadcrumb">
             <h4 class="breadcrumb-title">Dashboard</h4>
             <ul class="db-breadcrumb-list">
-                <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="{{url('home')}}"><i class="fa fa-home"></i>Home</a></li>
                 <li>Dashboard</li>
             </ul>
         </div>	

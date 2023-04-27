@@ -45,22 +45,22 @@ class LanguageController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'languagename' => 'required|unique:languages|max:100',
+            'language_name' => 'required|unique:languages|max:100',
         ]);
         // Language::create($language);
 
         $language = new Language();
-        $language->name = $request->input('languagename');
+        $language->language_name = $request->input('language_name');
         $language->save();
         //dd($language->id);
 
         // $level = new Level();
         // $level->name = $request->input('levelname');
 
-        $levelNames = $request->input('levelname');
+        $levelNames = $request->input('level_name');
         foreach ($levelNames as $ln) {
             $language->levels()->createMany([
-                ['name' => $ln, 'language_id' => $language->id],
+                ['level_name' => $ln, 'language_id' => $language->id],
             ]);
         }
 
@@ -106,14 +106,14 @@ class LanguageController extends Controller
         //     ]);
     
         $language= Language::find($id);
-        $language->name=request('languagename');
+        $language->language_name=request('language_name');
         $language->save();
 
-        $levelNames = $request->input('levelname');
+        $levelNames = $request->input('level_name');
         foreach ($levelNames as $ln) {
             $level = Level::updateOrInsert(
-                ['name' => $ln, 'language_id' => $language->id], 
-                ['name' => $ln, 'language_id' => $language->id]
+                ['level_name' => $ln, 'language_id' => $language->id], 
+                ['level_name' => $ln, 'language_id' => $language->id]
             );
         }
 

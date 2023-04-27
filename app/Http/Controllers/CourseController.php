@@ -42,7 +42,7 @@ class CourseController extends Controller
 
     public function getLevels($id)
     {
-        $course_levels = Level::where('language_id', $id)->pluck('name', 'id');
+        $course_levels = Level::where('language_id', $id)->pluck('level_name', 'id');
         return response()->json($course_levels);
     }
 
@@ -65,7 +65,7 @@ class CourseController extends Controller
             }
         }
          $request->validate([
-                'coursename'=> 'required',
+                'course_name'=> 'required',
                 'course_language' => 'required',
                 'course_level' => 'required',
                 'description'=> 'required',
@@ -73,10 +73,10 @@ class CourseController extends Controller
             ]);
 
             $course = new Course();
-            $course->name = $request->input('coursename');
+            $course->course_name = $request->input('course_name');
             $course->description = $request->input('description');
             $course->level_id = $request->input('course_level');
-            $course->image = $randomName;
+            $course->course_img = $randomName;
             $course->save();
 
             return redirect()->route('course.index')->with('success', 'Course created successfully.');
@@ -107,7 +107,7 @@ class CourseController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'coursename'=> 'required',
+            'course_name'=> 'required',
             'course_language' => 'required',
             'course_level' => 'required',
             'description'=> 'required'
@@ -124,13 +124,13 @@ class CourseController extends Controller
                 $extension = $request->course_img->extension();
                 $randomName = rand().".".$extension;
                 $request->course_img->storeAs('/public/img/',$randomName);
-                    $course->image = $randomName;
+                    $course->course_img = $randomName;
             }
         }   
         else{
-            $course->image =$request->input('db_course_img');
+            $course->course_img =$request->input('db_course_img');
         }
-            $course->name = $request->input('coursename');
+            $course->course_name = $request->input('course_name');
             $course->description = $request->input('description');
             $course->level_id = $request->input('course_level');
          

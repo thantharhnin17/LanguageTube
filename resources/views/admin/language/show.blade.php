@@ -38,11 +38,11 @@
                                 @foreach($languages as $language)
                                 <tr>
                                     <td>{{$no++}}</td>
-                                    <td>{{$language->name}}</td>
+                                    <td>{{$language->language_name}}</td>
                                     <td>
                                         @foreach($levels as $level)
                                             @if ($language->id == $level->language_id)
-                                                {{$level->name}}{{ $loop->last ? '' : ',' }}
+                                                {{$level->level_name}}{{ $loop->last ? '' : ',' }}
                                             @endif
                                         @endforeach
                                     </td>

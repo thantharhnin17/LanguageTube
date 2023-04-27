@@ -11,6 +11,22 @@
                 <li>All Batches</li>
             </ul>
         </div>	
+        {{-- @if(session('success_message'))
+                    <div class="alert alert-success">{{session('success_message')}}</div>
+                @endif --}}
+        @if(session('success_message'))
+            <script>
+                Swal.fire({
+                    icon: 'success',
+                    title: '{{session('success_message')}}',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    position: 'top-end',
+                    toast: true,
+            });
+            </script>      
+        @endif
+
         <div class="row">
             <!-- Your Profile Views Chart -->
             <div class="col-lg-12 m-b30">
@@ -19,7 +35,7 @@
                         <h4>All Batches</h4>
                         <div class="">
                             <a class="btn btn-primary" href="{{url('batch/create')}}" role="button">
-                                <i class="fas fa-solid fa-plus"></i>  Add New Batche
+                                <i class="fas fa-solid fa-plus"></i>  Add New Batch
                             </a>
                         </div>
                     </div>
@@ -48,13 +64,21 @@
                                                 </a>  
                                             </li>
                                             <li>
-                                                <form action="{{url('batch/'.$batch->id)}}" method="POST">
+                                                <form action="{{url('batch/'.$batch->id)}}" method="POST" id="delete-form{{$batch->id}}">
                                                     @csrf
                                                      @method('DELETE')
-                                                    <button type="submit" class="btn-circle delete-btn btn-danger" data-toggle="tooltip" title="Delete">
+                                                    <button type="button" onclick="confirmDelete({{$batch->id}})" class="btn-circle delete-btn btn-danger" data-toggle="tooltip" title="Delete">
                                                         <i class="fa fa-trash-o"></i>
                                                     </button>
                                                 </form>
+
+                                                {{-- <form id="delete-form{{$batch->id}}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="button" onclick="confirmDelete({{$batch->id}})" class="btn-circle delete-btn btn-danger" data-toggle="tooltip" title="Delete">
+                                                        <i class="fa fa-trash-o"></i>
+                                                    </button>
+                                                </form> --}}
                                             </li>
                                             
 										</ul>
@@ -73,5 +97,4 @@
         </div>
     </div>
 </main>
-
 @endsection

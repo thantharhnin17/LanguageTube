@@ -62,24 +62,37 @@ class BatchController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Batch $batch)
+    public function edit(string $id)
     {
-        //
+        $batch= Batch::find($id);
+        return view('admin.batch.edit',compact('batch'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Batch $batch)
+    public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'batch_name' => 'required|unique:batches|max:100',
+        ]);
+
+        $batch= Batch::find($id);
+        $batch->batch_name=request('batch_name');
+        $batch->save();
+
+        return redirect()->route('batch.index')
+        ->withSuccess('status','batch delete successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Batch $batch)
+    public function destroy(string $id)
     {
-        //
+        $batch= Batch::find($id);
+        $batch->delete();
+        return redirect()->route('batch.index')->with('success_message','Batch has been deleted');
+        // return redirect('/batch')->with('success_message', 'Batch created successfully');
     }
 }

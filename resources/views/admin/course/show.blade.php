@@ -41,11 +41,11 @@
                                 @foreach($courses as $course)
                                 <tr>
                                     <td>{{$no++}}</td>
-                                    <td><img src="{{ asset('storage/img/' . $course->image) }}" width="100px" height="100px" /></td>
-                                    <td>{{$course->name}}</td>
+                                    <td><img src="{{ asset('storage/img/' . $course->course_img) }}" width="100px" height="100px" /></td>
+                                    <td>{{$course->course_name}}</td>
                                     <td><p> {!! $course->description !!} </p></td>
-                                    <td>{{$course->level->language->name}}</td>
-                                    <td>{{$course->level->name}}</td>
+                                    <td>{{$course->level->language->language_name}}</td>
+                                    <td>{{$course->level->level_name}}</td>
                                     <td class="tb-action">
                                         <ul class="mailbox-toolbar">
                                             <li class="mr-2">

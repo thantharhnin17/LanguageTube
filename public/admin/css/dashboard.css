@@ -1,3 +1,4 @@
+/* @import 'sweetalert2/src/sweetalert2.scss'; */
 /*-------------------------------------------------------------------
 [1. Header]
 *------------------------------------------------------------------*/
@@ -1887,4 +1888,8 @@
 .help-inline{
 	font-size: 12px;
 	color: red;
+}
+
+.swal2-select{
+	display: none !important;
 }

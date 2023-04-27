@@ -56,12 +56,6 @@
                 <li>
                     <a href="courses.html" class="ttr-material-button">
                         <span class="ttr-icon"><i class="ti-book"></i></span>
-                        <span class="ttr-label">Learning Platforms</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="courses.html" class="ttr-material-button">
-                        <span class="ttr-icon"><i class="ti-book"></i></span>
                         <span class="ttr-label">Course Batches</span>
                     </a>
                 </li>
@@ -82,6 +76,12 @@
                     </ul>
                 </li>
                 <li class="ttr-seperate"></li>
+                <li>
+                    <a href="{{url('teacher')}}" class="ttr-material-button">
+                        <span class="ttr-icon"><i class="ti-book"></i></span>
+                        <span class="ttr-label">Teachers</span>
+                    </a>
+                </li>
             </ul>
             <!-- sidebar menu end -->
         </nav>

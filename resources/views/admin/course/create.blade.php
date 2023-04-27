@@ -27,8 +27,8 @@
                                 <div class="form-group col-12">
                                     <label class="col-form-label">Course Name</label>
                                     <div>
-                                        <input name="coursename" class="form-control" type="text" value="{{ old('coursename') }}">
-                                        <span class="help-inline">@error('coursename'){{$message}}@enderror</span>
+                                        <input name="course_name" class="form-control" type="text" value="{{ old('course_name') }}">
+                                        <span class="help-inline">@error('course_name'){{$message}}@enderror</span>
                                     </div>
                                 </div>
 
@@ -39,7 +39,7 @@
                                             <option selected value="">Choose Category</option>
                                             @foreach ($languages as $language)
                                               <option value="{{ $language->id }}" {{ old('course_language') == "$language->id" ? 'selected' : '' }}>
-                                                {{ $language->name }}
+                                                {{ $language->language_name }}
                                               </option>
                                             @endforeach 
                                         </select>
