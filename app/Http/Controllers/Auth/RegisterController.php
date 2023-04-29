@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Models\Level;
+use App\Models\Student;
+use App\Models\Language;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -49,11 +54,32 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        $validator = Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'user_type' => ['required', 'string', Rule::in(['admin', 'student', 'teacher'])],
         ]);
+    
+        $userType = $data['user_type'];
+        if ($userType === 'admin') {
+            $validator->mergeRules([
+                'admin_field' => ['sometimes', 'string', 'max:255'],
+            ]);
+        } else if ($userType === 'student') {
+            $validator->mergeRules([
+                'photo'=> 'required',
+                'phone'=> 'required',
+                'dob' => 'required',
+                'gender' => 'required',
+            ]);
+        } else if ($userType === 'teacher') {
+            $validator->mergeRules([
+                'teacher_field' => ['sometimes', 'string', 'max:255'],
+            ]);
+        }
+    
+        return $validator;
     }
 
     /**
@@ -62,12 +88,169 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
+    protected function create(array $data = [])
     {
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        // $userType = $data['user_type'];
+
+        // if ($userType === 'admin') {
+        //     $data['admin_field'] = $data['admin_field'] ?? null;
+        // } else if ($userType === 'student') {
+        //     $data['photo'] = $data['photo'] ?? null;
+        //     $data['dob'] = $data['dob'] ?? null;
+        //     $data['gender'] = $data['gender'] ?? null;
+        // } else if ($userType === 'teacher') {
+        //     $data['teacher_field'] = $data['teacher_field'] ?? null;
+        // }
+
+        // if (isset($data['user_type'])) {
+        //     $data['user_type'] = ucfirst($data['user_type']);
+        // }
+
+        // return static::query()->create($data);
     }
+
+    /**
+     * Show the student registration form.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function showStudentRegistrationForm()
+    {
+        return view('auth.register_student');
+    }
+
+    /**
+     * Create a new student instance after a valid registration.
+     
+     */
+    public function registerStudent(Request $request)
+    {
+        $userRules = [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'user_type' => ['required', 'string', Rule::in(['admin', 'student', 'teacher'])],
+        ];
+    
+        $studentRules = [
+            'photo'=> 'required',
+            'phone'=> 'required',
+            'dob' => 'required',
+            'gender' => 'required',
+        ];
+
+        $studentData = $request->input('student') ? $request->input('student') : [];
+
+        $validator = Validator::make(
+            array_merge($request->all(), $studentData),
+            array_merge($userRules, $studentRules)
+        );
+    
+        if ($validator->fails()) {
+            return redirect('register/student')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $user = new User([
+            'name' => $request->input('student.name'),
+            'email' => $request->input('student.email'),
+            'password' => Hash::make($request->input('student.password')),
+            'user_type' => 'student',
+        ]);
+    
+        $user->save();
+    
+        $student = new Student([
+            'photo' => $request->input('student.photo'),
+            'phone' => $request->input('student.phone'),
+            'dob' => $request->input('student.dob'),
+            'gender' => $request->input('student.gender'),
+        ]);
+    
+        $user->student()->save($student);
+    
+        return redirect('/')->with('success', 'You have been registered as a student!');
+    }
+
+
+    /**
+     * Show the teacher registration form.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function showTeacherRegistrationForm()
+    {
+        $languages = Language::all();
+        $levels = Level::all();
+        return view('auth.register_teacher',compact('languages', 'levels'));
+    }
+
+    /**
+     * Create a new student instance after a valid registration.
+     
+     */
+    public function registerTeacher(Request $request)
+    {
+        $userRules = [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'user_type' => ['required', 'string', Rule::in(['admin', 'student', 'teacher'])],
+        ];
+    
+        $studentRules = [
+            'photo'=> 'required',
+            'phone'=> 'required',
+            'dob' => 'required',
+            'gender' => 'required',
+        ];
+
+        $studentData = $request->input('student') ? $request->input('student') : [];
+
+        $validator = Validator::make(
+            array_merge($request->all(), $studentData),
+            array_merge($userRules, $studentRules)
+        );
+    
+        if ($validator->fails()) {
+            return redirect('register/student')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $user = new User([
+            'name' => $request->input('student.name'),
+            'email' => $request->input('student.email'),
+            'password' => Hash::make($request->input('student.password')),
+            'user_type' => 'student',
+        ]);
+    
+        $user->save();
+    
+        $student = new Student([
+            'photo' => $request->input('student.photo'),
+            'phone' => $request->input('student.phone'),
+            'dob' => $request->input('student.dob'),
+            'gender' => $request->input('student.gender'),
+        ]);
+    
+        $user->student()->save($student);
+    
+        return redirect('/')->with('success', 'You have been registered as a student!');
+    }
+
+
+    public function getLevels($id)
+    {
+        $teach_levels = Level::where('language_id', $id)->pluck('level_name', 'id');
+        return response()->json($teach_levels);
+    }
+
 }

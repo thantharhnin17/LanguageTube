@@ -80,7 +80,12 @@
         <div class="account-container">
             <div class="heading-bx left">
                 <h2 class="title-head">Login to your <span>Account</span></h2>
-                <p>Don't have an account? <a href="register.html">Create one here</a></p>
+                <p>Don't have an account?
+                    <div class="d-flex justify-content-between align-items-center acc-box">
+                        <a href="{{ route('register.student') }}">Create student account</a>
+                        <a href="{{ route('register.teacher') }}">Create teacher account</a>
+                    </div>
+                </p>
             </div>	
             <form class="contact-bx" method="POST" action="{{ route('login') }}">
                 @csrf

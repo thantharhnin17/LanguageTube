@@ -47,28 +47,30 @@
 	<!-- STYLESHEETS ============================================= -->
 	<link rel="stylesheet" type="text/css" href="{{asset ('admin/css/style.css')}}">
 	<link class="skin" rel="stylesheet" type="text/css" href="{{asset ('admin/css/color/color-1.css')}}">
-	
+
+	<!-- External JavaScripts -->
+<script src="{{asset ('admin/js/jquery.min.js')}}"></script>
+<script src="{{asset ('admin/vendors/bootstrap/js/popper.min.js')}}"></script>
+<script src="{{asset ('admin/vendors/bootstrap/js/bootstrap.min.js')}}"></script>
+<script src="{{asset ('admin/vendors/bootstrap-select/bootstrap-select.min.js')}}"></script>
+<script src="{{asset ('admin/vendors/bootstrap-touchspin/jquery.bootstrap-touchspin.js')}}"></script>
+<script src="{{asset ('admin/vendors/magnific-popup/magnific-popup.js')}}"></script>
+<script src="{{asset ('admin/vendors/counter/waypoints-min.js')}}"></script>
+<script src="{{asset ('admin/vendors/counter/counterup.min.js')}}"></script>
+<script src="{{asset ('admin/vendors/imagesloaded/imagesloaded.js')}}"></script>
+<script src="{{asset ('admin/vendors/masonry/masonry.js')}}"></script>
+<script src="{{asset ('admin/vendors/masonry/filter.js')}}"></script>
+<script src="{{asset ('admin/vendors/owl-carousel/owl.carousel.js')}}"></script>
+<script src="{{asset ('admin/js/functions.js')}}"></script>
+<script src="{{asset ('admin/js/contact.js')}}"></script>
+
 </head>
 <body id="bg">
 <div class="page-wraper">
     @yield('content')
 
 </div>
-<!-- External JavaScripts -->
-<script src="{{asset ('admin/js/jquery.min.js')}"></script>
-<script src="{{asset ('admin/vendors/bootstrap/js/popper.min.js')}"></script>
-<script src="{{asset ('admin/vendors/bootstrap/js/bootstrap.min.js')}"></script>
-<script src="{{asset ('admin/vendors/bootstrap-select/bootstrap-select.min.js)}"></script>
-<script src="{{asset ('admin/vendors/bootstrap-touchspin/jquery.bootstrap-touchspin.js')}"></script>
-<script src="{{asset ('admin/vendors/magnific-popup/magnific-popup.js')}"></script>
-<script src="{{asset ('admin/vendors/counter/waypoints-min.js')}"></script>
-<script src="{{asset ('admin/vendors/counter/counterup.min.js')}"></script>
-<script src="{{asset ('admin/vendors/imagesloaded/imagesloaded.js')}"></script>
-<script src="{{asset ('admin/vendors/masonry/masonry.js')}"></script>
-<script src="{{asset ('admin/vendors/masonry/filter.j')}s"></script>
-<script src="{{asset ('admin/vendors/owl-carousel/owl.carousel.js')}"></script>
-<script src="{{asset ('admin/js/functions.js')}"></script>
-<script src="{{asset ('admin/js/contact.js')}"></script>
+
 </body>
 
 </html>

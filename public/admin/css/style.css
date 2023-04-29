@@ -2114,6 +2114,7 @@ button.back-to-top {
     line-height: 32px;
     padding-left: 10px;
     border-left: 5px solid var(--primary);
+	white-space: nowrap;
 }
 .heading-bx.left p{
 	max-width:500px;
@@ -3249,4 +3250,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#391800', end
 	.courses-filter {
 		padding: 15px 15px 0 15px;
 	}
+}
+
+
+/* Login Form */
+.acc-box{
+	border: 0.1px solid rgba(0,0,0,0.1);
+	border-radius: 2px;
+    padding: 10px
+}
+.acc-box a{
+	text-decoration: underline;
 }

@@ -36,7 +36,7 @@
                                     <label class="col-form-label">Course Language</label>
                                     <div>
                                         <select class="form-control" id="course_language" name="course_language">
-                                            <option selected value="">Choose Category</option>
+                                            <option selected value="">Choose Language</option>
                                             @foreach ($languages as $language)
                                               <option value="{{ $language->id }}" {{ old('course_language') == "$language->id" ? 'selected' : '' }}>
                                                 {{ $language->language_name }}
@@ -48,14 +48,14 @@
                                 </div>
 
                                 <div class="form-group col-12 level-div" id="level-div" style="display:none;">
-                                    <label class="col-form-label">Course Level</label>
+                                    {{-- <label class="col-form-label">Course Level</label>
                                     <div>
                                         <select class="form-control" name="course_level" id="course_level">
                                             <option selected value="">Choose Level</option>
                                             
                                         </select>
                                         <span class="help-inline">@error('course_level'){{$message}}@enderror</span>
-                                    </div>
+                                    </div> --}}
                                 </div>
 
                                 <div class="form-group col-12">

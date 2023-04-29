@@ -6,7 +6,9 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\BatchController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +45,17 @@ Route::resource('contact', ContactController::class);
 // Route::get('/login', function () {
 //         return view('login');
 //     });
+Route::get('/register/admin', 'Auth\RegisterController@showAdminRegistrationForm')->name('register.admin');
+Route::post('/register/admin', 'Auth\RegisterController@registerAdmin')->name('register.admin.submit');
+
+// 'Auth\RegisterController@showStudentRegistrationForm'
+Route::get('/register/student', [RegisterController::class, 'showStudentRegistrationForm'])->name('register.student');
+Route::post('/register/student', [RegisterController::class, 'registerStudent'])->name('register.student.submit');
+// Route::resource('student', StudentController::class);
+
+Route::get('/register/teacher', [RegisterController::class, 'showTeacherRegistrationForm'])->name('register.teacher');
+Route::get('/register/teacher/get-teach-levels/{id}',[RegisterController::class, 'getLevels']);
+Route::post('/register/teacher', 'Auth\RegisterController@registerTeacher')->name('register.teacher.submit');
 
 
 //////////Backend/////////////
@@ -64,7 +77,7 @@ Route::group(['middleware' => 'auth'], function(){
 
      /////////Course////////////
     Route::resource('course', CourseController::class);
-    Route::get('/get-levels/{id}',[CourseController::class, 'getLevels']);
+    Route::get('/get-course-levels/{id}',[CourseController::class, 'getLevels']);
 
 
     //////////Batch////////////
