@@ -15,9 +15,7 @@
             </div>	
             <form method="POST" action="{{route('register.student.submit')}}">
                 @csrf
-
-                <input name="user_type" type="hidden" value="student">
-
+                {{-- <input name="user_type" type="hidden" value="student"> --}}
                 <div class="row placeani">
                     <div class="col-lg-12">
                         <div class="form-group">
@@ -33,7 +31,7 @@
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label class="col-form-label">{{ __('Profile Photo') }}Profile Photo</label>
+                            <label class="col-form-label">{{ __('Profile Photo') }}</label>
                             <div>
                                 <input name="student[photo]" type="file" class="form-control-file" value="">
                                 @error('photo')

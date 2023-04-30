@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Models\User;
 use App\Models\Level;
 use App\Models\Student;
+use App\Models\Teacher;
 use App\Models\Language;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -135,7 +136,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'user_type' => ['required', 'string', Rule::in(['admin', 'student', 'teacher'])],
+            // 'user_type' => ['required', 'string', Rule::in(['admin', 'student', 'teacher'])],
         ];
     
         $studentRules = [
@@ -202,48 +203,69 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'user_type' => ['required', 'string', Rule::in(['admin', 'student', 'teacher'])],
+            // 'user_type' => ['required', 'string', Rule::in(['admin', 'student', 'teacher'])],
         ];
     
-        $studentRules = [
+        $teacherRules = [
             'photo'=> 'required',
             'phone'=> 'required',
             'dob' => 'required',
             'gender' => 'required',
+            'education' => ['required', 'string', Rule::in(['undergraduate', 'graduated', 'master'])],
+            'cv_form' => 'required',
+            'reason' => 'required',
         ];
 
-        $studentData = $request->input('student') ? $request->input('student') : [];
+        $teacherData = $request->input('teacher') ? $request->input('teacher') : [];
 
         $validator = Validator::make(
-            array_merge($request->all(), $studentData),
-            array_merge($userRules, $studentRules)
+            array_merge($request->all(), $teacherData),
+            array_merge($userRules, $teacherRules)
         );
     
         if ($validator->fails()) {
-            return redirect('register/student')
+            return redirect('register/teacher')
                         ->withErrors($validator)
                         ->withInput();
         }
 
         $user = new User([
-            'name' => $request->input('student.name'),
-            'email' => $request->input('student.email'),
-            'password' => Hash::make($request->input('student.password')),
-            'user_type' => 'student',
+            'name' => $request->input('teacher.name'),
+            'email' => $request->input('teacher.email'),
+            'password' => Hash::make($request->input('teacher.password')),
+            'user_type' => 'teacher',
         ]);
     
         $user->save();
     
-        $student = new Student([
-            'photo' => $request->input('student.photo'),
-            'phone' => $request->input('student.phone'),
-            'dob' => $request->input('student.dob'),
-            'gender' => $request->input('student.gender'),
+        $teacher = new Teacher([
+            'photo' => $request->input('teacher.photo'),
+            'phone' => $request->input('teacher.phone'),
+            'dob' => $request->input('teacher.dob'),
+            'gender' => $request->input('teacher.gender'),
+            'education' => $request->input('teacher.education'),
+            'cv_form' => $request->input('teacher.cv_form'),
+            'reason' => $request->input('teacher.reason'),
         ]);
     
-        $user->student()->save($student);
+        $user->teacher()->save($teacher);
+
+        $levels = $request->input('teacher.level');
+        $teacher->teacher_levels()->sync($levels);
+        // foreach ($levels as $lel) {
+        //     $teacher->teacher_levels()->createMany([
+        //         ['teacher_id' => $teacher->id, 'level_id' => $lel],
+        //     ]);
+        // }
+
+        $certificates = $request->input('teacher.certificates');
+        foreach ($certificates as $certi) {
+            $teacher->teacher_certificates()->createMany([
+                ['teacher_id' => $teacher->id, 'certi_img' => $certi],
+            ]);
+        }
     
-        return redirect('/')->with('success', 'You have been registered as a student!');
+        return redirect('/')->with('success', 'You have been registered as a teacher!');
     }
 
 

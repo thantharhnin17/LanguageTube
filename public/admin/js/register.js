@@ -13,8 +13,8 @@ $(document).ready(function() {
                     $('#level-div').append(`<label class="form-label">Teach Level</label><br>`);
                     $.each(data, function(key, value) {
                         $('#level-div').append(`<div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="teacher[level[]]" value="`+key+`">
-                        <label class="form-check-label" for="teacher[level[]]">`+value+`</label>
+                        <input class="form-check-input" type="checkbox" name="teacher[level][]" value="`+key+`">
+                        <label class="form-check-label" for="teacher[level][]">`+value+`</label>
                     </div>`);
                     });
                 }

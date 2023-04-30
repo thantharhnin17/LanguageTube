@@ -22,6 +22,13 @@ class Level extends Model
         return $this->hasMany(Course::class);
     }
 
+    //A level can have many teachers
+    public function teachers()
+    {
+        return $this->hasMany(Teacher::class,'teachers_levels','teacher_id','level_id');
+    }
+
+
     // protected $fillable = ['name'];
 
     // protected $casts = [

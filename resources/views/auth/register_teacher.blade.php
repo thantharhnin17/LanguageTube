@@ -13,7 +13,9 @@
                 <h2 class="title-head">{{ __('Register') }} <span>Teacher Account</span></h2>
                 <p>Login Your Account <a href="{{ url('login') }}">Click here</a></p>
             </div>	
-            <form class="">
+            <form method="POST" action="{{route('register.teacher.submit')}}">
+                @csrf
+                {{-- <input name="user_type" type="hidden" value="teacher"> --}}
                 <div class="row placeani">
                     <div class="col-lg-12">
                         <div class="form-group">
@@ -29,7 +31,7 @@
                     </div>
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label class="col-form-label">{{ __('Profile Photo') }}Profile Photo</label>
+                            <label class="col-form-label">{{ __('Profile Photo') }}</label>
                             <div>
                                 <input name="teacher[photo]" type="file" class="form-control-file" value="">
                                 @error('photo')
@@ -122,9 +124,9 @@
                             <label for="teacher[education]" class="form-label">{{ __('Background Education') }}</label>
                             <select class="form-control" name="teacher[education]">
                                 <option selected value="">Choose Background Education</option>
-                                <option value="">Undergraduate</option>
-                                <option value="">Graduated</option>
-                                <option value="">Master</option>   
+                                <option value="undergraduate">Undergraduate</option>
+                                <option value="graduated">Graduated</option>
+                                <option value="master">Master</option>   
                             </select>   
                         </div>
                     </div>
@@ -168,7 +170,7 @@
                         <div class="form-group">
                             <label class="col-form-label">{{ __('Certificates') }}</label>
                             <div>
-                                <input name="teacher[certificates[]]" type="file" multiple class="form-control-file" value="">
+                                <input name="teacher[certificates][]" type="file" multiple class="form-control-file" value="">
                             </div>
                         </div>
                     </div>

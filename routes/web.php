@@ -51,11 +51,10 @@ Route::post('/register/admin', 'Auth\RegisterController@registerAdmin')->name('r
 // 'Auth\RegisterController@showStudentRegistrationForm'
 Route::get('/register/student', [RegisterController::class, 'showStudentRegistrationForm'])->name('register.student');
 Route::post('/register/student', [RegisterController::class, 'registerStudent'])->name('register.student.submit');
-// Route::resource('student', StudentController::class);
 
 Route::get('/register/teacher', [RegisterController::class, 'showTeacherRegistrationForm'])->name('register.teacher');
 Route::get('/register/teacher/get-teach-levels/{id}',[RegisterController::class, 'getLevels']);
-Route::post('/register/teacher', 'Auth\RegisterController@registerTeacher')->name('register.teacher.submit');
+Route::post('/register/teacher', [RegisterController::class, 'registerTeacher'])->name('register.teacher.submit');
 
 
 //////////Backend/////////////
