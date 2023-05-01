@@ -4,7 +4,7 @@
         <!-- side menu logo start -->
         <div class="ttr-sidebar-logo">
             {{-- <a href="#"><img alt="" src="assets/images/logo.png" width="122" height="27"></a> --}}
-            <a href="{{url('/')}}">
+            <a href="{{url('admin/dashboard')}}">
                                 
                 <div class="d-flex align-items-center">
                     <div>
@@ -30,25 +30,25 @@
         <nav class="ttr-sidebar-navi">
             <ul>
                 <li>
-                    <a href="{{url('home')}}" class="ttr-material-button">
+                    <a href="{{url('admin/home')}}" class="ttr-material-button">
                         <span class="ttr-icon"><i class="ti-home"></i></span>
                         <span class="ttr-label">Dashborad</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{url('language')}}" class="ttr-material-button">
+                    <a href="{{url('admin/language')}}" class="ttr-material-button">
                         <span class="ttr-icon"><i class="ti-book"></i></span>
                         <span class="ttr-label">Languages</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{url('course')}}" class="ttr-material-button">
+                    <a href="{{url('admin/course')}}" class="ttr-material-button">
                         <span class="ttr-icon"><i class="ti-book"></i></span>
                         <span class="ttr-label">Courses</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{url('batch')}}" class="ttr-material-button">
+                    <a href="{{url('admin/batch')}}" class="ttr-material-button">
                         <span class="ttr-icon"><i class="ti-book"></i></span>
                         <span class="ttr-label">Batches</span>
                     </a>
@@ -77,9 +77,15 @@
                 </li>
                 <li class="ttr-seperate"></li>
                 <li>
-                    <a href="{{url('teacher')}}" class="ttr-material-button">
+                    <a href="{{url('admin/teacher')}}" class="ttr-material-button">
                         <span class="ttr-icon"><i class="ti-book"></i></span>
                         <span class="ttr-label">Teachers</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url('admin/student')}}" class="ttr-material-button">
+                        <span class="ttr-icon"><i class="ti-book"></i></span>
+                        <span class="ttr-label">Students</span>
                     </a>
                 </li>
             </ul>

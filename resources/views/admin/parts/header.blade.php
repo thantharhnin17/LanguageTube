@@ -9,7 +9,7 @@
         <!--logo start -->
         <div class="ttr-logo-box">
             <div>
-                <a href="{{url('/')}}"  class="ttr-logo text-white">
+                <a href="{{url('admin/home')}}"  class="ttr-logo text-white">
                                 
                     <div class="d-flex align-items-center">
                         <div>

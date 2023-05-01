@@ -7,8 +7,8 @@
         <div class="db-breadcrumb">
             <h4 class="breadcrumb-title">Add New Batch</h4>
             <ul class="db-breadcrumb-list">
-                <li><a href="{{url('home')}}"><i class="fa fa-home"></i>Home</a></li>
-                <li><a href="{{url('batch')}}"><i class="fa fa-home"></i>Batches</a></li>
+                <li><a href="{{url('admin/home')}}"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="{{url('admin/batch')}}"><i class="fa fa-home"></i>Batches</a></li>
                 <li>Add New Batch</li>
             </ul>
         </div>	

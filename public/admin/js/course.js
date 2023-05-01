@@ -6,7 +6,7 @@ $(document).ready(function() {
         var course_language_id = $(this).val();
         if(course_language_id) {
             $.ajax({
-                url: '/get-course-levels/'+course_language_id,
+                url: 'get-course-levels/'+course_language_id,
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {

@@ -7,8 +7,8 @@
         <div class="db-breadcrumb">
             <h4 class="breadcrumb-title">Add New Course</h4>
             <ul class="db-breadcrumb-list">
-                <li><a href="{{url('home')}}"><i class="fa fa-home"></i>Home</a></li>
-                <li><a href="{{url('course')}}"><i class="fa fa-home"></i>Courses</a></li>
+                <li><a href="{{url('admin/home')}}"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="{{url('admin/course')}}"><i class="fa fa-home"></i>Courses</a></li>
                 <li>Add New Course</li>
             </ul>
         </div>	

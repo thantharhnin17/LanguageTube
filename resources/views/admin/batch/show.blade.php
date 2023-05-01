@@ -7,7 +7,7 @@
         <div class="db-breadcrumb">
             <h4 class="breadcrumb-title">All Batches</h4>
             <ul class="db-breadcrumb-list">
-                <li><a href="{{url('home')}}"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="{{url('admin/home')}}"><i class="fa fa-home"></i>Home</a></li>
                 <li>All Batches</li>
             </ul>
         </div>	
@@ -34,7 +34,7 @@
                     <div class="wc-title">
                         <h4>All Batches</h4>
                         <div class="">
-                            <a class="btn btn-primary" href="{{url('batch/create')}}" role="button">
+                            <a class="btn btn-primary" href="{{url('admin/batch/create')}}" role="button">
                                 <i class="fas fa-solid fa-plus"></i>  Add New Batch
                             </a>
                         </div>
@@ -64,7 +64,7 @@
                                                 </a>  
                                             </li>
                                             <li>
-                                                <form action="{{url('batch/'.$batch->id)}}" method="POST" id="delete-form{{$batch->id}}">
+                                                <form action="{{url('admin/batch/'.$batch->id)}}" method="POST" id="delete-form{{$batch->id}}">
                                                     @csrf
                                                      @method('DELETE')
                                                     <button type="button" onclick="confirmDelete({{$batch->id}})" class="btn-circle delete-btn btn-danger" data-toggle="tooltip" title="Delete">

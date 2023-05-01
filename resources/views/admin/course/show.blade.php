@@ -7,7 +7,7 @@
         <div class="db-breadcrumb">
             <h4 class="breadcrumb-title">All Courses</h4>
             <ul class="db-breadcrumb-list">
-                <li><a href="{{url('home')}}"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="{{url('admin/home')}}"><i class="fa fa-home"></i>Home</a></li>
                 <li>All Courses</li>
             </ul>
         </div>	
@@ -18,7 +18,7 @@
                     <div class="wc-title">
                         <h4>All Courses</h4>
                         <div class="">
-                            <a class="btn btn-primary" href="{{url('course/create')}}" role="button">
+                            <a class="btn btn-primary" href="{{url('admin/course/create')}}" role="button">
                                 <i class="fas fa-solid fa-plus"></i>  Add New Courses
                             </a>
                         </div>

@@ -3262,3 +3262,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#391800', end
 .acc-box a{
 	text-decoration: underline;
 }
+
+
+.invalid-feedback{
+	display: block;
+}

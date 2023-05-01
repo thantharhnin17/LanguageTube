@@ -109,7 +109,7 @@
                                 <input class="form-check-input" type="radio" name="teacher[gender]" id="female" value="female">
                                 <label class="form-check-label" for="female">Female</label>
                             </div>
-                            @error('dob')
+                            @error('gender')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>    

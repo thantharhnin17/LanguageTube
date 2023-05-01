@@ -7,6 +7,7 @@ use App\Http\Controllers\BatchController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\Auth\RegisterController;
 
@@ -61,7 +62,7 @@ Route::post('/register/teacher', [RegisterController::class, 'registerTeacher'])
 
 Auth::routes();
 
-Route::group(['middleware' => 'auth'], function(){
+Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function(){
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -76,11 +77,18 @@ Route::group(['middleware' => 'auth'], function(){
 
      /////////Course////////////
     Route::resource('course', CourseController::class);
-    Route::get('/get-course-levels/{id}',[CourseController::class, 'getLevels']);
+    Route::get('course/get-course-levels/{id}',[CourseController::class, 'getLevels']);
 
 
     //////////Batch////////////
     Route::resource('batch', BatchController::class);
+
+
+    //////////Student////////////
+    Route::resource('student', StudentController::class);
+
+    //////////Teacher////////////
+    Route::resource('teacher', TeacherController::class);
 
 });
 

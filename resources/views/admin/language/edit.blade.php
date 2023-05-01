@@ -7,8 +7,8 @@
         <div class="db-breadcrumb">
             <h4 class="breadcrumb-title">Edit Language</h4>
             <ul class="db-breadcrumb-list">
-                <li><a href="{{url('home')}}"><i class="fa fa-home"></i>Home</a></li>
-                <li><a href="{{url('language')}}"><i class="fa fa-home"></i>Languages</a></li>
+                <li><a href="{{url('admin/home')}}"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="{{url('admin/language')}}"><i class="fa fa-home"></i>Languages</a></li>
                 <li>Edit Language</li>
             </ul>
         </div>	
