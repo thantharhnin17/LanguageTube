@@ -178,3 +178,7 @@ Theme Version:	1.0.0
 	/* jQuery ready  */	
 	jQuery(document).on('ready',function() {AdminBuilder.initialHelper();});
 })(jQuery);
+
+$(document).ready(function() {
+    $('.summernote').summernote();
+});

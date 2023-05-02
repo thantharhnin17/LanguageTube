@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('#summernote').summernote();
+    // $('.summernote').summernote();
 
 
     $('#course_language').on('change', function() {

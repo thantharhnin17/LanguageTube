@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Recruit;
+use App\Models\Language;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -31,7 +32,8 @@ class RecruitController extends Controller
      */
     public function create()
     {
-        //
+        $languages = Language::all();
+        return view('admin.recruit.create',compact('languages'));
     }
 
     /**
@@ -39,7 +41,44 @@ class RecruitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->hasFile('recruit_img')) 
+        {
+            if ($request->file('recruit_img')->isValid()) 
+            {
+                $validated = $request->validate([
+                    'recruit_img' => 'mimes:jpg,jpeg,png,gif|max:2048',
+                ]);
+                $extension = $request->recruit_img->extension();
+                $randomName = rand().".".$extension;
+                $request->recruit_img->storeAs('/public/img/',$randomName);
+                
+            }
+        }
+         $request->validate([
+                'user'=> 'required',
+                'title'=> 'required',
+                'language'=> 'required',
+                'type' => 'required',
+                'salary' => 'required',
+                'total_person' => 'required',
+                'description'=> 'required',
+                'requirement' => 'required',
+                'recruit_img' => 'required',
+            ]);
+
+            $recruit = new Recruit();
+            $recruit->user_id = $request->input('user');
+            $recruit->title = $request->input('title');
+            $recruit->language_id = $request->input('language');
+            $recruit->type = $request->input('type');
+            $recruit->salary = $request->input('salary');
+            $recruit->total_person = $request->input('total_person');
+            $recruit->description = $request->input('description');
+            $recruit->requirement = $request->input('requirement');
+            $recruit->recruit_img = $randomName;
+            $recruit->save();
+
+            return redirect()->route('recruit.index')->with('success_message', 'Recruitment created successfully.');
     }
 
     /**
@@ -55,7 +94,9 @@ class RecruitController extends Controller
      */
     public function edit(RecruitPosts $recruitPosts)
     {
-        //
+        $recruit = Recruit::find($id);
+        $languages = Language::all();
+        return view('admin.recruit.edit',compact('recruit','languages'));
     }
 
     /**
@@ -69,8 +110,11 @@ class RecruitController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(RecruitPosts $recruitPosts)
+    public function destroy(string $id)
     {
-        //
+        $recruit= Recruit::find($id);
+        $recruit->delete();
+        return redirect()->route('recruit.index')
+        ->with('success_message','Recruitment delete successfully.');
     }
 }

@@ -13,20 +13,20 @@ return new class extends Migration
     {
         Schema::create('recruits', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('admin_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('language_id');
             $table->string('title');
             $table->string('recruit_img');
-            $table->boolean('type')->default(0);
+            $table->string('type');
             $table->string('salary');
-            $table->string('worktime');
-            $table->string('workdays');
             $table->longtext('description');
             $table->longtext('requirement');
             $table->integer('total_person');
             $table->boolean('status')->default(0);
             $table->timestamps();
 
-            $table->foreign('admin_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

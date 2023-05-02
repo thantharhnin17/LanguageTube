@@ -61,7 +61,7 @@
                                 <div class="form-group col-12">
                                     <label class="col-form-label">Course Description</label>
                                     <div>
-                                        <textarea  type="summernote" class="form-control" id="summernote" name="description">{{old('description')}}</textarea>
+                                        <textarea  type="summernote" class="form-control summernote" name="description">{{old('description')}}</textarea>
                                         <span class="help-inline">@error('description'){{$message}}@enderror</span>
                                     </div>
                                 </div>

@@ -13,4 +13,9 @@ class Language extends Model
     {
         return $this->hasMany(Level::class);
     }
+
+    public function recruits()
+    {
+        return $this->hasMany(Recruit::class);
+    }
 }
