@@ -49,20 +49,27 @@
                                     <td class="tb-action">
                                         <ul class="mailbox-toolbar">
                                             <li class="mr-2">
-                                                <a href="{{url('language/'.$language->id.'/edit')}}">
+                                                <a href="{{url('admin/language/'.$language->id.'/edit')}}">
                                                     <button type="submit" class="btn-circle edit-btn btn-warning" data-toggle="tooltip" title="Edit">
                                                         <i class="fa fa-pen-to-square"></i>
                                                     </button>
                                                 </a>  
                                             </li>
                                             <li>
-                                                <form action="{{url('language/'.$language->id)}}" method="POST">
+                                                <form action="{{url('admin/language/'.$language->id)}}" method="POST" id="delete-form{{$language->id}}">
+                                                    @csrf
+                                                     @method('DELETE')
+                                                    <button type="button" onclick="confirmDelete({{$language->id}})" class="btn-circle delete-btn btn-danger" data-toggle="tooltip" title="Delete">
+                                                        <i class="fa fa-trash-o"></i>
+                                                    </button>
+                                                </form>
+                                                {{-- <form action="{{url('admin/language/'.$language->id)}}" method="POST">
                                                     @csrf
                                                      @method('DELETE')
                                                     <button type="submit" class="btn-circle delete-btn btn-danger" data-toggle="tooltip" title="Delete">
                                                         <i class="fa fa-trash-o"></i>
                                                     </button>
-                                                </form>
+                                                </form> --}}
                                             </li>
                                             
 										</ul>

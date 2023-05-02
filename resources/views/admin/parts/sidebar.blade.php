@@ -77,6 +77,20 @@
                 </li>
                 <li class="ttr-seperate"></li>
                 <li>
+                    <a href="{{url('admin/recruit')}}" class="ttr-material-button">
+                        <span class="ttr-icon"><i class="ti-book"></i></span>
+                        <span class="ttr-label">Recruitment</span>
+                    </a>
+                </li>
+
+                <li class="ttr-seperate"></li>
+                <li>
+                    <a href="{{url('admin/user')}}" class="ttr-material-button">
+                        <span class="ttr-icon"><i class="ti-book"></i></span>
+                        <span class="ttr-label">Users</span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{url('admin/teacher')}}" class="ttr-material-button">
                         <span class="ttr-icon"><i class="ti-book"></i></span>
                         <span class="ttr-label">Teachers</span>

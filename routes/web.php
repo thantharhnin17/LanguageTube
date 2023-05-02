@@ -2,13 +2,16 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\BatchController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\RecruitController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\RecruitPostController;
 use App\Http\Controllers\Auth\RegisterController;
 
 /*
@@ -83,6 +86,11 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function(){
     //////////Batch////////////
     Route::resource('batch', BatchController::class);
 
+    //////////recruit////////////
+    Route::resource('recruit', RecruitController::class);
+
+    //////////User////////////
+    Route::resource('user', UserController::class);
 
     //////////Student////////////
     Route::resource('student', StudentController::class);

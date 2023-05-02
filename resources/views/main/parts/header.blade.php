@@ -15,8 +15,7 @@
                             <ul>
                                 
                                 <li class="{{ request()->is('login') ? 'active' : '' }}"><a href="/login">Login</a></li>
-                                <li class="{{ request()->is('register') ? 'active' : '' }}"><a href="register.html">Register As Student</a></li>
-                                <li class="{{ request()->is('register') ? 'active' : '' }}"><a href="register.html">Register As Teacher</a></li>
+                                <li class="{{ request()->is('register') ? 'active' : '' }}"><a href="/register">Create User Account</a></li>
                             </ul>
                         </div>
                     </div>

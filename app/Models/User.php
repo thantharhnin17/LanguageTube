@@ -3,7 +3,6 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Models\Teacher;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -23,6 +22,10 @@ class User extends Authenticatable
         'email',
         'password',
         'user_type',
+        'photo',
+        'phone',
+        'dob',
+        'gender'
     ];
 
     /**
@@ -46,15 +49,21 @@ class User extends Authenticatable
 
 
     // One to One
-    public function student()
-    {
-        return $this->hasOne(Student::class);
-    }
+    // public function student()
+    // {
+    //     return $this->hasOne(Student::class);
+    // }
 
-    // One to One
-    public function teacher()
+    // // One to One
+    // public function teacher()
+    // {
+    //     return $this->hasOne(Teacher::class);
+    // }
+
+    // One to Many
+    public function recruits()
     {
-        return $this->hasOne(Teacher::class);
+        return $this->hasMany(Recruit::class);
     }
 
 }

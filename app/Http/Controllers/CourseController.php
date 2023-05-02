@@ -79,7 +79,7 @@ class CourseController extends Controller
             $course->course_img = $randomName;
             $course->save();
 
-            return redirect()->route('course.index')->with('success', 'Course created successfully.');
+            return redirect()->route('course.index')->with('success_message', 'Course created successfully.');
     }
 
     /**
@@ -128,7 +128,7 @@ class CourseController extends Controller
             }
         }   
         else{
-            $course->course_img =$request->input('db_course_img');
+            $course->course_img = $course->course_img;
         }
             $course->course_name = $request->input('course_name');
             $course->description = $request->input('description');
@@ -136,7 +136,7 @@ class CourseController extends Controller
          
            $course->save();
            return redirect()->route('course.index')
-            ->with('success', 'Course update successfully.');
+            ->with('success_message', 'Course update successfully.');
     }
 
     /**
@@ -147,6 +147,6 @@ class CourseController extends Controller
         $course= Course::find($id);
         $course->delete();
         return redirect()->route('course.index')
-        ->withSuccess('status','course delete successfully.');
+        ->with('success_message','course delete successfully.');
     }
 }

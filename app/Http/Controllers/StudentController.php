@@ -125,9 +125,10 @@ class StudentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Student $student)
+    public function edit(string $id)
     {
-        //
+        $student= Student::find($id);
+        return view('admin.student.edit',compact('student'));
     }
 
     /**
@@ -152,6 +153,6 @@ class StudentController extends Controller
         $student->delete();
 
         return redirect()->route('student.index')
-        ->withSuccess('success_message','Student delete successfully.');
+        ->with('success_message','Student delete successfully.');
     }
 }

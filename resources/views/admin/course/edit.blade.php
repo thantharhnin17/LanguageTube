@@ -78,7 +78,7 @@
                                     <div>
                                         <img src="{{ asset('storage/img/' . $course->course_img) }}" height="100" width="100">
                                         <input type="file" name="course_img" value="{{ old('course_img') ?? $course->course_img}}">
-                                        <input type="hidden" name="db_course_img" value="{{$course->course_img}}">
+                                        {{-- <input type="hidden" name="db_course_img" value="{{$course->course_img}}"> --}}
                                         <span class="help-inline">@error('course_img'){{$message}}@enderror</span>
                                     </div>
                                 </div>

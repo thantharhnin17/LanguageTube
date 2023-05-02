@@ -71,7 +71,7 @@
                                             <td class="tb-action">
                                                 <ul class="mailbox-toolbar">
                                                     <li class="mr-2">
-                                                        <a href="{{url('student/'.$student->id.'/edit')}}">
+                                                        <a href="{{url('admin/student/'.$student->id.'/edit')}}">
                                                             <button type="submit" class="btn-circle edit-btn btn-warning" data-toggle="tooltip" title="Edit">
                                                                 <i class="fa fa-pen-to-square"></i>
                                                             </button>

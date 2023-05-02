@@ -9,6 +9,7 @@ use App\Models\Teacher;
 use App\Models\Language;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Http\UploadedFile;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
@@ -60,26 +61,30 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'user_type' => ['required', 'string', Rule::in(['admin', 'student', 'teacher'])],
+            // 'user_type' => ['required', 'string', Rule::in(['admin', 'user', 'student', 'teacher'])],
+            'photo'=> ['required', 'mimes:jpg,jpeg,png,gif', 'max:2048'],
+            'phone'=> 'required',
+            'dob' => 'required',
+            'gender' => 'required',
         ]);
     
-        $userType = $data['user_type'];
-        if ($userType === 'admin') {
-            $validator->mergeRules([
-                'admin_field' => ['sometimes', 'string', 'max:255'],
-            ]);
-        } else if ($userType === 'student') {
-            $validator->mergeRules([
-                'photo'=> 'required',
-                'phone'=> 'required',
-                'dob' => 'required',
-                'gender' => 'required',
-            ]);
-        } else if ($userType === 'teacher') {
-            $validator->mergeRules([
-                'teacher_field' => ['sometimes', 'string', 'max:255'],
-            ]);
-        }
+        // $userType = $data['user_type'];
+        // if ($userType === 'admin') {
+        //     $validator->mergeRules([
+        //         'admin_field' => ['sometimes', 'string', 'max:255'],
+        //     ]);
+        // } else if ($userType === 'student') {
+        //     $validator->mergeRules([
+        //         'photo'=> 'required',
+        //         'phone'=> 'required',
+        //         'dob' => 'required',
+        //         'gender' => 'required',
+        //     ]);
+        // } else if ($userType === 'teacher') {
+        //     $validator->mergeRules([
+        //         'teacher_field' => ['sometimes', 'string', 'max:255'],
+        //     ]);
+        // }
     
         return $validator;
     }
@@ -92,30 +97,51 @@ class RegisterController extends Controller
      */
     protected function create(array $data = [])
     {
+        if (isset($data['photo'])) {
+                
+            $extension = $data['photo']->getClientOriginalExtension();
+            $randomName = rand() . "." . $extension;
+            $path = $data['photo']->storeAs('public/img', $randomName);
+        }      
+        
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            // 'user_type' => 'user',
+            'photo' => $randomName,
+            'phone' => $data['phone'],
+            'dob' => $data['dob'],
+            'gender' => $data['gender'],
         ]);
-
-        // $userType = $data['user_type'];
-
-        // if ($userType === 'admin') {
-        //     $data['admin_field'] = $data['admin_field'] ?? null;
-        // } else if ($userType === 'student') {
-        //     $data['photo'] = $data['photo'] ?? null;
-        //     $data['dob'] = $data['dob'] ?? null;
-        //     $data['gender'] = $data['gender'] ?? null;
-        // } else if ($userType === 'teacher') {
-        //     $data['teacher_field'] = $data['teacher_field'] ?? null;
-        // }
-
-        // if (isset($data['user_type'])) {
-        //     $data['user_type'] = ucfirst($data['user_type']);
-        // }
-
-        // return static::query()->create($data);
     }
+    // protected function create(Request $request)
+    // {
+    //     if ($request->hasFile('photo')) 
+    //     {
+    //         if ($request->file('photo')->isValid()) 
+    //         {
+    //             $validated = $request->validate([
+    //                 'photo' => 'mimes:jpg,jpeg,png,gif|max:2048',
+    //             ]);
+    //             $extension = $request->photo->extension();
+    //             $randomName = rand().".".$extension;
+    //             $request->photo->storeAs('/public/img/',$randomName);
+                
+    //         }
+    //     }
+        
+    //     return User::create([
+    //         'name' => request('name'),
+    //         'email' => request('email'),
+    //         'password' => Hash::make(request('password')),
+    //         'photo' => $randomName,
+    //         'phone' => request('phone'),
+    //         'dob' => request('dob'),
+    //         'gender' => request('gender'),
+    //     ]);
+
+    // }
 
     /**
      * Show the student registration form.
