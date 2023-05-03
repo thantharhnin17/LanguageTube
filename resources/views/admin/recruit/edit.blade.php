@@ -20,28 +20,28 @@
                         <h4>Edit Recruitment</h4>
                     </div>
                     <div class="widget-inner widget-inner-create">
-                        <form method="POST" action="{{route('recruit.store')}}" enctype="multipart/form-data" class="edit-profile m-b30">
+                        <form method="POST" action="{{route('recruit.update',$recruit->id)}}" enctype="multipart/form-data" class="edit-profile m-b30">
                             @csrf
-                            @method('POST')
+                            @method('PUT')
                             <input name="user" class="form-control" type="hidden" value="{{ Auth::user()->id }}">
                             <div class="row wi-body">
                                 <div class="form-group col-12">
                                     <label class="col-form-label">Recruitment Title</label>
                                     <div>
-                                        <input name="title" class="form-control" type="text" value="{{ old('title') }}">
+                                        <input name="title" class="form-control" type="text" value="{{$recruit->title}}">
                                         <span class="help-inline">@error('title'){{$message}}@enderror</span>
                                     </div>
                                 </div>
 
                                 <div class="form-group col-12">
-                                    <label class="col-form-label">teach Language</label>
+                                    <label class="col-form-label">Teach Language</label>
                                     <div>
                                         <select class="form-control" id="language" name="language">
                                             <option selected value="">Choose Language</option>
                                             @foreach ($languages as $language)
-                                              <option value="{{ $language->id }}" {{ old('language') == "$language->id" ? 'selected' : '' }}>
+                                            <option value="{{ $language->id  }}" {{$recruit->language->id == $language->id  ? 'selected' : ''}}>
                                                 {{ $language->language_name }}
-                                              </option>
+                                            </option>
                                             @endforeach 
                                         </select>
                                         <span class="help-inline">@error('language'){{$message}}@enderror</span>
@@ -53,11 +53,11 @@
                                     <label class="form-label" for="type">Work Type</label>
                                     <br>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="type" id="on-campus" value="on-campus" {{ (old('type') == 'on-campus') ? 'checked' : ''}}>
+                                        <input class="form-check-input" type="radio" name="type" id="on-campus" value="on-campus" {{ ($recruit->type == 'on-campus') ? 'checked' : ''}}>
                                         <label class="form-check-label" for="on-campus">On-Campus</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="type" id="online" value="online" {{ (old('type') == 'online') ? 'checked' : ''}}>
+                                        <input class="form-check-input" type="radio" name="type" id="online" value="online" {{ ($recruit->type == 'online') ? 'checked' : ''}}>
                                         <label class="form-check-label" for="online">Online</label>
                                     </div>
                                     <span class="help-inline">@error('type'){{$message}}@enderror</span>
@@ -68,9 +68,9 @@
                                     <div>
                                         <select class="form-control" id="salary" name="salary">
                                             <option selected value="">Choose Salary</option>
-                                            <option value="negotiate" {{ old('salary') == "negotiate" ? 'selected' : '' }}>negotiate</option>
+                                            <option value="negotiate" {{$recruit->salary == "negotiate"  ? 'selected' : ''}}>negotiate</option>
                                             @for ($i = 2; $i < 10; $i++)
-                                                <option value="{{ $i }} - {{ $i+1 }}" {{ old('salary') == "$i - $i+1" ? 'selected' : '' }}>{{ $i*100000 }} - {{ ($i+1)*100000 }}</option>
+                                                <option value="{{ $i }} - {{ $i+1 }}" {{$recruit->salary == "$i - $i+1"  ? 'selected' : ''}} >{{ $i*100000 }} - {{ ($i+1)*100000 }}</option>
                                             @endfor
 
                                         </select>
@@ -81,7 +81,7 @@
                                 <div class="form-group col-12">
                                     <label class="col-form-label">Total Person</label>
                                     <div>
-                                        <input name="total_person" class="form-control" type="number" value="{{ old('total_person') }}">
+                                        <input name="total_person" class="form-control" type="number" value="{{$recruit->total_person}}">
                                         <span class="help-inline">@error('total_person'){{$message}}@enderror</span>
                                     </div>
                                 </div>
@@ -89,7 +89,7 @@
                                 <div class="form-group col-12">
                                     <label class="col-form-label">Work Description</label>
                                     <div>
-                                        <textarea type="summernote" class="form-control summernote" name="description">{{old('description')}}</textarea>
+                                        <textarea type="summernote" class="form-control summernote" name="description">{{$recruit->description}}</textarea>
                                         <span class="help-inline">@error('description'){{$message}}@enderror</span>
                                     </div>
                                 </div>
@@ -97,7 +97,7 @@
                                 <div class="form-group col-12">
                                     <label class="col-form-label">Work Requirement</label>
                                     <div>
-                                        <textarea type="summernote" class="form-control summernote" name="requirement">{{old('requirement')}}</textarea>
+                                        <textarea type="summernote" class="form-control summernote" name="requirement">{{$recruit->requirement}}</textarea>
                                         <span class="help-inline">@error('requirement'){{$message}}@enderror</span>
                                     </div>
                                 </div>
@@ -105,6 +105,7 @@
                                 <div class="form-group col-12">
                                     <label class="col-form-label">Recruitment Photo</label>
                                     <div>
+                                        <img src="{{ asset('storage/img/' . $recruit->recruit_img) }}" height="100" width="100">
                                         <input name="recruit_img" type="file" class="form-control-file" value="{{old('recruit_img')}}">
                                         <span class="help-inline">@error('recruit_img'){{$message}}@enderror</span>
                                     </div>

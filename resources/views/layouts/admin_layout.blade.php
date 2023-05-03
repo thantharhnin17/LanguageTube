@@ -127,7 +127,6 @@
 
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
             $('#example2').DataTable({
-                scrollY: 200,
                 scrollX: true,
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         });

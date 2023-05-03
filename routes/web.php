@@ -11,7 +11,6 @@ use App\Http\Controllers\RecruitController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\LanguageController;
-use App\Http\Controllers\RecruitPostController;
 use App\Http\Controllers\Auth\RegisterController;
 
 /*
