@@ -1878,7 +1878,14 @@
 .ttr-opened-sidebar .footer{
 	margin-left: 300px;
 }
-
+@media (max-width: 1200px){
+	.footer{
+		margin-left: 300px;
+	}
+	.ttr-opened-sidebar .footer{
+		margin-left: 0;
+	}
+}
 
 
 .form-control.bs-select-hidden:hover,.btn-group.bootstrap-select.form-control:hover{

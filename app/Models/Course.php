@@ -13,4 +13,9 @@ class Course extends Model
     {
         return $this->belongsTo(Level::class);
     }
+
+    public function courseBatchs()
+    {
+        return $this->hasMany(CourseBatch::class);
+    }
 }

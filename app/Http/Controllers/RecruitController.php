@@ -140,6 +140,11 @@ class RecruitController extends Controller
             $recruit->total_person = $request->input('total_person');
             $recruit->description = $request->input('description');
             $recruit->requirement = $request->input('requirement');
+            if($request->input('status') == null){
+                $recruit->status = 0; 
+            }else{
+                $recruit->status = 1; 
+            }
          
            $recruit->save();
            return redirect()->route('recruit.index')
@@ -156,4 +161,31 @@ class RecruitController extends Controller
         return redirect()->route('recruit.index')
         ->with('success_message','Recruitment delete successfully.');
     }
+
+    /**
+     * Update the status
+     */
+    public function updateStatus(Request $request, string $id)
+    {
+
+        $recruit = Recruit::find($id);
+        if($request->input('status') == null){
+            $recruit->status = 0; 
+        }else{
+            $recruit->status = 1; 
+        }
+        $recruit->save();
+        return redirect()->route('recruit.index')
+            ->with('success_message', 'Status update successfully.');
+    }
+
+    /**
+     * Show Recruit Detail
+     */
+    public function recruit_details($id)
+    {
+        $recruit = Recruit::find($id);
+        return view('main.recruit_details',compact('recruit'));
+    }
+
 }

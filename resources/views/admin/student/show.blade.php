@@ -49,6 +49,7 @@
                               <th>Email</th>
                               <th>Phone</th>
                               <th>Date Of Birth</th>
+                              <th>Age</th>
                               <th>Gender</th>
                               <th></th>
                             </tr>
@@ -56,42 +57,44 @@
                             <tbody>
                             <?php $no=1; ?>
                                 @foreach($users as $user)
-                                    @foreach($students as $student)
-                                        @if ($user->id == $student->user_id)
-                                        <tr>
-                                            <td>{{$no++}}</td>
-                                            <td><img src="{{ asset('storage/img/' . $student->photo) }}" width="100px" height="100px" /></td>
-                                            <td>{{$user->name}}</td>
-                                            <td>{{$user->email}}</td>
+                                <tr>
+                                    <td>{{$no++}}</td>
+                                    <td><img src="{{ asset('storage/img/' . $user->photo) }}" width="100px" height="100px" /></td>
+                                    <td>{{$user->name}}</td>
+                                    <td>{{$user->email}}</td>
+                                    
+                                    <td>{{$user->phone}}</td>
+                                    <td>{{$user->dob}}</td>
+                                    <td>
+                                        @php
+                                            $dob = \Carbon\Carbon::parse($user->dob);
+                                        @endphp
+                                        {{ $dob->diffInYears(\Carbon\Carbon::now()) }}
+                                    </td>
+                                    <td>{{$user->gender}}</td>
+                                        
+                                    <td class="tb-action">
+                                        <ul class="mailbox-toolbar">
+                                            <li class="mr-2">
+                                                <a href="{{url('admin/student/'.$user->id.'/edit')}}">
+                                                    <button type="submit" class="btn-circle edit-btn btn-warning" data-toggle="tooltip" title="Edit">
+                                                        <i class="fa fa-pen-to-square"></i>
+                                                    </button>
+                                                </a>  
+                                            </li>
+                                            <li>
+                                                <form action="{{url('admin/student/'.$user->id)}}" method="POST" id="delete-form{{$user->id}}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="button" onclick="confirmDelete({{$user->id}})" class="btn-circle delete-btn btn-danger" data-toggle="tooltip" title="Delete">
+                                                        <i class="fa fa-trash-o"></i>
+                                                    </button>
+                                                </form>
+                                            </li>
                                             
-                                            <td>{{$student->phone}}</td>
-                                            <td>{{$student->dob}}</td>
-                                            <td>{{$student->gender}}</td>
-                                                
-                                            <td class="tb-action">
-                                                <ul class="mailbox-toolbar">
-                                                    <li class="mr-2">
-                                                        <a href="{{url('admin/student/'.$student->id.'/edit')}}">
-                                                            <button type="submit" class="btn-circle edit-btn btn-warning" data-toggle="tooltip" title="Edit">
-                                                                <i class="fa fa-pen-to-square"></i>
-                                                            </button>
-                                                        </a>  
-                                                    </li>
-                                                    <li>
-                                                        <form action="{{url('admin/student/'.$student->id)}}" method="POST" id="delete-form{{$student->id}}">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="button" onclick="confirmDelete({{$student->id}})" class="btn-circle delete-btn btn-danger" data-toggle="tooltip" title="Delete">
-                                                                <i class="fa fa-trash-o"></i>
-                                                            </button>
-                                                        </form>
-                                                    </li>
-                                                    
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        @endif
-                                    @endforeach
+                                        </ul>
+                                    </td>
+                                </tr>   
                                 @endforeach
                                 
           

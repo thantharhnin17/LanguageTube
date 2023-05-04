@@ -41,6 +41,17 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+         $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:8'],
+                'user_type' => ['required', 'string', Rule::in(['admin', 'user', 'student', 'teacher'])],
+                'photo'=> 'required',
+                'phone'=> 'required',
+                'dob' => 'required',
+                'gender' => 'required',
+        ]);
+
         if ($request->hasFile('photo')) 
         {
             if ($request->file('photo')->isValid()) 
@@ -54,18 +65,6 @@ class UserController extends Controller
                 
             }
         }
-         $request->validate([
-                'name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                'password' => ['required', 'string', 'min:8'],
-                'user_type' => ['required', 'string', Rule::in(['admin', 'user', 'student', 'teacher'])],
-                'photo'=> 'required',
-                'phone'=> 'required',
-                'dob' => 'required',
-                'gender' => 'required',
-            ]);
-
-            // dd(request('user_type'));
 
             User::create([
                 'name' => request('name'),
@@ -158,6 +157,13 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         $user= User::find($id);
+        $image = $user->photo;
+
+        $path = "public/img/{$image}";
+
+        if(Storage::exists($path)) {
+            Storage::delete($path);
+        }
 
         $user->delete();
 

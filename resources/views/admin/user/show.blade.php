@@ -49,6 +49,7 @@
                               <th>Email</th>
                               <th>Phone</th>
                               <th>Date Of Birth</th>
+                              <th>Age</th>
                               <th>Gender</th>
                               <th>Type</th>
                               <th></th>
@@ -65,6 +66,12 @@
                                     
                                     <td>{{$user->phone}}</td>
                                     <td>{{$user->dob}}</td>
+                                    <td>
+                                        @php
+                                            $dob = \Carbon\Carbon::parse($user->dob);
+                                        @endphp
+                                        {{ $dob->diffInYears(\Carbon\Carbon::now()) }}
+                                    </td>
                                     <td>{{$user->gender}}</td>
                                     <td>{{$user->user_type}}</td>
                                         

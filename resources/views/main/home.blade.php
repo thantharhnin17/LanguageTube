@@ -165,66 +165,41 @@
             </div>
         </div>
         <!-- Form END -->
-        <div class="section-area section-sp1">
+        <!-- Teacher Recruitment -->
+        <div class="section-area section-sp2 latest-courses-bx">
             <div class="container">
-                 <div class="row">
-                     <div class="col-lg-6 m-b30">
-                        <h2 class="title-head ">Learn a new skill online<br> <span class="text-primary"> on your time</span></h2>
-                        <h4><span class="counter">57,000</span> Online Courses</h4>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type.</p>
-                        <a href="#" class="btn button-md">Join Now</a>
-                     </div>
-                     <div class="col-lg-6">
-                         <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6 m-b30">
-                                <div class="feature-container">
-                                    <div class="feature-md text-white m-b20">
-                                        <a href="#" class="icon-cell"><img src="assets/images/icon/icon1.png" alt=""></a> 
-                                    </div>
-                                    <div class="icon-content">
-                                        <h5 class="ttr-tilte">Our Philosophy</h5>
-                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing.</p>
-                                    </div>
-                                </div>
+                <div class="row">
+                    <div class="col-md-12 heading-bx left">
+                        <h2 class="title-head">Teacher <span>Recruitment</span></h2>
+                    </div>
+                </div>
+                <div class="row p-lr0">
+
+                    @foreach($recruits as $recruit)
+                    <div class="item col-12 col-md-6 col-lg-4">
+                        <div class="cours-bx">
+                            <div class="action-box">
+                                <img src="{{ asset('storage/img/' . $recruit->recruit_img) }}" alt="">
+                                
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 m-b30">
-                                <div class="feature-container">
-                                    <div class="feature-md text-white m-b20">
-                                        <a href="#" class="icon-cell"><img src="assets/images/icon/icon2.png" alt=""></a> 
-                                    </div>
-                                    <div class="icon-content">
-                                        <h5 class="ttr-tilte">Kingster's Principle</h5>
-                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing.</p>
-                                    </div>
-                                </div>
+                            <div class="info-bx text-center">
+                                <h5><a href="#">{{$recruit->title}} - {{$recruit->language->language_name}}</a></h5>
+                                <span>{{$recruit->language->language_name}}</span>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 m-b30">
-                                <div class="feature-container">
-                                    <div class="feature-md text-white m-b20">
-                                        <a href="#" class="icon-cell"><img src="assets/images/icon/icon3.png" alt=""></a> 
-                                    </div>
-                                    <div class="icon-content">
-                                        <h5 class="ttr-tilte">Key Of Success</h5>
-                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing.</p>
-                                    </div>
+                            <div class="cours-more-info">
+                                <div class="price">
+                                    <h5>KS 120,000</h5>
                                 </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 m-b30">
-                                <div class="feature-container">
-                                    <div class="feature-md text-white m-b20">
-                                        <a href="#" class="icon-cell"><img src="assets/images/icon/icon4.png" alt=""></a> 
-                                    </div>
-                                    <div class="icon-content">
-                                        <h5 class="ttr-tilte">Our Philosophy</h5>
-                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing.</p>
-                                    </div>
-                                </div>
+                                <a href="{{url('recruit_details/'.$recruit->id) }}" class="btn">Read More</a>
                             </div>
                         </div>
                     </div>
+                    @endforeach
+
                 </div>
             </div>
         </div>
+        <!-- Latest Courses END -->
         
         <!-- Testimonials -->
         <div class="section-area section-sp1 bg-fix ovbl-dark text-white" style="background-image:url(assets/images/background/bg1.jpg);">

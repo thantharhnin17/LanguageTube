@@ -11,6 +11,7 @@ use App\Http\Controllers\RecruitController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\RegisterController;
 
 /*
@@ -27,7 +28,9 @@ use App\Http\Controllers\Auth\RegisterController;
 Route::get('/', function () {
     return view('main.home');
 });
+Route::resource('/', HomeController::class);
 
+Route::get('/recruit_details/{id}',[RecruitController::class, 'recruit_details']);
 //////////Home////////////
 // Route::get('/', function () {
 //     return view('home');
@@ -66,7 +69,7 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function(){
 
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/home', [DashboardController::class, 'index'])->name('home');
 
     //////////Language////////////
     Route::resource('language', LanguageController::class);
@@ -87,6 +90,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function(){
 
     //////////recruit////////////
     Route::resource('recruit', RecruitController::class);
+    Route::post('recruit/status/{id}',[RecruitController::class, 'updateStatus'])->name('recruit.status');
 
     //////////User////////////
     Route::resource('user', UserController::class);

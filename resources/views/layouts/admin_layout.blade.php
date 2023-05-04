@@ -97,6 +97,9 @@
     <script src="{{asset ('admin/js/swal.js')}}"></script>
     {{-- ============================================= --}}
 
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/css/bootstrap-switch-button.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/dist/bootstrap-switch-button.min.js"></script>
+
 </head>
 
 <body class="ttr-opened-sidebar ttr-pinned-sidebar">

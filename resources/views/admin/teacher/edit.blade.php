@@ -1,15 +1,15 @@
 @extends('layouts.admin_layout')
-@section('title', 'Edit Student')
+@section('title', 'Edit Teacher')
 @section('content')
 <!--Main container start -->
 <main class="ttr-wrapper">
     <div class="container-fluid">
         <div class="db-breadcrumb">
-            <h4 class="breadcrumb-title">Edit Student</h4>
+            <h4 class="breadcrumb-title">Edit Teacher</h4>
             <ul class="db-breadcrumb-list">
                 <li><a href="{{url('admin/home')}}"><i class="fa fa-home"></i>Home</a></li>
-                <li><a href="{{url('admin/student')}}"><i class="fa fa-home"></i>Students</a></li>
-                <li>Edit Students</li>
+                <li><a href="{{url('admin/teacher')}}"><i class="fa fa-home"></i>Teachers</a></li>
+                <li>Edit Teachers</li>
             </ul>
         </div>	
         <div class="row">
@@ -17,10 +17,10 @@
             <div class="col-lg-12 m-b30">
                 <div class="widget-box">
                     <div class="wc-title">
-                        <h4>Edit Students</h4>
+                        <h4>Edit Teachers</h4>
                     </div>
                     <div class="widget-inner widget-inner-create">
-                        <form method="POST" action="{{route('student.update',$user->id)}}" enctype="multipart/form-data" class="edit-profile m-b30">
+                        <form method="POST" action="{{route('teacher.update',$user->id)}}" enctype="multipart/form-data" class="edit-profile m-b30">
                             @csrf
                             @method('PUT')
                             <div class="row wi-body">

@@ -3267,3 +3267,19 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#391800', end
 .invalid-feedback{
 	display: block;
 }
+
+/* Recruit Switch */
+.switch.ios, .switch-on.ios, .switch-off.ios { border-radius: 20rem; }
+  .switch.ios .switch-handle { border-radius: 20rem; }
+  .switch.btn{
+    width: auto !important;
+    height: auto !important;
+  }
+  .btn.switch-off{
+    background-color: #E9ECEF !important;
+  }
+  .btn.switch-on{
+    background-color: #4c1864 !important;
+    color: #E9ECEF !important;
+  }
+  /* Recruit Switch */

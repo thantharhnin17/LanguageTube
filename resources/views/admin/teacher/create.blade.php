@@ -1,15 +1,15 @@
 @extends('layouts.admin_layout')
-@section('title', 'Edit Student')
+@section('title', 'Create New Teacher')
 @section('content')
 <!--Main container start -->
 <main class="ttr-wrapper">
     <div class="container-fluid">
         <div class="db-breadcrumb">
-            <h4 class="breadcrumb-title">Edit Student</h4>
+            <h4 class="breadcrumb-title">Add New Teacher</h4>
             <ul class="db-breadcrumb-list">
                 <li><a href="{{url('admin/home')}}"><i class="fa fa-home"></i>Home</a></li>
-                <li><a href="{{url('admin/student')}}"><i class="fa fa-home"></i>Students</a></li>
-                <li>Edit Students</li>
+                <li><a href="{{url('admin/teacher')}}"><i class="fa fa-home"></i>Teachers</a></li>
+                <li>Add New Teacher</li>
             </ul>
         </div>	
         <div class="row">
@@ -17,17 +17,17 @@
             <div class="col-lg-12 m-b30">
                 <div class="widget-box">
                     <div class="wc-title">
-                        <h4>Edit Students</h4>
+                        <h4>Add New Teachers</h4>
                     </div>
                     <div class="widget-inner widget-inner-create">
-                        <form method="POST" action="{{route('student.update',$user->id)}}" enctype="multipart/form-data" class="edit-profile m-b30">
+                        <form method="POST" action="{{route('teacher.store')}}" enctype="multipart/form-data" class="edit-profile m-b30">
                             @csrf
-                            @method('PUT')
+                            @method('POST')
                             <div class="row wi-body">
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="form-label">{{ __('Name') }}</label>
-                                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{$user->name}}" required autocomplete="name" autofocus>
+                                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
             
                                             @error('name')
                                                 <span class="invalid-feedback" role="alert">
@@ -39,7 +39,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label>{{ __('Email') }}</label>
-                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{$user->email}}" required autocomplete="email">
+                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
             
                                             @error('email')
                                                 <span class="invalid-feedback" role="alert">
@@ -51,7 +51,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label>{{ __('Password') }}</label>
-                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password">
+                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
             
                                             @error('password')
                                                 <span class="invalid-feedback" role="alert">
@@ -67,9 +67,7 @@
                                     <div class="form-group">
                                         <label class="col-form-label">{{ __('Profile Photo') }}</label>
                                         <div>
-                                            <img src="{{ asset('storage/img/' . $user->photo) }}" height="100" width="100">
-                                            {{-- <input type="hidden" name="db_photo" value="{{$user->photo}}"> --}}
-                                            <input name="photo" type="file" class="form-control-file" value="">
+                                            <input name="photo" type="file" class="form-control-file" value="{{ old('photo') }}">
                                             @error('photo')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -83,7 +81,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label>{{ __('Phone') }}</label>
-                                        <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{$user->phone}}" required autocomplete="phone" autofocus>
+                                        <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" autofocus>
             
                                             @error('phone')
                                                 <span class="invalid-feedback" role="alert">
@@ -95,7 +93,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label>{{ __('Date Of Birth') }}</label>
-                                        <input name="dob" type="date" class="form-control @error('dob') is-invalid @enderror" value="{{$user->dob}}" required="">
+                                        <input name="dob" type="date" class="form-control @error('dob') is-invalid @enderror" value="{{ old('dob') }}" required="">
                                             @error('dob')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -109,11 +107,11 @@
                                         <label class="form-label" for="gender">{{ __('Gender') }}</label>
                                         <br>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="gender" id="male" value="male" {{ ($user->gender == 'male') ? 'checked' : ''}}>
+                                            <input class="form-check-input" type="radio" name="gender" id="male" value="male" {{ (old('gender') == 'male') ? 'checked' : ''}}>
                                             <label class="form-check-label" for="male">Male</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="gender" id="female" value="female" {{ ($user->gender == 'female') ? 'checked' : ''}}>
+                                            <input class="form-check-input" type="radio" name="gender" id="female" value="female" {{ (old('gender') == 'female') ? 'checked' : ''}}>
                                             <label class="form-check-label" for="female">Female</label>
                                         </div>
                                         @error('gender')
@@ -122,8 +120,7 @@
                                             </span>    
                                         @enderror
                                     </div>
-                                </div>
-            
+                                </div>            
             
                                 <div class="col-lg-12 m-b30">
                                     <button name="submit" type="submit" value="Submit" class="btn button-md">{{ __('Register') }}</button>

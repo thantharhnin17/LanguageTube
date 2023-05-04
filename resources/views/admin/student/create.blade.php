@@ -9,7 +9,7 @@
             <ul class="db-breadcrumb-list">
                 <li><a href="{{url('admin/home')}}"><i class="fa fa-home"></i>Home</a></li>
                 <li><a href="{{url('admin/student')}}"><i class="fa fa-home"></i>Students</a></li>
-                <li>Add New Students</li>
+                <li>Add New Student</li>
             </ul>
         </div>	
         <div class="row">
@@ -24,91 +24,94 @@
                             @csrf
                             @method('POST')
                             <div class="row wi-body">
-                                <div class="form-group col-12">
-                                    <label class="col-form-label">Name</label>
-                                    <div>
-                                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="student[name]" value="{{ old('student.name') }}" required autocomplete="name" autofocus>
-                                        @error('name')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-label">{{ __('Name') }}</label>
+                                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+            
+                                            @error('name')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                     </div>
                                 </div>
-                                <div class="form-group col-12">
-                                    <label class="col-form-label">Photo</label>
-                                    <div>
-                                        <input name="student[photo]" type="file" class="form-control-file"  value="{{old('student.photo')}}" required>
-                                        {{-- <span class="help-inline">@error('photo'){{$message}}@enderror</span> --}}
-                                        @error('photo')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>{{ __('Email') }}</label>
+                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+            
+                                            @error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                     </div>
                                 </div>
-                                <div class="form-group col-12">
-                                    <label class="col-form-label">Email</label>
-                                    <div>
-                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="student[email]" value="{{ old('student.email') }}" required autocomplete="email">
-
-                                        @error('email')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>{{ __('Password') }}</label>
+                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+            
+                                            @error('password')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                     </div>
                                 </div>
-                                <div class="form-group col-12">
-                                    <label class="col-form-label">Password</label>
-                                    <div>
-                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="student[password]" value="{{ old('student.password') }}"  required autocomplete="new-password">
-
-                                        @error('password')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                            
+            
+            
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-form-label">{{ __('Profile Photo') }}</label>
+                                        <div>
+                                            <input name="photo" type="file" class="form-control-file" value="{{ old('photo') }}">
+                                            @error('photo')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group col-12">
-                                    <label class="col-form-label">Confirm Password</label>
-                                    <div>
-                                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                
+            
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>{{ __('Phone') }}</label>
+                                        <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" autofocus>
+            
+                                            @error('phone')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                     </div>
                                 </div>
-                                <div class="form-group col-12">
-                                    <label class="col-form-label">Phone</label>
-                                    <div>
-                                        <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="student[phone]" value="{{ old('student.phone') }}" required autocomplete="phone" autofocus>
-
-                                        @error('phone')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>{{ __('Date Of Birth') }}</label>
+                                        <input name="dob" type="date" class="form-control @error('dob') is-invalid @enderror" value="{{ old('dob') }}" required="">
+                                            @error('dob')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>    
+                                            @enderror
                                     </div>
                                 </div>
-                                <div class="form-group col-12">
-                                    <label class="col-form-label">Date Of Birth</label>
-                                    <div>
-                                        <input name="student[dob]" type="date" class="form-control" required="">
-                                        @error('dob')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>    
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="form-group col-12">
-                                    <label class="col-form-label">Gender</label>
-                                    <div>
+            
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-label" for="gender">{{ __('Gender') }}</label>
+                                        <br>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="student[gender]" id="male" value="male">
+                                            <input class="form-check-input" type="radio" name="gender" id="male" value="male" {{ (old('gender') == 'male') ? 'checked' : ''}}>
                                             <label class="form-check-label" for="male">Male</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="student[gender]" id="female" value="female">
+                                            <input class="form-check-input" type="radio" name="gender" id="female" value="female" {{ (old('gender') == 'female') ? 'checked' : ''}}>
                                             <label class="form-check-label" for="female">Female</label>
                                         </div>
                                         @error('gender')
@@ -117,15 +120,12 @@
                                             </span>    
                                         @enderror
                                     </div>
+                                </div>            
+            
+                                <div class="col-lg-12 m-b30">
+                                    <button name="submit" type="submit" value="Submit" class="btn button-md">{{ __('Register') }}</button>
                                 </div>
-
                                 
-                            </div>
-                            <div class="row wi-foot mt-3">
-                                <div class="col-12">
-                                    <button type="reset" class="btn-secondry mr-2">Clear</button>
-                                    <button type="submit" class="btn">Create</button>
-                                </div>
                             </div>
                         </form>
                     </div>

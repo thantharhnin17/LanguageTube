@@ -110,6 +110,12 @@
                                         <span class="help-inline">@error('recruit_img'){{$message}}@enderror</span>
                                     </div>
                                 </div>
+
+                                <div class="form-group col-12">
+                                    <label class="form-label" for="type">Status</label>
+                                    <br>
+                                    <input name="status" type="checkbox" data-toggle="switchbutton" {{ ($recruit->status == '1') ? 'checked' : ''}} data-style="ios">
+                                </div>   
                                 
                                 <div class="seperator"></div>
                                 

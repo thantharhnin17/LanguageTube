@@ -70,7 +70,14 @@
                                     <td>{{$recruit->total_person}}</td>
                                     <td>{!! $recruit->description !!}</td>
                                     <td>{!! $recruit->requirement !!}</td>
-                                    <td>{{$recruit->status}}</td>
+                                    <td>
+                                        <form id="statusForm" action="{{route('recruit.status',$recruit->id)}}" method="post">
+                                            @csrf
+                                            @method('POST')
+                                            <input name="status" type="checkbox" data-toggle="switchbutton" {{ ($recruit->status == '1') ? 'checked' : ''}} data-style="ios">
+                                        </form>
+                                        
+                                    </td>
                                     <td>{{$recruit->user->name}}</td>
                                         
                                     <td class="tb-action">
@@ -108,4 +115,5 @@
         </div>
     </div>
 </main>
+<script src="{{asset ('admin/js/recruit.js')}}"></script>
 @endsection

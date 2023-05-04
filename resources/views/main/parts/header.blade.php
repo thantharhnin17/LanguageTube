@@ -79,6 +79,9 @@
                                 <li class="{{ request()->is('courses') ? 'active' : '' }}">
                                     <a href="{{url('courses')}}">All Courses</a>
                                 </li>
+                                <li class="{{ request()->is('recruits') ? 'active' : '' }}">
+                                    <a href="{{url('recruits')}}">All Recruits</a>
+                                </li>
                                 <li class="{{ request()->is('about') ? 'active' : '' }}">
                                     <a href="{{url('about')}}">About</a>
                                 </li>

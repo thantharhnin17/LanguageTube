@@ -66,4 +66,9 @@ class User extends Authenticatable
         return $this->hasMany(Recruit::class);
     }
 
+    public function courseBatchs()
+    {
+        return $this->hasMany(CourseBatch::class);
+    }
+
 }

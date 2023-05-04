@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class StudentController extends Controller
@@ -27,8 +28,8 @@ class StudentController extends Controller
     public function index()
     {
         $users = User::where('user_type', 'student')->get();
-        $students = Student::all();
-        return view('admin.student.show',compact('users','students'));
+        // $students = Student::all();
+        return view('admin.student.show',compact('users'));
     }
 
     /**
@@ -45,73 +46,44 @@ class StudentController extends Controller
     public function store(Request $request)
     {
     
-        $userRules = [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ];
-    
-        $studentRules = [
-            // 'photo'=> 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'phone'=> 'required',
-            'dob' => 'required',
-            'gender' => 'required',
-        ];
+         $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:8'],
+                'photo'=> 'required',
+                'phone'=> 'required',
+                'dob' => 'required',
+                'gender' => 'required',
+        ]);
 
-        $studentData = $request->input('student') ? $request->input('student') : [];
-
-        $validator = Validator::make(
-            array_merge($request->all(), $studentData),
-            array_merge($userRules, $studentRules)
-        );
-    
-        if ($validator->fails()) {
-            return redirect('admin/student/create')
-                        ->withErrors($validator)
-                        ->withInput();
-        }
-
-        if ($request->hasFile('student.photo')) {
-            if ($request->file('student.photo')->isValid()) {
+        if ($request->hasFile('photo')) 
+        {
+            if ($request->file('photo')->isValid()) 
+            {
                 $validated = $request->validate([
-                    'student.photo' => ['mimes:jpg,jpeg,png,gif', 'max:2048'],
+                    'photo' => 'mimes:jpg,jpeg,png,gif|max:2048',
                 ]);
-                $extension = $request->file('student.photo')->extension();
-                $randomName = rand() . '.' . $extension;
-                $request->file('student.photo')->storeAs('public/img/', $randomName);
+                $extension = $request->photo->extension();
+                $randomName = rand().".".$extension;
+                $request->photo->storeAs('/public/img/',$randomName);
+                
             }
         }
 
-        // $request->validate([
-        //     'name' => ['required', 'string', 'max:255'],
-        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        //     'password' => ['required', 'string', 'min:8', 'confirmed'],
-        //     'student.photo'=> 'required',
-        //     'student.phone'=> 'required',
-        //     'student.dob' => 'required',
-        //     'student.gender' => 'required',
-        // ]);
+            // dd(request('user_type'));
 
+            User::create([
+                'name' => request('name'),
+                'email' => request('email'),
+                'password' => Hash::make(request('password')),
+                'photo' => $randomName,
+                'phone' => request('phone'),
+                'dob' => request('dob'),
+                'gender' => request('gender'),
+                'user_type' => 'student',
+            ]);
 
-        $user = new User([
-            'name' => $request->input('student.name'),
-            'email' => $request->input('student.email'),
-            'password' => Hash::make($request->input('student.password')),
-            'user_type' => 'student',
-        ]);
-    
-        $user->save();
-    
-        $student = new Student([
-            'photo' => $randomName,
-            'phone' => $request->input('student.phone'),
-            'dob' => $request->input('student.dob'),
-            'gender' => $request->input('student.gender'),
-        ]);
-    
-        $user->student()->save($student);
-    
-        return redirect()->route('student.index')->with('success_message', 'You have been registered as a student!');
+            return redirect()->route('student.index')->with('success_message', 'Student created successfully.');
     }
 
     /**
@@ -127,16 +99,60 @@ class StudentController extends Controller
      */
     public function edit(string $id)
     {
-        $student= Student::find($id);
-        return view('admin.student.edit',compact('student'));
+        $user= User::find($id);
+        return view('admin.student.edit',compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Student $student)
+    public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'phone'=> 'required',
+            'dob' => 'required',
+            'gender' => 'required',
+        ]);
+
+        $user = User::find($id);
+        if ($request->hasFile('photo')) 
+        {
+            if ($request->file('photo')->isValid()) 
+            {
+                $validated = $request->validate([
+                    'photo' => 'mimes:jpg,jpeg,png,gif|max:2048',
+                ]);
+                $extension = $request->photo->extension();
+                $randomName = rand().".".$extension;
+                $request->photo->storeAs('/public/img/',$randomName);
+                    $user->photo = $randomName;
+            }
+        }   
+        else{
+            $user->photo = $user->photo;
+        }
+
+        if(isset($request->password)){
+            $validated = $request->validate([
+                'password' => ['string', 'min:8'],
+            ]);
+            $user->password = Hash::make(request('password'));
+        }
+        else{
+            $user->password = $user->password;
+        }
+
+            $user->name = request('name');
+            $user->email = request('email');
+            $user->phone = request('phone');
+            $user->dob = request('dob');
+            $user->gender = request('gender');
+         
+           $user->save();
+           return redirect()->route('student.index')
+            ->with('success_message', 'Student update successfully.');
     }
 
     /**
@@ -144,13 +160,16 @@ class StudentController extends Controller
      */
     public function destroy(string $id)
     {
-        $student= Student::find($id);
+        $user= User::find($id);
+        $image = $user->photo;
 
-        // Delete the associated user record
-        $student->user()->delete();
-        
-        // Delete the student record
-        $student->delete();
+        $path = "public/img/{$image}";
+
+        if(Storage::exists($path)) {
+            Storage::delete($path);
+        }
+
+        $user->delete();
 
         return redirect()->route('student.index')
         ->with('success_message','Student delete successfully.');
