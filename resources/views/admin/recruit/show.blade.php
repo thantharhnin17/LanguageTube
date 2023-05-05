@@ -48,6 +48,7 @@
                               <th>Title</th>
                               <th>Teach Language</th>
                               <th>Type</th>
+                              <th>Time</th>
                               <th>Salary</th>
                               <th>Total Person</th>
                               <th>Description</th>
@@ -66,6 +67,7 @@
                                     <td>{{$recruit->title}}</td>
                                     <td>{{$recruit->language->language_name}}</td>
                                     <td>{{$recruit->type}}</td>
+                                    <td>{{$recruit->time}}</td>
                                     <td>{{$recruit->salary}}</td>
                                     <td>{{$recruit->total_person}}</td>
                                     <td>{!! $recruit->description !!}</td>

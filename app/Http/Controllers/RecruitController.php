@@ -14,10 +14,10 @@ class RecruitController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
     /**
      * Display a listing of the resource.
      */
@@ -59,6 +59,7 @@ class RecruitController extends Controller
                 'title'=> 'required',
                 'language'=> 'required',
                 'type' => 'required',
+                'time' => 'required',
                 'salary' => 'required',
                 'total_person' => 'required',
                 'description'=> 'required',
@@ -71,6 +72,7 @@ class RecruitController extends Controller
             $recruit->title = $request->input('title');
             $recruit->language_id = $request->input('language');
             $recruit->type = $request->input('type');
+            $recruit->time = $request->input('time');
             $recruit->salary = $request->input('salary');
             $recruit->total_person = $request->input('total_person');
             $recruit->description = $request->input('description');
@@ -109,6 +111,7 @@ class RecruitController extends Controller
                 'title'=> 'required',
                 'language'=> 'required',
                 'type' => 'required',
+                'time' => 'required',
                 'salary' => 'required',
                 'total_person' => 'required',
                 'description'=> 'required',
@@ -136,6 +139,7 @@ class RecruitController extends Controller
             $recruit->title = $request->input('title');
             $recruit->language_id = $request->input('language');
             $recruit->type = $request->input('type');
+            $recruit->time = $request->input('time');
             $recruit->salary = $request->input('salary');
             $recruit->total_person = $request->input('total_person');
             $recruit->description = $request->input('description');
@@ -177,6 +181,16 @@ class RecruitController extends Controller
         $recruit->save();
         return redirect()->route('recruit.index')
             ->with('success_message', 'Status update successfully.');
+    }
+
+    /**
+     * get all recruitment
+     */
+    public function getRecruits() {
+        $recruits = Recruit::all();
+        $languages = Language::all();
+        // return $recruits;
+        return view('main.recruits',compact('recruits', 'languages'));
     }
 
     /**

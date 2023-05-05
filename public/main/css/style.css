@@ -3412,3 +3412,37 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#391800', end
 		margin-bottom: 5px;
 	}
 }
+
+/* Recruit Detail */
+.card.r-detail{
+	border: none !important;
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 4px;
+  }
+  .r-detail ul{
+	list-style: none;
+	padding: 0;
+	display: flex;
+  }
+  .r-detail span{
+	float: right;
+  }
+  .r-text{
+	width: 100%;
+  }
+  .r-text ul li i{
+	color: var(--primary);
+  }
+  .rd-seperate{
+	height: 1px;
+    background-color: rgba(0,0,0,0.1);
+	margin: 15px 0;
+  }
+
+  .course-detail-bx a{
+	width: 100%;
+  }
+
+  /* Recruit Detail */
+
+

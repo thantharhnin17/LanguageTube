@@ -12,7 +12,6 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +29,7 @@ Route::get('/', function () {
 });
 Route::resource('/', HomeController::class);
 
+Route::get('/recruits', [RecruitController::class, 'getRecruits']);
 Route::get('/recruit_details/{id}',[RecruitController::class, 'recruit_details']);
 //////////Home////////////
 // Route::get('/', function () {
@@ -48,8 +48,8 @@ Route::resource('contact', ContactController::class);
 
 
 //////////Login////////////
-// Route::get('/login', function () {
-//         return view('login');
+// Route::get('/register', function () {
+//         return view('register');
 //     });
 Route::get('/register/admin', 'Auth\RegisterController@showAdminRegistrationForm')->name('register.admin');
 Route::post('/register/admin', 'Auth\RegisterController@registerAdmin')->name('register.admin.submit');

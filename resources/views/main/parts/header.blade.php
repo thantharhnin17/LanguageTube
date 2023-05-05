@@ -12,11 +12,35 @@
                             </ul>
                         </div>
                         <div class="topbar-right">
+                            @auth
+                            <li class="nav-item dropdown" style="list-style: none">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <i class="fas fa-user-circle mobile_header_icon" style="font-size:2rem; color:#3D464D"></i>
+                                    {{ Auth::user()->name }}
+                                </a>
+        
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/profile">
+                                        My Profile
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+        
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                            @else
                             <ul>
                                 
                                 <li class="{{ request()->is('login') ? 'active' : '' }}"><a href="/login">Login</a></li>
                                 <li class="{{ request()->is('register') ? 'active' : '' }}"><a href="/register">Create User Account</a></li>
                             </ul>
+                            @endauth
                         </div>
                     </div>
                 </div>
@@ -80,7 +104,7 @@
                                     <a href="{{url('courses')}}">All Courses</a>
                                 </li>
                                 <li class="{{ request()->is('recruits') ? 'active' : '' }}">
-                                    <a href="{{url('recruits')}}">All Recruits</a>
+                                    <a href="{{url('recruits')}}">Recruitment</a>
                                 </li>
                                 <li class="{{ request()->is('about') ? 'active' : '' }}">
                                     <a href="{{url('about')}}">About</a>

@@ -132,8 +132,6 @@
                     <div class="ttr-header-submenu">
                         <ul>
                             <li><a href="user-profile.html">My profile</a></li>
-                            <li><a href="list-view-calendar.html">Activity</a></li>
-                            <li><a href="mailbox.html">Messages</a></li>
                             <li>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();

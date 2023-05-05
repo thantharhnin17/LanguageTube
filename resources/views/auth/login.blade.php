@@ -82,7 +82,7 @@
                 <h2 class="title-head">Login to your <span>Account</span></h2>
                 <p>Don't have an account?
                     <div class="d-flex justify-content-between align-items-center acc-box">
-                        <a href="{{ route('register.student') }}">Create student account</a>
+                        <a href="{{ route('register') }}">Create student account</a>
                         <a href="{{ route('register.teacher') }}">Create teacher account</a>
                     </div>
                 </p>

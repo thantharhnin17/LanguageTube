@@ -64,6 +64,20 @@
                                 </div>    
 
                                 <div class="form-group col-12">
+                                    <label class="form-label" for="time">Work Time</label>
+                                    <br>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="time" id="full-time" value="full-time" {{ (old('time') == 'full-time') ? 'checked' : ''}}>
+                                        <label class="form-check-label" for="full-time">Full-time</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="time" id="part-time" value="part-time" {{ (old('time') == 'part-time') ? 'checked' : ''}}>
+                                        <label class="form-check-label" for="part-time">Part-time</label>
+                                    </div>
+                                    <span class="help-inline">@error('time'){{$message}}@enderror</span>
+                                </div> 
+
+                                <div class="form-group col-12">
                                     <label class="col-form-label">Salary</label>
                                     <div>
                                         <select class="form-control" id="salary" name="salary">

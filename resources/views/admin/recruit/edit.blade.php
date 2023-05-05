@@ -61,7 +61,21 @@
                                         <label class="form-check-label" for="online">Online</label>
                                     </div>
                                     <span class="help-inline">@error('type'){{$message}}@enderror</span>
-                                </div>    
+                                </div>  
+                                
+                                <div class="form-group col-12">
+                                    <label class="form-label" for="time">Work Time</label>
+                                    <br>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="time" id="full-time" value="full-time" {{ ($recruit->time == 'full-time') ? 'checked' : ''}}>
+                                        <label class="form-check-label" for="full-time">Full-time</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="time" id="part-time" value="part-time" {{ ($recruit->time == 'part-time') ? 'checked' : ''}}>
+                                        <label class="form-check-label" for="part-time">Part-time</label>
+                                    </div>
+                                    <span class="help-inline">@error('time'){{$message}}@enderror</span>
+                                </div> 
 
                                 <div class="form-group col-12">
                                     <label class="col-form-label">Salary</label>

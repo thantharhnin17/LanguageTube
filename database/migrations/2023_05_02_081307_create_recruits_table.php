@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('recruit_img');
             $table->string('type');
+            $table->string('time');
             $table->string('salary');
             $table->longtext('description');
             $table->longtext('requirement');
