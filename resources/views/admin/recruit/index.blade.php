@@ -51,10 +51,9 @@
                               <th>Time</th>
                               <th>Salary</th>
                               <th>Total Person</th>
-                              <th>Description</th>
-                              <th>Requirement</th>
                               <th>Status</th>
                               <th>Author</th>
+                              <th>Lists</th>
                               <th></th>
                             </tr>
                             </thead>
@@ -70,8 +69,6 @@
                                     <td>{{$recruit->time}}</td>
                                     <td>{{$recruit->salary}}</td>
                                     <td>{{$recruit->total_person}}</td>
-                                    <td>{!! $recruit->description !!}</td>
-                                    <td>{!! $recruit->requirement !!}</td>
                                     <td>
                                         <form id="{{$recruit->id}}" action="{{route('recruit.status',$recruit->id)}}" method="post">
                                             @csrf
@@ -81,11 +78,23 @@
                                         
                                     </td>
                                     <td>{{$recruit->user->name}}</td>
+
+                                    <td>
+                                        <a href="{{ route('recruit.applicant', $recruit->id) }}">
+                                            <button type="submit" class="btn" data-toggle="tooltip" title="All Applicants">
+                                                Applicants
+                                            </button>
+                                        </a> 
+                                    </td>
                                         
                                     <td class="tb-action">
                                         <ul class="mailbox-toolbar">
                                             <li class="mr-2">
-                                                <a href="{{ route('recruit.show', $recruit->id) }}">Show</a>
+                                                <a href="{{ route('recruit.show', $recruit->id) }}">
+                                                    <button type="submit" class="btn-circle show-btn btn-primary" data-toggle="tooltip" title="Show">
+                                                        <i class="fa-solid fa-eye"></i>
+                                                    </button>
+                                                </a>
                                             </li>
                                             <li class="mr-2">
                                                 <a href="{{url('admin/recruit/'.$recruit->id.'/edit')}}">

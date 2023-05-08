@@ -95,6 +95,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function(){
     //////////recruit////////////
     Route::resource('recruit', RecruitController::class);
     Route::post('recruit/status/{id}',[RecruitController::class, 'updateStatus'])->name('recruit.status');
+    Route::post('recruit/status/{id}',[RecruitController::class, 'updateStatus'])->name('recruit.status');
 
     //////////User////////////
     Route::resource('user', UserController::class);
