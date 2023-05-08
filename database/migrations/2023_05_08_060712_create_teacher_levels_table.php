@@ -20,7 +20,6 @@ return new class extends Migration
 
             $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('level_id')->references('id')->on('levels')->onDelete('cascade')->onUpdate('cascade');
-
         });
     }
 

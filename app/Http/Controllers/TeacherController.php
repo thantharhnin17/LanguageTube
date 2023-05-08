@@ -5,21 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Student;
 use App\Models\Teacher;
+use App\Models\TeacherLevel;
 use Illuminate\Http\Request;
+use App\Models\TeacherCertificate;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 
 class TeacherController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      */
@@ -172,4 +165,124 @@ class TeacherController extends Controller
         return redirect()->route('teacher.index')
         ->with('success_message','Teacher delete successfully.');
     }
+
+
+    /**
+     * apply job
+     */
+    public function apply(Request $request)
+    {
+        $user_id = $request->input('user_id');
+        $recruit_id = $request->input('recruit_id');
+
+    //////////
+
+        // $request->validate([
+        //     'name' => ['required', 'string', 'max:255'],
+        //     'email' => ['required', 'string', 'email', 'max:255'],
+        //     'phone'=> 'required',
+        //     'dob' => 'required',
+        //     'gender' => 'required',
+        //     'education' => 'required',
+        //     'university' => 'required',
+        //     'teach_language' => 'required',
+        //     'levels' => 'required',
+        //     'cv_form' => 'required',
+        //     'certis' => 'required',
+        // ]);
+
+        $user = User::find($user_id);
+        if ($request->hasFile('photo')) 
+        {
+            if ($request->file('photo')->isValid()) 
+            {
+                $validated = $request->validate([
+                    'photo' => 'mimes:jpg,jpeg,png,gif|max:2048',
+                ]);
+                $extension = $request->photo->extension();
+                $randomName = rand().".".$extension;
+                $request->photo->storeAs('/public/img/',$randomName);
+                    $user->photo = $randomName;
+            }
+        }   
+        else{
+            $user->photo = $user->photo;
+        }
+
+        $user->name = request('name');
+        $user->email = request('email');
+        $user->phone = request('phone');
+        $user->dob = request('dob');
+        $user->gender = request('gender');
+         
+        $user->save();
+        /////////////
+
+        if ($request->hasFile('cv_form')) 
+        {
+            if ($request->file('cv_form')->isValid()) 
+            {
+                $validated = $request->validate([
+                    'cv_form' => 'mimes:jpg,jpeg,png,gif,pdf|max:2048',
+                ]);
+                $extension = $request->cv_form->extension();
+                $randomCV = rand().".".$extension;
+                $request->cv_form->storeAs('/public/img/',$randomCV);
+                
+            }
+        }
+
+        $teacher = new Teacher();
+        $teacher->user_id = $user_id;
+        $teacher->recruit_id = $recruit_id;
+        $teacher->education = $request->input('education');
+        $teacher->university = $request->input('university');
+        $teacher->cv_form = $randomCV;
+        $teacher->comment = $request->input('comment');
+        $teacher->save();
+
+
+        ///////////////
+
+        // $levels = $request->input('levels');
+        // foreach ($levels as $level) {
+        //     $teacher->levels()->createMany([
+        //         ['teacher_id' => $teacher->id, 'level_id' => $level->id],
+        //     ]);
+        // }
+
+        $levels = $request->input('levels');
+        $levelData = [];
+        foreach ($levels as $level) {
+            $levelData[] = [
+                'teacher_id' => $teacher->id,
+                'level_id' => $level
+            ];
+        }
+        TeacherLevel::insert($levelData);
+
+        ///////////////
+
+        $certis = $request->file('certis');
+
+        foreach ($certis as $certi) {
+            $extension = $certi->extension();
+            $randomCerti = rand() . "." . $extension;
+            $certi->storeAs('/public/img/', $randomCerti);
+
+            // $teacherCerti = new TeacherCertificate();
+            // $teacherCerti->teacher_id = $teacher->id;
+            // $teacherCerti->certi_img = $randomCerti;
+            // dd($randomCerti);
+            // dd($certi);
+            $teacher->teacher_certificates()->createMany([
+                ['teacher_id' => $teacher->id, 'certi_img' => $randomCerti],
+            ]);
+        }
+
+
+        return redirect('/')
+        ->with('success_message','You apply successfully.');
+    }
+
 }

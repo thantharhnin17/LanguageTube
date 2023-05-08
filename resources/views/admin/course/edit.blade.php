@@ -48,7 +48,7 @@
                                 </div>
 
                                 <div class="form-group col-12 level-div" id="level-div">
-                                    <label class="col-form-label">Course Language</label>
+                                    <label class="col-form-label">Course Level</label>
                                     <div>
                                         <select class="form-control" name="course_level" id="course_level">
                                             <option selected value="">Choose Level</option>

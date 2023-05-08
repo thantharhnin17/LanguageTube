@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Level;
 use App\Models\Recruit;
 use App\Models\Language;
 use Illuminate\Http\Request;
@@ -24,7 +25,7 @@ class RecruitController extends Controller
     public function index()
     {
         $recruits = Recruit::all();
-        return view('admin.recruit.show',compact('recruits'));
+        return view('admin.recruit.index',compact('recruits'));
     }
 
     /**
@@ -86,9 +87,11 @@ class RecruitController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(RecruitPosts $recruitPosts)
+    public function show(string $id)
     {
-        //
+        $recruit = Recruit::find($id);
+        $languages = Language::all();
+        return view('admin.recruit.show',compact('recruit','languages'));
     }
 
     /**
@@ -179,8 +182,8 @@ class RecruitController extends Controller
             $recruit->status = 1; 
         }
         $recruit->save();
-        return redirect()->route('recruit.index')
-            ->with('success_message', 'Status update successfully.');
+        // return redirect()->route('recruit.index')
+        //     ->with('success_message', 'Status update successfully.');
     }
 
     /**
@@ -200,6 +203,17 @@ class RecruitController extends Controller
     {
         $recruit = Recruit::find($id);
         return view('main.recruit_details',compact('recruit'));
+    }
+
+    /**
+     * Show Recruit Form
+     */
+    public function recruit_form($id)
+    {
+        $recruit = Recruit::find($id);
+        $languages = Language::all();
+        $levels = Level::all();
+        return view('main.recruit_form',compact('recruit', 'languages', 'levels'));
     }
 
 }

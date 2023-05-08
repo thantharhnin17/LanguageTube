@@ -190,7 +190,7 @@
                                 <div class="price">
                                     <h5>KS 120,000</h5>
                                 </div>
-                                <a href="{{url('recruit_details/'.$recruit->id) }}" class="btn">Read More</a>
+                                <a href="{{url('recruits/recruit_details/'.$recruit->id) }}" class="btn">Read More</a>
                             </div>
                         </div>
                     </div>

@@ -54,11 +54,11 @@ class User extends Authenticatable
     //     return $this->hasOne(Student::class);
     // }
 
-    // // One to One
-    // public function teacher()
-    // {
-    //     return $this->hasOne(Teacher::class);
-    // }
+    // Define the one-to-one relationship with the Teacher model
+    public function teacher()
+    {
+        return $this->hasOne(Teacher::class);
+    }
 
     // One to Many
     public function recruits()

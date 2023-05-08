@@ -1,6 +1,6 @@
 @extends('layouts.main_layout')
 
-@section('title', 'Recruitment')
+@section('title', 'Recruitment Details')
 
 @section('content')
 <!-- Content -->
@@ -69,7 +69,12 @@
                             </div>	
                             <div class="rd-seperate"></div>
                             <div class="course-buy-now text-center">
-                                <a href="#" class="btn radius-xl text-uppercase">Apply Here</a>
+                                @if (Auth::check())
+                                    <a href="{{url('recruits/recruit_details/'.$recruit->id.'/recruit_form') }}" class="btn radius-xl text-uppercase">Apply Here</a>
+                                @else
+                                    <a href="/login" class="btn radius-xl text-uppercase">Apply Here</a>
+                                @endif
+
                             </div>
                             
                             <div class="course-info-list scroll-page">

@@ -11,13 +11,13 @@ class TeacherLevel extends Model
 
     protected $guarded = [];
 
-    // public function teacher()
-    // {
-    //     return $this->belongsTo(Teacher::class);
-    // }
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class);
+    }
 
-    // public function level()
-    // {
-    //     return $this->belongsTo(Level::class);
-    // }
+    public function level()
+    {
+        return $this->belongsTo(Level::class);
+    }
 }

@@ -30,7 +30,11 @@ Route::get('/', function () {
 Route::resource('/', HomeController::class);
 
 Route::get('/recruits', [RecruitController::class, 'getRecruits']);
-Route::get('/recruit_details/{id}',[RecruitController::class, 'recruit_details']);
+Route::get('/recruits/recruit_details/{id}',[RecruitController::class, 'recruit_details']);
+Route::get('/recruits/recruit_details/{id}/recruit_form/',[RecruitController::class, 'recruit_form']);
+//////////Teacher Apply////////////
+Route::put('/recruits/recruit_details/{id}/recruit_form/', [TeacherController::class, 'apply'])->name('apply.teacher.submit');
+
 //////////Home////////////
 // Route::get('/', function () {
 //     return view('home');

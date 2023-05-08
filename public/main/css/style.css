@@ -3446,3 +3446,27 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#391800', end
   /* Recruit Detail */
 
 
+  /* Recruit Form */
+.card.r-form{
+	border: none !important;
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 4px;
+  }
+  .r-title{
+	text-align: center;
+    padding-top: 20px;
+  }
+
+.form-control.bs-select-hidden:hover,.btn-group.bootstrap-select.form-control:hover{
+	display: block !important;
+}
+.btn.dropdown-toggle.btn-default:hover{
+	display: block !important;
+}
+.btn.dropdown-toggle,.btn.dropdown-toggle:hover {
+	color: #333;
+  }
+  
+  /* Recruit Form */
+
+

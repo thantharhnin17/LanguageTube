@@ -20,4 +20,11 @@ class Recruit extends Model
     {
         return $this->belongsTo(Language::class);
     }
+
+    //One(recruit) to Many(teacher)
+    //One(recruit) can have many teachers
+    public function teachers()
+    {
+        return $this->hasMany(Teacher::class);
+    }
 }

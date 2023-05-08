@@ -14,17 +14,16 @@ return new class extends Migration
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->unique();
-            $table->string('photo');
-            $table->string('phone');
-            $table->string('dob');
-            $table->string('gender');
+            $table->unsignedBigInteger('recruit_id')->unique();
             $table->string('education');
+            $table->string('university');
             $table->string('cv_form');
-            $table->longtext('reason');
+            $table->longtext('comment')->nullable();
 
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('recruit_id')->references('id')->on('recruits')->onUpdate('cascade');
         });
     }
 
