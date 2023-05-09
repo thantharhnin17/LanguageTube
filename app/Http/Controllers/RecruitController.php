@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Level;
 use App\Models\Recruit;
+use App\Models\Teacher;
 use App\Models\Language;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -214,6 +215,45 @@ class RecruitController extends Controller
         $languages = Language::all();
         $levels = Level::all();
         return view('main.recruit_form',compact('recruit', 'languages', 'levels'));
+    }
+
+    /**
+     * get all applicants by recruitment
+     */
+    public function getapplicants($id) {
+
+        $recruit = Recruit::find($id);
+        $teachers = $recruit->teachers()
+        ->whereHas('user', function ($query) {
+            $query->where('user_type', 'user');
+        })
+        ->get();
+        return view('admin.recruit.applicant',compact('recruit','teachers'));
+    }
+
+    /**
+     * get one applicant by recruitment
+     */
+    public function getoneapplicant($id,$app_id) {
+
+        $teacher = Teacher::find($app_id);
+        $levels = $teacher->levels;
+        return view('admin.recruit.oneApplicant',compact('teacher','levels'));
+    }
+
+    /**
+     * get one applicant by recruitment
+     */
+    public function accept($id,$app_id) {
+
+        $teacher = Teacher::find($app_id);
+        $user = $teacher->user;
+        $user->user_type = 'teacher';
+        $user->save();
+
+        $recruit = Recruit::find($id);
+        $teachers = $recruit->teachers;
+        return view('admin.recruit.applicant',compact('recruit','teachers'));
     }
 
 }

@@ -25,7 +25,7 @@ class Level extends Model
     //A level can have many teachers
     public function teachers()
     {
-        return $this->belongsToMany(Teacher::class, 'teacher_level');
+        return $this->belongsToMany(Teacher::class, 'teacher_levels');
     }
 
 

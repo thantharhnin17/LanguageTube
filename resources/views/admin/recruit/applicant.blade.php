@@ -34,14 +34,14 @@
                 <div class="widget-box">
                     <div class="wc-title">
                         <h4>All Applicants</h4>
-                        <div class="">
+                        {{-- <div class="">
                             <a class="btn btn-primary" href="{{url('admin/teacher/create')}}" role="button">
                                 <i class="fas fa-solid fa-plus"></i>  Add New Teacher
                             </a>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="widget-inner">
-                        <table id="example1" class="table table-hover">
+                        <table id="example2" class="table table-hover">
                             <thead class="thead-light">
                             <tr>
                               <th>#</th>
@@ -49,51 +49,40 @@
                               <th>Name</th>
                               <th>Email</th>
                               <th>Phone</th>
-                              <th>Date Of Birth</th>
                               <th>Age</th>
                               <th>Gender</th>
-                              <th></th>
+                              <th>Background Education</th>
+                              <th>Background University</th>
+                              <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php $no=1; ?>
-                                @foreach($users as $user)
+                                @foreach($teachers as $teacher)
                                 <tr>
                                     <td>{{$no++}}</td>
-                                    <td><img src="{{ asset('storage/img/' . $user->photo) }}" width="100px" height="100px" /></td>
-                                    <td>{{$user->name}}</td>
-                                    <td>{{$user->email}}</td>
+                                    <td><img src="{{ asset('storage/img/' . $teacher->user->photo) }}" width="100px" height="100px" /></td>
+                                    <td>{{$teacher->user->name}}</td>
+                                    <td>{{$teacher->user->email}}</td>
                                     
-                                    <td>{{$user->phone}}</td>
-                                    <td>{{$user->dob}}</td>
+                                    <td>{{$teacher->user->phone}}</td>
                                     <td>
                                         @php
-                                            $dob = \Carbon\Carbon::parse($user->dob);
+                                            $dob = \Carbon\Carbon::parse($teacher->user->dob);
                                         @endphp
                                         {{ $dob->diffInYears(\Carbon\Carbon::now()) }}
                                     </td>
-                                    <td>{{$user->gender}}</td>
+                                    <td>{{$teacher->user->gender}}</td>
+
+                                    <td>{{$teacher->education}}</td>
+                                    <td>{{$teacher->university}}</td>
                                         
                                     <td class="tb-action">
-                                        <ul class="mailbox-toolbar">
-                                            <li class="mr-2">
-                                                <a href="{{url('admin/teacher/'.$user->id.'/edit')}}">
-                                                    <button type="submit" class="btn-circle edit-btn btn-warning" data-toggle="tooltip" title="Edit">
-                                                        <i class="fa fa-pen-to-square"></i>
-                                                    </button>
-                                                </a>  
-                                            </li>
-                                            <li>
-                                                <form action="{{url('admin/teacher/'.$user->id)}}" method="POST" id="delete-form{{$user->id}}">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="button" onclick="confirmDelete({{$user->id}})" class="btn-circle delete-btn btn-danger" data-toggle="tooltip" title="Delete">
-                                                        <i class="fa fa-trash-o"></i>
-                                                    </button>
-                                                </form>
-                                            </li>
-                                            
-                                        </ul>
+                                        <a href="{{ route('recruit.oneapplicant',  ['id' => $teacher->recruit->id, 'app_id' => $teacher->id]) }}">
+                                            <button type="submit" class="btn" data-toggle="tooltip" title="Check">
+                                                Check
+                                            </button>
+                                        </a> 
                                     </td>
                                 </tr>   
                                 @endforeach

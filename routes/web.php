@@ -95,7 +95,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function(){
     //////////recruit////////////
     Route::resource('recruit', RecruitController::class);
     Route::post('recruit/status/{id}',[RecruitController::class, 'updateStatus'])->name('recruit.status');
-    Route::post('recruit/status/{id}',[RecruitController::class, 'updateStatus'])->name('recruit.status');
+    Route::get('recruit/{id}/applicants',[RecruitController::class, 'getapplicants'])->name('recruit.applicant');
+    Route::get('recruit/{id}/applicants/{app_id}',[RecruitController::class, 'getoneapplicant'])->name('recruit.oneapplicant');
+    Route::post('recruit/{id}/applicants/{app_id}',[RecruitController::class, 'accept'])->name('recruit.accept');
 
     //////////User////////////
     Route::resource('user', UserController::class);
