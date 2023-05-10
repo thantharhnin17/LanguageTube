@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->unique();
-            $table->unsignedBigInteger('recruit_id')->unique();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('recruit_id');
             $table->string('education');
             $table->string('university');
             $table->string('cv_form');
             $table->longtext('comment')->nullable();
+            $table->string('status')->default('Pending');
 
             $table->timestamps();
 

@@ -14,8 +14,8 @@ class Course extends Model
         return $this->belongsTo(Level::class);
     }
 
-    public function courseBatchs()
+    public function classrooms()
     {
-        return $this->hasMany(CourseBatch::class);
+        return $this->hasMany(Classroom::class);
     }
 }

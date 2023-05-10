@@ -53,6 +53,7 @@
                               <th>Gender</th>
                               <th>Background Education</th>
                               <th>Background University</th>
+                              <th>Status</th>
                               <th>Action</th>
                             </tr>
                             </thead>
@@ -76,6 +77,15 @@
 
                                     <td>{{$teacher->education}}</td>
                                     <td>{{$teacher->university}}</td>
+                                    <td>
+                                        @if($teacher->status == 'Pending') 
+                                            <p class="text-warning">Pending</p> 
+                                        @elseif ($teacher->status == 'Accepted')    
+                                            <p class="text-success">Accepted</p>
+                                        @else
+                                            <p class="text-secondary">Rejected</p>
+                                        @endif
+                                    </td>
                                         
                                     <td class="tb-action">
                                         <a href="{{ route('recruit.oneapplicant',  ['id' => $teacher->recruit->id, 'app_id' => $teacher->id]) }}">

@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Batch extends Model
+class OnlineInfo extends Model
 {
     use HasFactory;
 
-    public function classrooms()
+    public function classroom()
     {
-        return $this->hasMany(Classroom::class);
+        return $this->belongsTo(Classroom::class);
     }
 }

@@ -5,12 +5,14 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\BatchController;
+use App\Http\Controllers\LevelController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\RecruitController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\DashboardController;
 
 /*
@@ -55,16 +57,16 @@ Route::resource('contact', ContactController::class);
 // Route::get('/register', function () {
 //         return view('register');
 //     });
-Route::get('/register/admin', 'Auth\RegisterController@showAdminRegistrationForm')->name('register.admin');
-Route::post('/register/admin', 'Auth\RegisterController@registerAdmin')->name('register.admin.submit');
+// Route::get('/register/admin', 'Auth\RegisterController@showAdminRegistrationForm')->name('register.admin');
+// Route::post('/register/admin', 'Auth\RegisterController@registerAdmin')->name('register.admin.submit');
 
-// 'Auth\RegisterController@showStudentRegistrationForm'
-Route::get('/register/student', [RegisterController::class, 'showStudentRegistrationForm'])->name('register.student');
-Route::post('/register/student', [RegisterController::class, 'registerStudent'])->name('register.student.submit');
+// // 'Auth\RegisterController@showStudentRegistrationForm'
+// Route::get('/register/student', [RegisterController::class, 'showStudentRegistrationForm'])->name('register.student');
+// Route::post('/register/student', [RegisterController::class, 'registerStudent'])->name('register.student.submit');
 
-Route::get('/register/teacher', [RegisterController::class, 'showTeacherRegistrationForm'])->name('register.teacher');
-Route::get('/register/teacher/get-teach-levels/{id}',[RegisterController::class, 'getLevels']);
-Route::post('/register/teacher', [RegisterController::class, 'registerTeacher'])->name('register.teacher.submit');
+// Route::get('/register/teacher', [RegisterController::class, 'showTeacherRegistrationForm'])->name('register.teacher');
+// Route::get('/register/teacher/get-teach-levels/{id}',[RegisterController::class, 'getLevels']);
+// Route::post('/register/teacher', [RegisterController::class, 'registerTeacher'])->name('register.teacher.submit');
 
 
 //////////Backend/////////////
@@ -97,7 +99,12 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function(){
     Route::post('recruit/status/{id}',[RecruitController::class, 'updateStatus'])->name('recruit.status');
     Route::get('recruit/{id}/applicants',[RecruitController::class, 'getapplicants'])->name('recruit.applicant');
     Route::get('recruit/{id}/applicants/{app_id}',[RecruitController::class, 'getoneapplicant'])->name('recruit.oneapplicant');
-    Route::post('recruit/{id}/applicants/{app_id}',[RecruitController::class, 'accept'])->name('recruit.accept');
+    Route::post('recruit/{id}/applicants/{app_id}',[RecruitController::class, 'process'])->name('recruit.process');
+
+    //////////Classroom////////////
+    Route::resource('classroom', ClassroomController::class);
+    // Route::get('classroom/get-onlineInfo',[ClassroomController::class, 'getOnlineInfo']);
+    
 
     //////////User////////////
     Route::resource('user', UserController::class);

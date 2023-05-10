@@ -223,11 +223,12 @@ class RecruitController extends Controller
     public function getapplicants($id) {
 
         $recruit = Recruit::find($id);
-        $teachers = $recruit->teachers()
-        ->whereHas('user', function ($query) {
-            $query->where('user_type', 'user');
-        })
-        ->get();
+        $teachers = $recruit->teachers;
+        // $teachers = $recruit->teachers()
+        // ->whereHas('user', function ($query) {
+        //     $query->where('user_type', 'user');
+        // })
+        // ->get();
         return view('admin.recruit.applicant',compact('recruit','teachers'));
     }
 
@@ -244,6 +245,38 @@ class RecruitController extends Controller
     /**
      * get one applicant by recruitment
      */
+    public function process($id, $app_id, Request $request)
+    {
+        $action = $request->input('action');
+
+        $teacher = Teacher::find($app_id);
+        $user = $teacher->user;
+
+        // dd($action);
+
+        if ($action === 'accept') {
+            $teacher->status = 'Accepted';
+            $teacher->save();
+            $user->user_type = 'teacher';
+            $user->save();
+
+            $recruit = Recruit::findOrFail($id);
+            $teachers = $recruit->teachers;
+            return view('admin.recruit.applicant',compact('recruit','teachers'));
+        } elseif ($action === 'reject') {
+            $teacher->status = 'Rejected';
+            $teacher->save();
+            $user->user_type = 'user';
+            $user->save();
+
+            $recruit = Recruit::findOrFail($id);
+            $teachers = $recruit->teachers;
+            return view('admin.recruit.applicant',compact('recruit','teachers'));
+        } else {
+            return back()->withInput();
+        }
+    }
+
     public function accept($id,$app_id) {
 
         $teacher = Teacher::find($app_id);

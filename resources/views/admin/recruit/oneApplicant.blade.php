@@ -89,15 +89,20 @@
 
                             <div class="row my-3">
                                 <div class="col-12 d-flex justify-content-end">
-                                    <button type="button" class="btn-secondry mr-2">Reject</button>
-
-                                    <form action="{{ route('recruit.accept', ['id' => $teacher->recruit->id, 'app_id' => $teacher->id]) }}" method="post">
+                                    <form action="{{ route('recruit.process', ['id' => $teacher->recruit->id, 'app_id' => $teacher->id]) }}" method="post">
                                         @csrf
                                         @method('POST')
-                                        <button type="submit" class="btn" data-toggle="tooltip" title="Show">
+                                        <button type="submit" class="btn btn-secondary ml-2" data-toggle="tooltip" title="reject">
+                                            Reject
+                                        </button>
+                                        <button type="submit" class="btn" data-toggle="tooltip" title="accept">
                                             Accept
                                         </button>
+                                        <input type="hidden" name="action" value="">
                                     </form>
+
+                                    
+                                    
                                 </div>
                             </div>
 
@@ -110,5 +115,14 @@
         </div>
     </div>
 </main>
+<script>
+    $(document).ready(function() {
+        $('form').on('click', 'button[type="submit"]', function() {
+            var action = $(this).attr('title');
+            $('input[name="action"]').val(action);
+        });
+    });
+</script>
+
 <script src="{{asset ('admin/js/course.js')}}"></script>
 @endsection

@@ -54,9 +54,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="courses.html" class="ttr-material-button">
+                    <a href="{{url('admin/classroom')}}" class="ttr-material-button">
                         <span class="ttr-icon"><i class="ti-book"></i></span>
-                        <span class="ttr-label">Course Batches</span>
+                        <span class="ttr-label">Classrooms</span>
                     </a>
                 </li>
                 
