@@ -39,6 +39,10 @@
                                     </div>
                                 </div>
 
+                                <div class="form-group col-12 teacher-div" id="teacher-div" style="display:none;">
+                                    
+                                </div>
+
                                 <div class="form-group col-12">
                                     <label class="col-form-label">Batch Name</label>
                                     <div>
@@ -54,20 +58,6 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group col-12">
-                                    <label class="col-form-label">Teacher Name</label>
-                                    <div>
-                                        <select class="form-control" id="teacher_name" name="teacher_name">
-                                            <option selected value="">Choose teacher name</option>
-                                            @foreach ($teachers as $teacher)
-                                              <option value="{{ $teacher->id }}" {{ old('teacher_name') == "$teacher->id" ? 'selected' : '' }}>
-                                                {{ $teacher->user->name }}
-                                              </option>
-                                            @endforeach 
-                                        </select>
-                                        <span class="help-inline">@error('course_name'){{$message}}@enderror</span>
-                                    </div>
-                                </div>
 
                                 <div class="form-group col-12">
                                     <label class="col-form-label">Duration</label>
@@ -78,7 +68,7 @@
                                 </div>
 
                                 <div class="form-group col-12">
-                                    <label class="col-form-label">Duration</label>
+                                    <label class="col-form-label">Start Date</label>
                                     <div>
                                         <input name="start_date" class="form-control" type="date" value="{{ old('start_date') }}">
                                         <span class="help-inline">@error('start_date'){{$message}}@enderror</span>
@@ -117,16 +107,15 @@
                                     </div>
                                 </div>
 
-                                <div id="online-info" data-url="{{ url('admin/classroom/get-onlineInfo') }}"></div>
                                 <div class="form-group col-12">
                                     <label class="form-label" for="class_type">Class Type</label>
                                     <br>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="class_type" id="on-campus" value="on-campus" {{ (old('class_type') == 'on-campus') ? 'checked' : ''}}>
+                                        <input class="form-check-input" type="radio" name="class_type" id="on-campus" value="0" {{ (old('class_type') == '0') ? 'checked' : ''}}>
                                         <label class="form-check-label" for="on-campus">On-Campus</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="class_type" id="online" value="online" {{ (old('class_type') == 'online') ? 'checked' : ''}}>
+                                        <input class="form-check-input" type="radio" name="class_type" id="online" value="1" {{ (old('class_type') == '1') ? 'checked' : ''}}>
                                         <label class="form-check-label" for="online">Online</label>
                                     </div>
                                     <span class="help-inline">@error('class_type'){{$message}}@enderror</span>

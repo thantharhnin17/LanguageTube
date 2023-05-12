@@ -123,6 +123,37 @@
                                         @enderror
                                     </div>
                                 </div>
+
+                                <div class="form-group col-12">
+                                    <label class="col-form-label">{{ __('Teach Language') }}</label>
+                                    <div>
+                                        <select class="form-control" id="teach_language" name="teach_language">
+                                            <option selected value="">Choose Language</option>
+                                            @foreach ($languages as $language)
+                                              <option value="{{ $language->id }}" {{ $teacher->levels->first()->language->id == $language->id ? 'selected' : '' }}>
+                                                {{ $language->language_name }}
+                                              </option>
+                                            @endforeach 
+                                        </select>
+                                        <span class="help-inline">@error('teach_language'){{$message}}@enderror</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-12 level-div" id="level-div">
+                                        <label class="form-label">{{ __('Teach Levels') }}</label>
+                                        <div id="tt_level">
+                                            @foreach ($levels as $level)
+                                                @if ($teacher->levels->first()->language->id == $level->language_id)
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" name="levels[]" value="{{ $level->id }}">
+                                                    <label class="form-check-label" for="levels[]">{{ $level->level_name }}</label>
+                                                </div>
+                                                @endif
+                                                
+                                            @endforeach 
+                                            <span class="help-inline">@error('levels'){{$message}}@enderror</span>
+                                        </div>
+                                </div>
             
             
                                 <div class="col-lg-12 m-b30">
@@ -139,4 +170,5 @@
         </div>
     </div>
 </main>
+{{-- <script src="{{asset ('admin/js/teacher.js')}}"></script> --}}
 @endsection

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Teacher;
+use App\Models\Language;
+use App\Models\TeacherLevel;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
@@ -33,7 +36,14 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.user.create');
+        $languages = Language::all();
+        return view('admin.user.create',compact('languages'));
+    }
+
+    public function getLevels($id)
+    {
+        $course_levels = Level::where('language_id', $id)->pluck('level_name', 'id');
+        return response()->json($course_levels);
     }
 
     /**
@@ -66,7 +76,7 @@ class UserController extends Controller
             }
         }
 
-            User::create([
+            $user = User::create([
                 'name' => request('name'),
                 'email' => request('email'),
                 'password' => Hash::make(request('password')),
@@ -77,7 +87,29 @@ class UserController extends Controller
                 'gender' => request('gender'),
             ]);
 
-            return redirect()->route('user.index')->with('success_message', 'User created successfully.');
+            if($user->user_type == "teacher"){
+                $teacher = new Teacher();
+                $teacher->user_id = $user->id;
+                $teacher->recruit_id = null;
+                $teacher->education = null;
+                $teacher->university = null;
+                $teacher->cv_form = null;
+                $teacher->comment = null;
+                $teacher->status = 'Accepted';
+                $teacher->save();
+
+                $levels = $request->input('levels');
+                $levelData = [];
+                foreach ($levels as $level) {
+                    $levelData[] = [
+                        'teacher_id' => $teacher->id,
+                        'level_id' => $level
+                    ];
+                }
+                TeacherLevel::insert($levelData);
+            }
+            
+            return redirect()->route('user.index')->with('success_message', 'Teacher created successfully.');
     }
 
     /**
@@ -147,6 +179,29 @@ class UserController extends Controller
             $user->gender = request('gender');
          
            $user->save();
+
+            if($user->user_type == "teacher"){
+                $teacher = new Teacher();
+                $teacher->user_id = $user->id;
+                $teacher->recruit_id = null;
+                $teacher->education = null;
+                $teacher->university = null;
+                $teacher->cv_form = null;
+                $teacher->comment = null;
+                $teacher->status = 'Accepted';
+                $teacher->save();
+
+                $levels = $request->input('levels');
+                $levelData = [];
+                foreach ($levels as $level) {
+                    $levelData[] = [
+                        'teacher_id' => $teacher->id,
+                        'level_id' => $level
+                    ];
+                }
+                TeacherLevel::insert($levelData);
+            }
+
            return redirect()->route('user.index')
             ->with('success_message', 'User update successfully.');
     }

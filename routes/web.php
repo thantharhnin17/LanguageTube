@@ -103,17 +103,20 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function(){
 
     //////////Classroom////////////
     Route::resource('classroom', ClassroomController::class);
-    // Route::get('classroom/get-onlineInfo',[ClassroomController::class, 'getOnlineInfo']);
+    Route::get('classroom/get-teachers/{id}',[ClassroomController::class, 'getTeachers']);
     
 
     //////////User////////////
     Route::resource('user', UserController::class);
+    Route::get('user/get-levels/{id}',[CourseController::class, 'getLevels']);
 
     //////////Student////////////
     Route::resource('student', StudentController::class);
 
     //////////Teacher////////////
     Route::resource('teacher', TeacherController::class);
+    Route::get('teacher/get-levels/{id}',[TeacherController::class, 'getLevels']);
+    // Route::get('teacher/teacher/{id}/edit/get-levels/{id}',[TeacherController::class, 'getLevels']);
 
 });
 

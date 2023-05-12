@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('recruit_id');
-            $table->string('education');
-            $table->string('university');
-            $table->string('cv_form');
+            $table->unsignedBigInteger('recruit_id')->nullable();
+            $table->string('education')->nullable();
+            $table->string('university')->nullable();
+            $table->string('cv_form')->nullable();
             $table->longtext('comment')->nullable();
-            $table->string('status')->default('Pending');
+            $table->string('status')->default('Pending')->nullable();
 
             $table->timestamps();
 

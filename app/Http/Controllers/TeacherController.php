@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Level;
 use App\Models\Student;
 use App\Models\Teacher;
+use App\Models\Language;
 use App\Models\TeacherLevel;
 use Illuminate\Http\Request;
 use App\Models\TeacherCertificate;
@@ -28,7 +30,14 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        return view('admin.teacher.create');
+        $languages = Language::all();
+        return view('admin.teacher.create',compact('languages'));
+    }
+
+    public function getLevels($id)
+    {
+        $course_levels = Level::where('language_id', $id)->pluck('level_name', 'id');
+        return response()->json($course_levels);
     }
 
     /**
@@ -63,7 +72,7 @@ class TeacherController extends Controller
 
             // dd(request('user_type'));
 
-            User::create([
+            $user = User::create([
                 'name' => request('name'),
                 'email' => request('email'),
                 'password' => Hash::make(request('password')),
@@ -73,6 +82,26 @@ class TeacherController extends Controller
                 'gender' => request('gender'),
                 'user_type' => 'teacher',
             ]);
+
+            $teacher = new Teacher();
+            $teacher->user_id = $user->id;
+            $teacher->recruit_id = null;
+            $teacher->education = null;
+            $teacher->university = null;
+            $teacher->cv_form = null;
+            $teacher->comment = null;
+            $teacher->status = 'Accepted';
+            $teacher->save();
+
+            $levels = $request->input('levels');
+            $levelData = [];
+            foreach ($levels as $level) {
+                $levelData[] = [
+                    'teacher_id' => $teacher->id,
+                    'level_id' => $level
+                ];
+            }
+            TeacherLevel::insert($levelData);
 
             return redirect()->route('teacher.index')->with('success_message', 'Teacher created successfully.');
     }
@@ -91,7 +120,10 @@ class TeacherController extends Controller
     public function edit(string $id)
     {
         $user= User::find($id);
-        return view('admin.teacher.edit',compact('user'));
+        $teacher = $user->teacher;
+        $languages= Language::all();
+        $levels = Level::all();
+        return view('admin.teacher.edit',compact('user','teacher','languages', 'levels'));
     }
 
     /**
@@ -142,6 +174,28 @@ class TeacherController extends Controller
             $user->gender = request('gender');
          
            $user->save();
+
+
+            $teacher = $user->teacher;
+                $teacher->user_id = $user->id;
+                $teacher->recruit_id = null;
+                $teacher->education = null;
+                $teacher->university = null;
+                $teacher->cv_form = null;
+                $teacher->comment = null;
+                $teacher->status = 'Accepted';
+                $teacher->save();
+
+                $levels = $request->input('levels');
+                $levelData = [];
+                foreach ($levels as $level) {
+                    $levelData[] = [
+                        'teacher_id' => $teacher->id,
+                        'level_id' => $level
+                    ];
+                }
+            TeacherLevel::insert($levelData);
+
            return redirect()->route('teacher.index')
             ->with('success_message', 'Teacher update successfully.');
     }

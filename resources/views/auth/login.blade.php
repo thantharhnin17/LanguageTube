@@ -78,7 +78,7 @@
     </div>
     <div class="account-form-inner">
         <div class="account-container">
-            <div class="heading-bx left">
+            {{-- <div class="heading-bx left">
                 <h2 class="title-head">Login to your <span>Account</span></h2>
                 <p>Don't have an account?
                     <div class="d-flex justify-content-between align-items-center acc-box">
@@ -86,7 +86,11 @@
                         <a href="{{ route('register.teacher') }}">Create teacher account</a>
                     </div>
                 </p>
-            </div>	
+            </div>	 --}}
+            <div class="heading-bx left">
+                <h2 class="title-head">Login to your <span>Account</span></h2>
+                <p>Don't have an account? <a href="/register">Create one here</a></p>
+            </div>
             <form class="contact-bx" method="POST" action="{{ route('login') }}">
                 @csrf
                 <div class="row placeani">

@@ -51,6 +51,14 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'course_name'=> 'required',
+            'course_language' => 'required',
+            'course_level' => 'required',
+            'description'=> 'required',
+            'course_img' => 'required'
+        ]);
+        
         if ($request->hasFile('course_img')) 
         {
             if ($request->file('course_img')->isValid()) 
@@ -64,13 +72,6 @@ class CourseController extends Controller
                 
             }
         }
-         $request->validate([
-                'course_name'=> 'required',
-                'course_language' => 'required',
-                'course_level' => 'required',
-                'description'=> 'required',
-                'course_img' => 'required'
-            ]);
 
             $course = new Course();
             $course->course_name = $request->input('course_name');
