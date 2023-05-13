@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('recruit_id')->nullable();
+            $table->boolean('type')->default(0);
+            $table->boolean('time')->default(0);
             $table->string('education')->nullable();
             $table->string('university')->nullable();
             $table->string('cv_form')->nullable();

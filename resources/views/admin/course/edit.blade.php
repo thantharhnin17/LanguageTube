@@ -24,25 +24,28 @@
                             @csrf
                             @method('PUT')
                             <div class="row wi-body">
-                                <div class="form-group col-12">
+                                {{-- <div class="form-group col-12">
                                     <label class="col-form-label">Course Name</label>
                                     <div>
                                         <input name="course_name" class="form-control" type="text" value="{{$course->course_name}}">
                                         <span class="help-inline">@error('course_name'){{$message}}@enderror</span>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <div class="form-group col-12">
                                     <label class="col-form-label">Course Language</label>
                                     <div>
-                                        <select class="form-control" id="course_language" name="course_language">
-                                            <option selected value="">Choose Category</option>
+                                        <select class="form-control" id="course_language" name="course_language" disabled>
+                                            <option selected value="">Choose Language</option>
                                             @foreach ($languages as $language)
                                             <option value="{{ $language->id  }}" {{$course->level->language->id == $language->id  ? 'selected' : ''}}>
                                                 {{ $language->language_name }}
                                             </option>
                                             @endforeach 
                                         </select>
+
+                                        <input type="hidden" name="course_language_hidden" value="{{ $course->level->language->id }}">
+                                        
                                         <span class="help-inline">@error('course_language'){{$message}}@enderror</span>
                                     </div>
                                 </div>
@@ -62,6 +65,14 @@
                                             @endforeach 
                                         </select>
                                         <span class="help-inline">@error('course_level'){{$message}}@enderror</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-12">
+                                    <label class="col-form-label">Course Summary</label>
+                                    <div>
+                                        <textarea  type="summernote" class="form-control summernote" name="summary">{{$course->summary}}</textarea>
+                                        <span class="help-inline">@error('summary'){{$message}}@enderror</span>
                                     </div>
                                 </div>
 
@@ -101,5 +112,4 @@
         </div>
     </div>
 </main>
-<script src="{{asset ('admin/js/course.js')}}"></script>
 @endsection

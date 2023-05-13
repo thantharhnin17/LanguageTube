@@ -17,8 +17,8 @@
     <div class="breadcrumb-row">
         <div class="container">
             <ul class="list-inline">
-                <li><a href="#">Home</a></li>
-                <li>Recruitments</li>
+                <li><a href="{{url('/')}}">Home</a></li>
+                <li><a href="{{url('recruits')}}">Recruitments</a></li>
                 <li>Recruitment Details</li>
             </ul>
         </div>
@@ -40,8 +40,20 @@
                                 <div class="r-text col-lg-9 col-md-8 col-sm-12">
                                     <h2 class="post-title">{{$recruit->title}} - {{$recruit->language->language_name}}</h2>
                                     <ul class="">
-										<li class="mr-4"><i class="fa-solid fa-business-time"></i>   {{$recruit->time}}</li>
-										<li class="mr-4"><i class="ti-location-pin"></i>   {{$recruit->type}}</li>
+										<li class="mr-4"><i class="fa-solid fa-business-time"></i>   
+                                            @if ($recruit->type == 0)
+                                                On-Compus  
+                                            @else
+                                                Online
+                                            @endif
+                                        </li>
+										<li class="mr-4"><i class="ti-location-pin"></i>   
+                                            @if ($recruit->time == 0)
+                                                Full-time  
+                                            @else
+                                                Part-time
+                                            @endif
+                                        </li>
 										<li class="mr-4"><i class="fa-solid fa-dollar-sign"></i>   {{$recruit->salary}}</li>
 										<li><i class="ti-user"></i>   {{$recruit->total_person}} Positions</li>
                                     </ul>

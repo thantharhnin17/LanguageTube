@@ -72,80 +72,27 @@
                     </div>
                 </div>
                 <div class="row">
-                <div class="courses-carousel owl-carousel owl-btn-1 col-12 p-lr0">
-                    <div class="item">
+                    @foreach($classrooms as $classroom)
+                    <div class="item col-12 col-md-4 col-lg-3">
                         <div class="cours-bx">
                             <div class="action-box">
-                                <img src="assets/images/courses/pic1.jpg" alt="">
+                                <img src="{{ asset('storage/img/' . $classroom->course->course_img) }}" alt="">
                                 
                             </div>
                             <div class="info-bx text-center">
-                                <h5><a href="#">Introduction EduChamp – LMS plugin</a></h5>
-                                <span>Programming</span>
+                                <h5><a href="{{url('classrooms/classroom_details/'.$classroom->id) }}">{{$classroom->course->course_name}}</a></h5>
+                                <span>{{$classroom->course->level->language->language_name}}</span>
                             </div>
                             <div class="cours-more-info">
                                 <div class="price">
-                                    <h5>KS 120,000</h5>
+                                    <h5>KS {{$classroom->fee}}</h5>
                                 </div>
-                                <a href="#" class="btn">Read More</a>
+                                <a href="{{url('classroom/classroom_details/'.$classroom->id) }}" class="btn">Read More</a>
                             </div>
                         </div>
                     </div>
-                    <div class="item">
-                        <div class="cours-bx">
-                            <div class="action-box">
-                                <img src="assets/images/courses/pic2.jpg" alt="">
-                                
-                            </div>
-                            <div class="info-bx text-center">
-                                <h5><a href="#">Introduction EduChamp – LMS plugin</a></h5>
-                                <span>Programming</span>
-                            </div>
-                            <div class="cours-more-info">
-                                <div class="price">
-                                    <h5>KS 120,000</h5>
-                                </div>
-                                <a href="#" class="btn">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="cours-bx">
-                            <div class="action-box">
-                                <img src="assets/images/courses/pic3.jpg" alt="">
-                                
-                            </div>
-                            <div class="info-bx text-center">
-                                <h5><a href="#">Introduction EduChamp – LMS plugin</a></h5>
-                                <span>Programming</span>
-                            </div>
-                            <div class="cours-more-info">
-                                <div class="price">
-                                    <h5>KS 120,000</h5>
-                                </div>
-                                <a href="#" class="btn">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="cours-bx">
-                            <div class="action-box">
-                                <img src="assets/images/courses/pic4.jpg" alt="">
-                                
-                            </div>
-                            <div class="info-bx text-center">
-                                <h5><a href="#">Introduction EduChamp – LMS plugin</a></h5>
-                                <span>Programming</span>
-                            </div>
-                            <div class="cours-more-info">
-                                <div class="price">
-                                    <h5>KS 120,000</h5>
-                                </div>
-                                <a href="#" class="btn">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    @endforeach
+               
                 </div>
             </div>
         </div>

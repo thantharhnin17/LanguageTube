@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Recruit;
+use App\Models\Classroom;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -13,8 +14,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $classrooms = Classroom::all();
         $recruits = Recruit::all();
-        return view('main.home',compact('recruits'));
+        return view('main.home',compact('classrooms','recruits'));
     }
 
     /**

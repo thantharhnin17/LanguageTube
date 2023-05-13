@@ -2606,6 +2606,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#391800', end
 /* course detail bx */
 .course-detail-bx{
 	padding:20px;
+	padding-bottom: 0;
 	border:1px solid rgba(0,0,0,0.1);
 	position: sticky;
 	top: 100px;
@@ -2631,6 +2632,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#391800', end
 }
 .teacher-bx{
 	border: 1px solid rgba(0,0,0,0.1);
+	background-color: #F7F7F7;
 	padding: 10px 20px;
 	margin: 20px -20px 0;
 	border-width: 1px 0 1px 0;

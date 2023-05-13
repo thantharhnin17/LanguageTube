@@ -125,9 +125,37 @@
                                 </div>
 
                                 <div class="form-group col-12">
+                                    <label class="form-label" for="type">Work Type</label>
+                                    <br>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="type" id="on-campus" value="0" {{ ($user->teacher->type == '0') ? 'checked' : ''}}>
+                                        <label class="form-check-label" for="on-campus">On-Campus</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="type" id="online" value="1" {{ ($user->teacher->type == '1') ? 'checked' : ''}}>
+                                        <label class="form-check-label" for="online">Online</label>
+                                    </div>
+                                    <span class="help-inline">@error('type'){{$message}}@enderror</span>
+                                </div>    
+
+                                <div class="form-group col-12">
+                                    <label class="form-label" for="time">Work Time</label>
+                                    <br>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="time" id="full-time" value="0" {{ ($user->teacher->time == '0') ? 'checked' : ''}}>
+                                        <label class="form-check-label" for="full-time">Full-time</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="time" id="part-time" value="1" {{ ($user->teacher->time == '1') ? 'checked' : ''}}>
+                                        <label class="form-check-label" for="part-time">Part-time</label>
+                                    </div>
+                                    <span class="help-inline">@error('time'){{$message}}@enderror</span>
+                                </div> 
+
+                                <div class="form-group col-12">
                                     <label class="col-form-label">{{ __('Teach Language') }}</label>
                                     <div>
-                                        <select class="form-control" id="teach_language" name="teach_language">
+                                        <select class="form-control" id="teach_language" name="teach_language" disabled>
                                             <option selected value="">Choose Language</option>
                                             @foreach ($languages as $language)
                                               <option value="{{ $language->id }}" {{ $teacher->levels->first()->language->id == $language->id ? 'selected' : '' }}>
@@ -144,12 +172,11 @@
                                         <div id="tt_level">
                                             @foreach ($levels as $level)
                                                 @if ($teacher->levels->first()->language->id == $level->language_id)
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" name="levels[]" value="{{ $level->id }}">
-                                                    <label class="form-check-label" for="levels[]">{{ $level->level_name }}</label>
-                                                </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" name="levels[]" value="{{ $level->id }}" {{ $teacher->levels->contains($level->id) ? 'checked' : ''}}>
+                                                        <label class="form-check-label" for="levels[]">{{ $level->level_name }}</label>
+                                                    </div>
                                                 @endif
-                                                
                                             @endforeach 
                                             <span class="help-inline">@error('levels'){{$message}}@enderror</span>
                                         </div>
@@ -170,5 +197,4 @@
         </div>
     </div>
 </main>
-{{-- <script src="{{asset ('admin/js/teacher.js')}}"></script> --}}
 @endsection

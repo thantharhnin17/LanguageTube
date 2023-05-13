@@ -52,9 +52,9 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'course_name'=> 'required',
             'course_language' => 'required',
             'course_level' => 'required',
+            'summary'=> 'required',
             'description'=> 'required',
             'course_img' => 'required'
         ]);
@@ -74,7 +74,17 @@ class CourseController extends Controller
         }
 
             $course = new Course();
-            $course->course_name = $request->input('course_name');
+
+            $language_id = $request->input('course_language');
+            $level_id = $request->input('course_level');
+
+            $language = Language::find($language_id)->language_name;
+            $level = Level::find($level_id)->level_name;
+
+            $course->course_name = $language . '-' . $level;
+
+            // $course->course_name = $request->input('course_language') . '-' . $request->input('course_level');
+            $course->summary = $request->input('summary');
             $course->description = $request->input('description');
             $course->level_id = $request->input('course_level');
             $course->course_img = $randomName;
@@ -108,9 +118,9 @@ class CourseController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'course_name'=> 'required',
-            'course_language' => 'required',
+            'course_language_hidden' => 'required',
             'course_level' => 'required',
+            'summary'=> 'required',
             'description'=> 'required'
         ]);
 
@@ -131,7 +141,17 @@ class CourseController extends Controller
         else{
             $course->course_img = $course->course_img;
         }
-            $course->course_name = $request->input('course_name');
+
+        $language_id = $request->input('course_language_hidden');
+        $level_id = $request->input('course_level');
+
+        $language = Language::find($language_id)->language_name;
+        $level = Level::find($level_id)->level_name;
+
+        $course->course_name = $language . '-' . $level;
+
+            // $course->course_name = $request->input('course_language') . '-' . $request->input('course_level');
+            $course->summary = $request->input('summary');
             $course->description = $request->input('description');
             $course->level_id = $request->input('course_level');
          

@@ -63,6 +63,27 @@
                             </div>
 
                             <div class="row mb-3">
+                                <div class="col-12 col-md-3">Work Type</div>
+                                <div class="col-12 col-md-9">
+                                    @if ($teacher->type == 0)
+                                        On-Compus  
+                                    @else
+                                        Online
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-12 col-md-3">Work Time</div>
+                                <div class="col-12 col-md-9">
+                                    @if ($teacher->time == 0)
+                                        Full-time  
+                                    @else
+                                        Part-time
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
                                 <div class="col-12 col-md-3">Background Education</div>
                                 <div class="col-12 col-md-9">{{$teacher->education}}</div>
                             </div>

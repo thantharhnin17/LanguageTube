@@ -24,13 +24,13 @@
                             @csrf
                             @method('POST')
                             <div class="row wi-body">
-                                <div class="form-group col-12">
+                                {{-- <div class="form-group col-12">
                                     <label class="col-form-label">Course Name</label>
                                     <div>
                                         <input name="course_name" class="form-control" type="text" value="{{ old('course_name') }}">
                                         <span class="help-inline">@error('course_name'){{$message}}@enderror</span>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <div class="form-group col-12">
                                     <label class="col-form-label">Course Language</label>
@@ -56,6 +56,14 @@
                                         </select>
                                         <span class="help-inline">@error('course_level'){{$message}}@enderror</span>
                                     </div> --}}
+                                </div>
+
+                                <div class="form-group col-12">
+                                    <label class="col-form-label">Course Summary</label>
+                                    <div>
+                                        <textarea  type="summernote" class="form-control summernote" name="summary">{{old('summary')}}</textarea>
+                                        <span class="help-inline">@error('summary'){{$message}}@enderror</span>
+                                    </div>
                                 </div>
 
                                 <div class="form-group col-12">

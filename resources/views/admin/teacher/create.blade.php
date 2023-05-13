@@ -121,6 +121,35 @@
                                         @enderror
                                     </div>
                                 </div>  
+
+
+                                <div class="form-group col-12">
+                                    <label class="form-label" for="type">Work Type</label>
+                                    <br>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="type" id="on-campus" value="0" {{ (old('type') == '0') ? 'checked' : ''}}>
+                                        <label class="form-check-label" for="on-campus">On-Campus</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="type" id="online" value="1" {{ (old('type') == '1') ? 'checked' : ''}}>
+                                        <label class="form-check-label" for="online">Online</label>
+                                    </div>
+                                    <span class="help-inline">@error('type'){{$message}}@enderror</span>
+                                </div>    
+
+                                <div class="form-group col-12">
+                                    <label class="form-label" for="time">Work Time</label>
+                                    <br>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="time" id="full-time" value="0" {{ (old('time') == '0') ? 'checked' : ''}}>
+                                        <label class="form-check-label" for="full-time">Full-time</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="time" id="part-time" value="1" {{ (old('time') == '1') ? 'checked' : ''}}>
+                                        <label class="form-check-label" for="part-time">Part-time</label>
+                                    </div>
+                                    <span class="help-inline">@error('time'){{$message}}@enderror</span>
+                                </div> 
                                 
                                 
                                 <div class="form-group col-12">

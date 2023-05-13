@@ -39,6 +39,40 @@
                                     </div>
                                 </div>
 
+                                <div class="form-group col-12">
+                                    <label class="form-label" for="class_type">Class Type</label>
+                                    <br>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="class_type" id="on-campus" value="0" {{ (old('class_type') == '0') ? 'checked' : ''}}>
+                                        <label class="form-check-label" for="on-campus">On-Campus</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="class_type" id="online" value="1" {{ (old('class_type') == '1') ? 'checked' : ''}}>
+                                        <label class="form-check-label" for="online">Online</label>
+                                    </div>
+                                    <span class="help-inline">@error('class_type'){{$message}}@enderror</span>
+                                </div> 
+
+                                <div class="form-group col-12 online-div" id="online-div" style="display:none;">
+                                    <div class="form-group col-12">
+                                        <label class="col-form-label">Meeting Link</label>
+                                        <div>
+                                            <input name="meeting_link" class="form-control" type="text" value="{{ old('meeting_link') }}">
+                                            <span class="help-inline">@error('meeting_link'){{$message}}@enderror</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-12">
+                                        <label class="col-form-label">Group Chat Link</label>
+                                        <div>
+                                            <input name="group_chat_link" class="form-control" type="text" value="{{ old('group_chat_link') }}">
+                                            <span class="help-inline">@error('group_chat_link'){{$message}}@enderror</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <meta name="csrf-token" content="{{ csrf_token() }}">
+                                
                                 <div class="form-group col-12 teacher-div" id="teacher-div" style="display:none;">
                                     
                                 </div>
@@ -107,57 +141,8 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group col-12">
-                                    <label class="form-label" for="class_type">Class Type</label>
-                                    <br>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="class_type" id="on-campus" value="0" {{ (old('class_type') == '0') ? 'checked' : ''}}>
-                                        <label class="form-check-label" for="on-campus">On-Campus</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="class_type" id="online" value="1" {{ (old('class_type') == '1') ? 'checked' : ''}}>
-                                        <label class="form-check-label" for="online">Online</label>
-                                    </div>
-                                    <span class="help-inline">@error('class_type'){{$message}}@enderror</span>
-                                </div> 
+                                
 
-                                <div class="form-group col-12 online-div" id="online-div" style="display:none;">
-                                    <div class="form-group col-12">
-                                        <label class="col-form-label">Meeting Link</label>
-                                        <div>
-                                            <input name="meeting_link" class="form-control" type="text" value="{{ old('meeting_link') }}">
-                                            <span class="help-inline">@error('meeting_link'){{$message}}@enderror</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group col-12">
-                                        <label class="col-form-label">Group Chat Link</label>
-                                        <div>
-                                            <input name="group_chat_link" class="form-control" type="text" value="{{ old('group_chat_link') }}">
-                                            <span class="help-inline">@error('group_chat_link'){{$message}}@enderror</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {{-- <div class=" collapse {{ (old('class_type') == 'online') ? 'show' : ''}} chosen_hiden chosen_online">
-
-                                    <div class="form-group col-12">
-                                        <label class="col-form-label">Meeting Link</label>
-                                        <div>
-                                            <input name="meeting_link" class="form-control" type="text" value="{{ old('meeting_link') }}">
-                                            <span class="help-inline">@error('meeting_link'){{$message}}@enderror</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group col-12">
-                                        <label class="col-form-label">Group Chat Link</label>
-                                        <div>
-                                            <input name="group_chat_link" class="form-control" type="text" value="{{ old('group_chat_link') }}">
-                                            <span class="help-inline">@error('group_chat_link'){{$message}}@enderror</span>
-                                        </div>
-                                    </div>
-
-                                </div> --}}
                                 
                                 <div class="seperator"></div>
                                 

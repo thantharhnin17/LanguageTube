@@ -27,7 +27,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::where('user_type', 'user')->get();
         return view('admin.user.show',compact('users'));
     }
 
@@ -36,15 +36,15 @@ class UserController extends Controller
      */
     public function create()
     {
-        $languages = Language::all();
-        return view('admin.user.create',compact('languages'));
+        // $languages = Language::all();
+        return view('admin.user.create');
     }
 
-    public function getLevels($id)
-    {
-        $course_levels = Level::where('language_id', $id)->pluck('level_name', 'id');
-        return response()->json($course_levels);
-    }
+    // public function getLevels($id)
+    // {
+    //     $course_levels = Level::where('language_id', $id)->pluck('level_name', 'id');
+    //     return response()->json($course_levels);
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -55,7 +55,6 @@ class UserController extends Controller
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'string', 'min:8'],
-                'user_type' => ['required', 'string', Rule::in(['admin', 'user', 'student', 'teacher'])],
                 'photo'=> 'required',
                 'phone'=> 'required',
                 'dob' => 'required',
@@ -80,36 +79,36 @@ class UserController extends Controller
                 'name' => request('name'),
                 'email' => request('email'),
                 'password' => Hash::make(request('password')),
-                'user_type' => request('user_type'),
+                'user_type' => 'user',
                 'photo' => $randomName,
                 'phone' => request('phone'),
                 'dob' => request('dob'),
                 'gender' => request('gender'),
             ]);
 
-            if($user->user_type == "teacher"){
-                $teacher = new Teacher();
-                $teacher->user_id = $user->id;
-                $teacher->recruit_id = null;
-                $teacher->education = null;
-                $teacher->university = null;
-                $teacher->cv_form = null;
-                $teacher->comment = null;
-                $teacher->status = 'Accepted';
-                $teacher->save();
+            // if($user->user_type == "teacher"){
+            //     $teacher = new Teacher();
+            //     $teacher->user_id = $user->id;
+            //     $teacher->recruit_id = null;
+            //     $teacher->education = null;
+            //     $teacher->university = null;
+            //     $teacher->cv_form = null;
+            //     $teacher->comment = null;
+            //     $teacher->status = 'Accepted';
+            //     $teacher->save();
 
-                $levels = $request->input('levels');
-                $levelData = [];
-                foreach ($levels as $level) {
-                    $levelData[] = [
-                        'teacher_id' => $teacher->id,
-                        'level_id' => $level
-                    ];
-                }
-                TeacherLevel::insert($levelData);
-            }
+            //     $levels = $request->input('levels');
+            //     $levelData = [];
+            //     foreach ($levels as $level) {
+            //         $levelData[] = [
+            //             'teacher_id' => $teacher->id,
+            //             'level_id' => $level
+            //         ];
+            //     }
+            //     TeacherLevel::insert($levelData);
+            // }
             
-            return redirect()->route('user.index')->with('success_message', 'Teacher created successfully.');
+            return redirect()->route('user.index')->with('success_message', 'User created successfully.');
     }
 
     /**
@@ -126,7 +125,8 @@ class UserController extends Controller
     public function edit(string $id)
     {
         $user= User::find($id);
-        return view('admin.user.edit',compact('user'));
+        $languages = Language::all();
+        return view('admin.user.edit',compact('user','languages'));
     }
 
     /**
@@ -137,7 +137,6 @@ class UserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
-            'user_type' => ['required', 'string', Rule::in(['admin', 'user', 'student', 'teacher'])],
             'phone'=> 'required',
             'dob' => 'required',
             'gender' => 'required',
@@ -173,34 +172,34 @@ class UserController extends Controller
 
             $user->name = request('name');
             $user->email = request('email');
-            $user->user_type = request('user_type');
+            // $user->user_type = request('user_type');
             $user->phone = request('phone');
             $user->dob = request('dob');
             $user->gender = request('gender');
          
            $user->save();
 
-            if($user->user_type == "teacher"){
-                $teacher = new Teacher();
-                $teacher->user_id = $user->id;
-                $teacher->recruit_id = null;
-                $teacher->education = null;
-                $teacher->university = null;
-                $teacher->cv_form = null;
-                $teacher->comment = null;
-                $teacher->status = 'Accepted';
-                $teacher->save();
+            // if($user->user_type == "teacher"){
+            //     $teacher = new Teacher();
+            //     $teacher->user_id = $user->id;
+            //     $teacher->recruit_id = null;
+            //     $teacher->education = null;
+            //     $teacher->university = null;
+            //     $teacher->cv_form = null;
+            //     $teacher->comment = null;
+            //     $teacher->status = 'Accepted';
+            //     $teacher->save();
 
-                $levels = $request->input('levels');
-                $levelData = [];
-                foreach ($levels as $level) {
-                    $levelData[] = [
-                        'teacher_id' => $teacher->id,
-                        'level_id' => $level
-                    ];
-                }
-                TeacherLevel::insert($levelData);
-            }
+            //     $levels = $request->input('levels');
+            //     $levelData = [];
+            //     foreach ($levels as $level) {
+            //         $levelData[] = [
+            //             'teacher_id' => $teacher->id,
+            //             'level_id' => $level
+            //         ];
+            //     }
+            //     TeacherLevel::insert($levelData);
+            // }
 
            return redirect()->route('user.index')
             ->with('success_message', 'User update successfully.');

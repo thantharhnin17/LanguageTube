@@ -71,4 +71,8 @@ class User extends Authenticatable
         return $this->hasMany(CourseBatch::class);
     }
 
+    public function classrooms()
+    {
+        return $this->hasMany(Classroom::class);
+    }
 }

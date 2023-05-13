@@ -14,6 +14,7 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PaymentMethodController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,8 +44,10 @@ Route::put('/recruits/recruit_details/{id}/recruit_form/', [TeacherController::c
 // });
 // Route::get('/', [HomeController::class, 'index']);
 
-//////////Course////////////
-Route::resource('courses', CourseController::class);
+//////////Classroom////////////
+Route::get('/classrooms', [ClassroomController::class, 'getClassrooms']);
+Route::get('/classrooms/classroom_details/{id}',[ClassroomController::class, 'classroom_details']);
+Route::get('/classrooms/classroom_details/{id}/class_form',[ClassroomController::class, 'class_form']);
 
 //////////Course////////////
 Route::resource('about', AboutController::class);
@@ -103,7 +106,11 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function(){
 
     //////////Classroom////////////
     Route::resource('classroom', ClassroomController::class);
-    Route::get('classroom/get-teachers/{id}',[ClassroomController::class, 'getTeachers']);
+    Route::post('classroom/get-teachers',[ClassroomController::class, 'getTeachers']);
+    Route::post('classroom/status/{id}',[ClassroomController::class, 'updateStatus'])->name('classroom.status');
+
+    //////////Payment////////////
+    Route::resource('payment', PaymentMethodController::class);
     
 
     //////////User////////////

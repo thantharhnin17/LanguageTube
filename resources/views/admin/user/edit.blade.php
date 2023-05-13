@@ -124,58 +124,6 @@
                                     </div>
                                 </div>
             
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label class="form-label" for="user_type">{{ __('User Type') }}</label>
-                                        <br>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="user_type" id="admin" value="admin" {{ ($user->user_type == 'admin') ? 'checked' : ''}}>
-                                            <label class="form-check-label" for="admin">Admin</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="user_type" id="user" value="user" {{ ($user->user_type == 'user') ? 'checked' : ''}}>
-                                            <label class="form-check-label" for="user">User</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="user_type" id="student" value="student" {{ ($user->user_type == 'student') ? 'checked' : ''}}>
-                                            <label class="form-check-label" for="student">Student</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="user_type" id="teacher" value="teacher" {{ ($user->user_type == 'teacher') ? 'checked' : ''}}>
-                                            <label class="form-check-label" for="teacher">Teacher</label>
-                                        </div>
-                                        @error('user_type')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>    
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="teacher-div" id="teacher-div" style="display:none; width:100%;">
-                                    <div class="form-group col-12">
-                                        <label class="col-form-label">{{ __('Teach Language') }}</label>
-                                        <div>
-                                            <select class="form-control" id="teach_language" name="teach_language">
-                                                <option selected value="">Choose Language</option>
-                                                @foreach ($languages as $language)
-                                                  <option value="{{ $language->id }}" {{ old('teach_language') == "$language->id" ? 'selected' : '' }}>
-                                                    {{ $language->language_name }}
-                                                  </option>
-                                                @endforeach 
-                                            </select>
-                                            <span class="help-inline">@error('teach_language'){{$message}}@enderror</span>
-                                        </div>
-                                    </div>
-    
-                                    <div class="form-group col-12 level-div" id="level-div" style="display:none;">
-                                        <label class="form-label">{{ __('Teach Levels') }}</label>
-                                        <div id="tt_level">
-
-                                            <span class="help-inline">@error('levels'){{$message}}@enderror</span>
-                                         </div>
-                                    </div>
-                                </div>
             
             
                                 <div class="col-lg-12 m-b30">

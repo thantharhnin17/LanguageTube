@@ -19,9 +19,9 @@ class Classroom extends Model
         return $this->belongsTo(Batch::class);
     }
 
-    public function teacher()
+    public function user()
     {
-        return $this->belongsTo(Teacher::class);
+        return $this->belongsTo(User::class);
     }
 
     public function onlineInfo()

@@ -48,9 +48,10 @@
                               <th>Name</th>
                               <th>Email</th>
                               <th>Phone</th>
-                              <th>Date Of Birth</th>
                               <th>Age</th>
                               <th>Gender</th>
+                              <th>Work Type</th>
+                              <th>Work Time</th>
                               <th></th>
                             </tr>
                             </thead>
@@ -64,7 +65,6 @@
                                     <td>{{$user->email}}</td>
                                     
                                     <td>{{$user->phone}}</td>
-                                    <td>{{$user->dob}}</td>
                                     <td>
                                         @php
                                             $dob = \Carbon\Carbon::parse($user->dob);
@@ -72,6 +72,21 @@
                                         {{ $dob->diffInYears(\Carbon\Carbon::now()) }}
                                     </td>
                                     <td>{{$user->gender}}</td>
+
+                                    <td>
+                                        @if ($user->teacher->type == 0)
+                                            On-Compus  
+                                        @else
+                                            Online
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($user->teacher->time == 0)
+                                            Full-time  
+                                        @else
+                                            Part-time
+                                        @endif
+                                    </td>
                                         
                                     <td class="tb-action">
                                         <ul class="mailbox-toolbar">

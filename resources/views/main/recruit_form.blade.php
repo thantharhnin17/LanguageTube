@@ -17,7 +17,7 @@
     <div class="breadcrumb-row">
         <div class="container">
             <ul class="list-inline">
-                <li><a href="#">Home</a></li>
+                <li><a href="{{url('/')}}">Home</a></li>
                 <li>Recruitments</li>
                 <li>Recruitment Details</li>
                 <li>Recruitment Form</li>
@@ -42,6 +42,8 @@
                             
                             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                             <input type="hidden" name="recruit_id" value="{{ $recruit->id }}">
+                            <input type="hidden" name="type" value="{{ $recruit->type }}">
+                            <input type="hidden" name="time" value="{{ $recruit->time }}">
 
                             <div class="row wi-body">
                                 <div class="col-lg-12">

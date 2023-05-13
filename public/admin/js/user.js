@@ -4,7 +4,7 @@ $(document).ready(function () {
         if (classType == "teacher") {
             $('#teacher-div').show();
         } else {
-        $('#teacher-div').hide();
+            $('#teacher-div').hide();
         }
 
     $('input[name="user_type"]').on('change', function () {

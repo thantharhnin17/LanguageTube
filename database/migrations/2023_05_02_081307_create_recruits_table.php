@@ -17,8 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('language_id');
             $table->string('title');
             $table->string('recruit_img');
-            $table->string('type');
-            $table->string('time');
+            $table->boolean('type')->default(0);
+            $table->boolean('time')->default(0);
             $table->string('salary');
             $table->longtext('description');
             $table->longtext('requirement');

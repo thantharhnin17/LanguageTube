@@ -54,6 +54,8 @@ class TeacherController extends Controller
                 'phone'=> 'required',
                 'dob' => 'required',
                 'gender' => 'required',
+                'type' => 'required',
+                'time' => 'required',
         ]);
 
         if ($request->hasFile('photo')) 
@@ -84,7 +86,10 @@ class TeacherController extends Controller
             ]);
 
             $teacher = new Teacher();
+            
             $teacher->user_id = $user->id;
+            $teacher->type = request('type');
+            $teacher->time = request('time');
             $teacher->recruit_id = null;
             $teacher->education = null;
             $teacher->university = null;
@@ -137,6 +142,8 @@ class TeacherController extends Controller
             'phone'=> 'required',
             'dob' => 'required',
             'gender' => 'required',
+            'type' => 'required',
+            'time' => 'required',
         ]);
 
         $user = User::find($id);
@@ -173,21 +180,23 @@ class TeacherController extends Controller
             $user->dob = request('dob');
             $user->gender = request('gender');
          
-           $user->save();
+            $user->save();
 
 
             $teacher = $user->teacher;
-                $teacher->user_id = $user->id;
-                $teacher->recruit_id = null;
-                $teacher->education = null;
-                $teacher->university = null;
-                $teacher->cv_form = null;
-                $teacher->comment = null;
-                $teacher->status = 'Accepted';
-                $teacher->save();
+            $teacher->user_id = $user->id;
+            $teacher->type = request('type');
+            $teacher->time = request('time');
+            $teacher->recruit_id = null;
+            $teacher->education = null;
+            $teacher->university = null;
+            $teacher->cv_form = null;
+            $teacher->comment = null;
+            $teacher->status = 'Accepted';
+            $teacher->save();
 
-                $levels = $request->input('levels');
-                $levelData = [];
+            $levels = $request->input('levels');
+            $levelData = [];
                 foreach ($levels as $level) {
                     $levelData[] = [
                         'teacher_id' => $teacher->id,
@@ -228,6 +237,8 @@ class TeacherController extends Controller
     {
         $user_id = $request->input('user_id');
         $recruit_id = $request->input('recruit_id');
+        $type = $request->input('type');
+        $time = $request->input('time');
 
     //////////
 
@@ -288,6 +299,8 @@ class TeacherController extends Controller
 
         $teacher = new Teacher();
         $teacher->user_id = $user_id;
+        $teacher->type = $type;
+        $teacher->time = $time;
         $teacher->recruit_id = $recruit_id;
         $teacher->education = $request->input('education');
         $teacher->university = $request->input('university');

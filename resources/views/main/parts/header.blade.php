@@ -100,8 +100,8 @@
                                 <li class="{{ request()->is('/') ? 'active' : '' }}">
                                     <a href="{{url('/')}}">Home</a>
                                 </li>
-                                <li class="{{ request()->is('courses') ? 'active' : '' }}">
-                                    <a href="{{url('courses')}}">All Courses</a>
+                                <li class="{{ request()->is('classrooms') ? 'active' : '' }}">
+                                    <a href="{{url('classrooms')}}">All Classrooms</a>
                                 </li>
                                 <li class="{{ request()->is('recruits') ? 'active' : '' }}">
                                     <a href="{{url('recruits')}}">Recruitment</a>

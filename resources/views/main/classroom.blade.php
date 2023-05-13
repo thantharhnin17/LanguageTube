@@ -1,6 +1,6 @@
 @extends('layouts.main_layout')
 
-@section('title', 'All Recruitments')
+@section('title', 'All Classrooms')
 
 @section('content')
 <!-- Content -->
@@ -9,7 +9,7 @@
     <div class="page-banner ovbl-dark" style="background-image:url(assets/images/banner/banner3.jpg);">
         <div class="container">
             <div class="page-banner-entry">
-                <h1 class="text-white">Recruitments</h1>
+                <h1 class="text-white">Our Classrooms</h1>
              </div>
         </div>
     </div>
@@ -18,7 +18,7 @@
         <div class="container">
             <ul class="list-inline">
                 <li><a href="{{url('/')}}">Home</a></li>
-                <li>Recruitments</li>
+                <li>Our Classrooms</li>
             </ul>
         </div>
     </div>
@@ -33,18 +33,19 @@
                         <div class="widget courses-search-bx placeani">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <label>Search Recruitments</label>
+                                    <label>Search Courses</label>
                                     <input name="dzName" type="text" required class="form-control">
                                 </div>
                             </div>
                         </div>
                         <div class="widget widget_archive">
-                            <h5 class="widget-title style-1">By Language</h5>
+                            <h5 class="widget-title style-1">All Courses</h5>
                             <ul>
-                                <li class="active"><a href="#">all</a></li>
-                                @foreach($languages as $language)
-                                <li><a href="#">{{$language->language_name}}</a></li>
-                                @endforeach
+                                <li class="active"><a href="#">General</a></li>
+                                <li><a href="#">IT & Software</a></li>
+                                <li><a href="#">Photography</a></li>
+                                <li><a href="#">Programming Language</a></li>
+                                <li><a href="#">Technology</a></li>
                             </ul>
                         </div>
                         <div class="widget">
@@ -91,56 +92,28 @@
                     </div>
                     <div class="col-lg-9 col-md-8 col-sm-12">
                         <div class="row">
-                            {{-- <div class="col-md-6 col-lg-4 col-sm-6 m-b30">
-                                <div class="cours-bx">
-                                    <div class="action-box">
-                                        <img src="assets/images/courses/pic1.jpg" alt="">
-                                        <a href="#" class="btn">Read More</a>
-                                    </div>
-                                    <div class="info-bx text-center">
-                                        <h5><a href="#">Introduction EduChamp – LMS plugin</a></h5>
-                                        <span>Programming</span>
-                                    </div>
-                                    <div class="cours-more-info">
-                                        <div class="review">
-                                            <span>3 Review</span>
-                                            <ul class="cours-star">
-                                                <li class="active"><i class="fa fa-star"></i></li>
-                                                <li class="active"><i class="fa fa-star"></i></li>
-                                                <li class="active"><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
-                                            </ul>
-                                        </div>
-                                        <div class="price">
-                                            <del>$190</del>
-                                            <h5>$120</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
-                            
-                            @foreach($recruits as $recruit)
+                            @foreach($classrooms as $classroom)
                             <div class="col-md-6 col-lg-4 col-sm-6 m-b30">
                                 <div class="cours-bx">
                                     <div class="action-box">
-                                        <img src="{{ asset('storage/img/' . $recruit->recruit_img) }}" alt="">
-                                        
+                                        <img src="{{ asset('storage/img/' . $classroom->course->course_img) }}" alt="">
+                                        <a href="#" class="btn">Read More</a>
                                     </div>
                                     <div class="info-bx text-center">
-                                        <h5><a href="#">{{$recruit->title}} - {{$recruit->language->language_name}}</a></h5>
-                                        <span>{{$recruit->language->language_name}}</span>
+                                        <h5><a href="{{url('classroom/classroom_details/'.$classroom->id) }}">{{$classroom->course->course_name}}</a></h5>
+                                        <span>{{$classroom->course->level->language->language_name}}</span>
                                     </div>
                                     <div class="cours-more-info">
                                         <div class="price">
-                                            <h5>KS 120,000</h5>
+                                            <h5>KS {{$classroom->fee}}</h5>
                                         </div>
-                                        <a href="{{url('recruits/recruit_details/'.$recruit->id) }}" class="btn">Read More</a>
+                                        <a href="{{url('classrooms/classroom_details/'.$classroom->id) }}" class="btn">Read More</a>
                                     </div>
                                 </div>
                             </div>
                             @endforeach
-
+                            
+                            
                             <div class="col-lg-12 m-b20">
                                 <div class="pagination-bx rounded-sm gray clearfix">
                                     <ul class="pagination">

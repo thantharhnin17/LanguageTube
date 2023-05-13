@@ -59,6 +59,12 @@
                         <span class="ttr-label">Classrooms</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{url('admin/payment')}}" class="ttr-material-button">
+                        <span class="ttr-icon"><i class="ti-book"></i></span>
+                        <span class="ttr-label">Payment Methods</span>
+                    </a>
+                </li>
                 
                 <li>
                     <a href="#" class="ttr-material-button">

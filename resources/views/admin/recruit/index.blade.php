@@ -65,8 +65,20 @@
                                     <td><img src="{{ asset('storage/img/' . $recruit->recruit_img) }}" width="100px" height="100px" /></td>
                                     <td>{{$recruit->title}}</td>
                                     <td>{{$recruit->language->language_name}}</td>
-                                    <td>{{$recruit->type}}</td>
-                                    <td>{{$recruit->time}}</td>
+                                    <td>
+                                        @if ($recruit->type == 0)
+                                            On-Compus  
+                                        @else
+                                            Online
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($recruit->time == 0)
+                                            Full-time  
+                                        @else
+                                            Part-time
+                                        @endif
+                                    </td>
                                     <td>{{$recruit->salary}}</td>
                                     <td>{{$recruit->total_person}}</td>
                                     <td>
