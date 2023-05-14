@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Classroom extends Model
 {
     use HasFactory;
+    protected $guarded = [];
 
     public function course()
     {
@@ -19,13 +20,23 @@ class Classroom extends Model
         return $this->belongsTo(Batch::class);
     }
 
-    public function user()
+    public function teacher()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function onlineInfo()
     {
         return $this->hasOne(OnlineInfo::class);
     }
+
+    public function students()
+    {
+        return $this->belongsToMany(User::class, 'classroom_students');
+    }
+    
+
 }
+
+
+

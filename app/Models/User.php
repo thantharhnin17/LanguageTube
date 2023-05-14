@@ -71,8 +71,24 @@ class User extends Authenticatable
         return $this->hasMany(CourseBatch::class);
     }
 
+    // public function classrooms()
+    // {
+    //     return $this->hasMany(Classroom::class);
+    // }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class, 'classroom_student_id');
+    }
+
     public function classrooms()
     {
-        return $this->hasMany(Classroom::class);
+        return $this->belongsToMany(Classroom::class, 'classroom_students');
+    }
+
+    // Define the one-to-one relationship with the Teacher model
+    public function paymentConfirm()
+    {
+        return $this->hasOne(PaymentConfirm::class);
     }
 }

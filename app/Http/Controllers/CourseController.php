@@ -53,7 +53,7 @@ class CourseController extends Controller
     {
         $request->validate([
             'course_language' => 'required',
-            'course_level' => 'required',
+            'course_level' => 'required|unique:courses,level_id',
             'summary'=> 'required',
             'description'=> 'required',
             'course_img' => 'required'
@@ -86,7 +86,7 @@ class CourseController extends Controller
             // $course->course_name = $request->input('course_language') . '-' . $request->input('course_level');
             $course->summary = $request->input('summary');
             $course->description = $request->input('description');
-            $course->level_id = $request->input('course_level');
+            $course->level_id = $level_id;
             $course->course_img = $randomName;
             $course->save();
 
@@ -118,8 +118,6 @@ class CourseController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'course_language_hidden' => 'required',
-            'course_level' => 'required',
             'summary'=> 'required',
             'description'=> 'required'
         ]);
@@ -142,18 +140,18 @@ class CourseController extends Controller
             $course->course_img = $course->course_img;
         }
 
-        $language_id = $request->input('course_language_hidden');
-        $level_id = $request->input('course_level');
+        // $language_id = $request->input('course_language_hidden');
+        // $level_id = $request->input('course_level_hidden');
 
-        $language = Language::find($language_id)->language_name;
-        $level = Level::find($level_id)->level_name;
+        // $language = Language::find($language_id)->language_name;
+        // $level = Level::find($level_id)->level_name;
 
-        $course->course_name = $language . '-' . $level;
+        // $course->course_name = $language . '-' . $level;
 
             // $course->course_name = $request->input('course_language') . '-' . $request->input('course_level');
             $course->summary = $request->input('summary');
             $course->description = $request->input('description');
-            $course->level_id = $request->input('course_level');
+            // $course->level_id = $request->input('course_level');
          
            $course->save();
            return redirect()->route('course.index')

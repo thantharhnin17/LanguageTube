@@ -87,7 +87,7 @@
                                 <div class="price">
                                     <h5>KS {{$classroom->fee}}</h5>
                                 </div>
-                                <a href="{{url('classroom/classroom_details/'.$classroom->id) }}" class="btn">Read More</a>
+                                <a href="{{url('classrooms/classroom_details/'.$classroom->id) }}" class="btn">Read More</a>
                             </div>
                         </div>
                     </div>

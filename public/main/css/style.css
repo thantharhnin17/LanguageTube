@@ -2611,6 +2611,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#391800', end
 	position: sticky;
 	top: 100px;
 }
+.class-form .course-detail-bx{
+	padding-bottom:20px;
+}
 .course-price{
 	text-align:center;
 	padding: 10px 0 20px;
@@ -3471,4 +3474,19 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#391800', end
   
   /* Recruit Form */
 
+
+  .copyBtn{
+	border: none;
+	background: none;
+	text-decoration: underline;
+	color: blue;
+  }
+  .copyTxt{
+	font-size: 12px;
+  }
+
+
+  .payment-form .row{
+	align-items: center;
+  }
 

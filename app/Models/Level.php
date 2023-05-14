@@ -17,9 +17,9 @@ class Level extends Model
         return $this->belongsTo(Language::class);
     }
 
-    public function courses()
+    public function course()
     {
-        return $this->hasMany(Course::class);
+        return $this->hasOne(Course::class);
     }
 
     //A level can have many teachers

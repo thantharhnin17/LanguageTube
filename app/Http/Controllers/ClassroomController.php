@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Batch;
 use App\Models\Course;
+use App\Models\Payment;
 use App\Models\Teacher;
 use App\Models\Classroom;
 use App\Models\OnlineInfo;
 use App\Models\TeacherLevel;
 use Illuminate\Http\Request;
 use App\Models\PaymentMethod;
+use App\Models\PaymentConfirm;
+use App\Models\ClassroomStudent;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class ClassroomController extends Controller
@@ -36,7 +40,8 @@ class ClassroomController extends Controller
         $courses = Course::all();
         $batches = Batch::all();
         $users = User::where('user_type', 'teacher')->get();
-        return view('admin.classroom.create',compact('classrooms', 'courses' ,'batches', 'users'));
+        $weekdays = ['Mon', 'Tue','Wed', 'Thur', 'Fri','Sat', 'Sun'];
+        return view('admin.classroom.create',compact('classrooms', 'courses' ,'batches', 'users', 'weekdays'));
     }
 
     public function getTeachers(Request $request)
@@ -65,7 +70,8 @@ class ClassroomController extends Controller
             'duration'=> 'required',
             'start_date' => 'required',
             'days' => 'required',
-            'time' => 'required',
+            'from' => 'required',
+            'to' => 'required',
             'avaliable_students' => 'required',
             'fee' => 'required',
             'class_type' => 'required',
@@ -79,8 +85,9 @@ class ClassroomController extends Controller
         $classroom->batch_id = $request->input('batch_name');
         $classroom->duration = $request->input('duration');
         $classroom->start_date = $request->input('start_date');
-        $classroom->days = $request->input('days');
-        $classroom->time = $request->input('time');
+        $classroom->days = implode(",",request('days'));
+        $classroom->from = $request->input('from');
+        $classroom->to = $request->input('to');
         $classroom->avaliable_students = $request->input('avaliable_students');
         $classroom->fee = $request->input('fee');
         $classroom->class_type = $request->input('class_type');
@@ -103,9 +110,14 @@ class ClassroomController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Classroom $classroom)
+    public function show(string $id)
     {
-        //
+        $classroom = Classroom::find($id);
+        $courses = Course::all();
+        $batches = Batch::all();
+        $users = User::where('user_type', 'teacher')->get();
+        $weekdays = ['Mon', 'Tue','Wed', 'Thur', 'Fri','Sat', 'Sun'];
+        return view('admin.classroom.show',compact('classroom', 'courses' ,'batches', 'users', 'weekdays'));
     }
 
     /**
@@ -117,7 +129,8 @@ class ClassroomController extends Controller
         $courses = Course::all();
         $batches = Batch::all();
         $users = User::where('user_type', 'teacher')->get();
-        return view('admin.classroom.edit',compact('classroom', 'courses' ,'batches', 'users'));
+        $weekdays = ['Mon', 'Tue','Wed', 'Thur', 'Fri','Sat', 'Sun'];
+        return view('admin.classroom.edit',compact('classroom', 'courses' ,'batches', 'users', 'weekdays'));
     }
 
     /**
@@ -132,7 +145,8 @@ class ClassroomController extends Controller
             'duration'=> 'required',
             'start_date' => 'required',
             'days' => 'required',
-            'time' => 'required',
+            'from' => 'required',
+            'to' => 'required',
             'avaliable_students' => 'required',
             'fee' => 'required',
             'class_type' => 'required',
@@ -146,8 +160,9 @@ class ClassroomController extends Controller
         $classroom->batch_id = $request->input('batch_name');
         $classroom->duration = $request->input('duration');
         $classroom->start_date = $request->input('start_date');
-        $classroom->days = $request->input('days');
-        $classroom->time = $request->input('time');
+        $classroom->days = implode(",",request('days'));
+        $classroom->from = $request->input('from');
+        $classroom->to = $request->input('to');
         $classroom->avaliable_students = $request->input('avaliable_students');
         $classroom->fee = $request->input('fee');
         $classroom->class_type = $request->input('class_type');
@@ -198,7 +213,7 @@ class ClassroomController extends Controller
      * get all classrooms
      */
     public function getClassrooms() {
-        $classrooms = Classroom::all();
+        $classrooms = Classroom::where('status', 1)->get();
         $courses = Course::all();
         $batches = Batch::all();
         $users = User::where('user_type', 'teacher')->get();
@@ -225,5 +240,129 @@ class ClassroomController extends Controller
         // $levels = Level::all();
         return view('main.class_form',compact('classroom', 'payments'));
     }
+
+
+    /**
+     * Classroom Purchase by user
+     */
+    public function purchase(Request $request)
+    {
+
+        $classroomStudent = new ClassroomStudent();
+        $classroomStudent->user_id = $request->input('user_id');
+        $classroomStudent->classroom_id = $request->input('classroom_id');
+        $classroomStudent->save();
+
+        $request->validate([
+            'payment_method_id'=> 'required',
+            'payImg' => 'required',
+        ]);
+
+        if ($request->hasFile('payImg')) 
+        {
+            if ($request->file('payImg')->isValid()) 
+            {
+                $validated = $request->validate([
+                    'payImg' => 'mimes:jpg,jpeg,png,gif|max:2048',
+                ]);
+                $extension = $request->payImg->extension();
+                $randomName = rand().".".$extension;
+                $request->payImg->storeAs('/public/img/',$randomName);
+                
+            }
+        }
+
+        $payment = new Payment();
+        $payment->classroom_student_id = $classroomStudent->id;
+        $payment->payment_method_id = $request->input('payment_method_id');
+        $payment->payImg = $randomName;
+        $payment->save();
+
+        $paymentConfirm = new PaymentConfirm();
+        $paymentConfirm->payment_id = $payment->id;
+        $paymentConfirm->user_id= null;
+        $paymentConfirm->confirmStatus = 'Pending';
+        $paymentConfirm->save();
+
+        return view('main.class_form_complete')->with('success_message', 'Payment created successfully.');
+        // return view('main.home');
+    }
+
+
+    /**
+     * get all students by classroom
+     */
+    public function getStudents($id) {
+
+        $classroom = Classroom::find($id);
+        $students = $classroom->students;
+        $paymentConfirms = PaymentConfirm::all();
+        
+        return view('admin.classroom.student',compact('classroom','students', 'paymentConfirms'));
+    }
+
+     /**
+     * get one student by classroom
+     */
+    public function getonestudent($id,$stu_id) {
+
+        $classroom = Classroom::find($id);
+        $student = User::find($stu_id);
+        $payments = Payment::all();
+        // $levels = $teacher->levels;
+        return view('admin.classroom.oneStudent',compact('student','classroom','payments'));
+    }
+
+    /**
+    * get one applicant by recruitment
+    */
+   public function process($id, $stu_id, Request $request)
+   {
+       $action = $request->input('action');
+       $admin_id = $request->input('admin_id');
+
+       $user = User::find($stu_id);
+
+       $classroomStudentId = ClassroomStudent::where('user_id', $stu_id)->where('classroom_id', $id)->pluck('id')->first();
+
+       $paymentId = Payment::where('classroom_student_id', $classroomStudentId)->pluck('id')->first();
+
+       $paymentConfirm = PaymentConfirm::where('payment_id', $paymentId)->first();
+
+    //    dd($admin_id);
+
+       
+
+
+       // dd($action);
+
+       if ($action === 'accept') {
+           $user->user_type = 'student';
+           $user->save();
+
+           $paymentConfirm->user_id = $admin_id;
+           $paymentConfirm->confirmStatus = 'Accepted';
+           $paymentConfirm->save();
+            
+       } elseif ($action === 'reject') {
+
+           $user->user_type = 'user';
+           $user->save();
+
+           $paymentConfirm->user_id = $admin_id;
+           $paymentConfirm->confirmStatus = 'Rejected';
+           $paymentConfirm->save();
+
+       } else {
+           return back()->withInput();
+       }
+       
+
+        $classroom = Classroom::findOrFail($id);
+        $students = $classroom->students;
+        $paymentConfirms = PaymentConfirm::all();
+            
+        return view('admin.classroom.student',compact('classroom','students', 'paymentConfirms'));
+   }
 
 }

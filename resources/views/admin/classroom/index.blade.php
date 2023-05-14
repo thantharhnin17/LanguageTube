@@ -24,21 +24,17 @@
                         </div>
                     </div>
                     <div class="widget-inner">
-                        <table id="example2" class="table table-hover">
+                        <table id="example" class="table table-hover">
                             <thead class="thead-light">
                             <tr>
                               <th>#</th>
                               <th>Course Name</th>
                               <th>Batch Name</th>
                               <th>Teacher Name</th>
-                              <th>Duration</th>
-                              <th>Start Date</th>
-                              <th>Days</th>
-                              <th>Time</th>
-                              <th>Avaliable Students</th>
                               <th>Fee</th>
                               <th>Class Type</th>
                               <th>Status</th>
+                              <th>List</th>
                               <th></th>
                             </tr>
                             </thead>
@@ -50,12 +46,8 @@
                                     
                                     <td>{{$classroom->course->course_name}}</td>
                                     <td>{{$classroom->batch->batch_name}}</td>
-                                    <td>{{$classroom->user->name}}</td>
-                                    <td>{{$classroom->duration}}</td>
-                                    <td>{{$classroom->start_date}}</td>
-                                    <td>{{$classroom->days}}</td>
-                                    <td>{{$classroom->time}}</td>
-                                    <td>{{$classroom->avaliable_students}}</td>
+                                    <td>{{$classroom->teacher->name}}</td>
+                                    
                                     <td>{{$classroom->fee}}</td>
                                     <td>
                                         @if ($classroom->class_type == 0)
@@ -70,6 +62,14 @@
                                             @method('POST')
                                             <input name="status" type="checkbox" data-toggle="switchbutton" {{ ($classroom->status == '1') ? 'checked' : ''}} data-style="ios">
                                         </form>
+                                    </td>
+
+                                    <td>
+                                        <a href="{{ route('classroom.student', $classroom->id) }}">
+                                            <button type="submit" class="btn" data-toggle="tooltip" title="All Students">
+                                                Students
+                                            </button>
+                                        </a> 
                                     </td>
 
                                     <td class="tb-action">

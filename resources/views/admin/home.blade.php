@@ -68,13 +68,13 @@
                 <div class="widget-card widget-bg3">					 
                     <div class="wc-item">
                         <h4 class="wc-title">
-                            New Orders 
+                            All Classrooms 
                         </h4>
                         <span class="wc-des">
                             Fresh Order Amount 
                         </span>
                         <span class="wc-stats counter">
-                            772 
+                            {{ $classroomCount }}
                         </span>		
                         <div class="progress wc-progress">
                             <div class="progress-bar" role="progressbar" style="width: 65%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
@@ -94,13 +94,13 @@
                 <div class="widget-card widget-bg4">					 
                     <div class="wc-item">
                         <h4 class="wc-title">
-                            New Users 
+                            All Users 
                         </h4>
                         <span class="wc-des">
                             Joined New User
                         </span>
                         <span class="wc-stats counter">
-                            350 
+                            {{ $userCount }}
                         </span>		
                         <div class="progress wc-progress">
                             <div class="progress-bar" role="progressbar" style="width: 90%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>

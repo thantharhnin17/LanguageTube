@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('duration');
             $table->string('start_date');
             $table->string('days');
-            $table->string('time');
+            $table->string('from');
+            $table->string('to');
             $table->integer('avaliable_students');
             $table->string('fee');
             $table->boolean('class_type')->default(0);

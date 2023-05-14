@@ -41,8 +41,10 @@ $(document).ready(function () {
   }
   
 
-      $('#course_name').on('change', updateClassType);
-      $('input[name="class_type"]').on('change', updateClassType);
+  updateClassType();
+
+  $('#course_name').on('change', updateClassType);
+  $('input[name="class_type"]').on('change', updateClassType);
 
 
     // $('input[name="status"]').on('change', function() {

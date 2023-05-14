@@ -72,7 +72,11 @@
                                     <li><i class="ti-time"></i> <span class="label">Duration</span> <span class="value">{{$classroom->duration}}</span></li>
                                     <li><i class="ti-stamp"></i> <span class="label">Start Date</span> <span class="value">{{$classroom->start_date}}</span></li>
                                     <li><i class="ti-calendar"></i> <span class="label">Days</span> <span class="value">{{$classroom->days}}</span></li>
-                                    <li><i class="ti-alarm-clock"></i> <span class="label">Time</span> <span class="value">{{$classroom->time}}</span></li>
+                                    <li>
+                                        <i class="ti-alarm-clock"></i> 
+                                        <span class="label">Time</span> 
+                                        <span class="value">{{$classroom->from}} - {{$classroom->to}}</span>
+                                    </li>
                                     <li><i class="ti-user"></i> <span class="label">Students</span> <span class="value">{{$classroom->avaliable_students}}</span></li>
                                     <li><i class="ti-layout-media-overlay-alt"></i> <span class="label">Type</span> 
                                         <span class="value">
@@ -93,16 +97,16 @@
                                 @if (Auth::check())
                                     <a href="{{url('classrooms/classroom_details/'.$classroom->id.'/class_form') }}" class="btn radius-xl text-uppercase">Register This Classroom</a>
                                 @else
-                                    <a href="/login" class="btn radius-xl text-uppercase">Apply Here</a>
+                                    <a href="/login" class="btn radius-xl text-uppercase">Register This Classroom</a>
                                 @endif
                             </div>
                             <div class="teacher-bx">
                                 <div class="teacher-info">
                                     <div class="teacher-thumb">
-                                        <img src="{{ asset('storage/img/' . $classroom->user->photo) }}" alt=""/>
+                                        <img src="{{ asset('storage/img/' . $classroom->teacher->photo) }}" alt=""/>
                                     </div>
                                     <div class="teacher-name">
-                                        <h5>{{$classroom->user->name}}</h5>
+                                        <h5>{{$classroom->teacher->name}}</h5>
                                         <span>Teacher</span>
                                     </div>
                                 </div>

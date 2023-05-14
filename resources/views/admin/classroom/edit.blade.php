@@ -39,17 +39,49 @@
                                     </div>
                                 </div>
 
+                                <div class="form-group col-12">
+                                    <label class="form-label" for="class_type">Class Type</label>
+                                    <br>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="class_type" id="on-campus" value="0" {{ ($classroom->class_type == '0') ? 'checked' : ''}}>
+                                        <label class="form-check-label" for="on-campus">On-Campus</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="class_type" id="online" value="1" {{ ($classroom->class_type == '1') ? 'checked' : ''}}>
+                                        <label class="form-check-label" for="online">Online</label>
+                                    </div>
+                                    <span class="help-inline">@error('class_type'){{$message}}@enderror</span>
+                                </div> 
+
+                                <div class="form-group col-12 online-div" id="online-div" style="display:none;">
+                                    <div class="form-group col-12">
+                                        <label class="col-form-label">Meeting Link</label>
+                                        <div>
+                                            <input name="meeting_link" class="form-control" type="text" value="{{ $classroom->meeting_link }}">
+                                            <span class="help-inline">@error('meeting_link'){{$message}}@enderror</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-12">
+                                        <label class="col-form-label">Group Chat Link</label>
+                                        <div>
+                                            <input name="group_chat_link" class="form-control" type="text" value="{{ $classroom->group_chat_link }}">
+                                            <span class="help-inline">@error('group_chat_link'){{$message}}@enderror</span>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="form-group col-12 teacher-div" id="teacher-div">
-                                    <label class="col-form-label">Course Language</label>
+                                    <label class="col-form-label">Course Teacher</label>
                                     <div>
                                         <select class="form-control" name="course_teacher" id="course_teacher">
                                             <option selected value="">Choose teacher</option>
                                             @foreach ($users as $user)
-                                                @if ($classroom->user->teacher->levels->first()->id == $classroom->course->level->id)
+                                                {{-- @if ($classroom->user->teacher->levels->first()->id == $classroom->course->level->id) --}}
                                                     <option value="{{ $user->id }}" {{$classroom->user_id == $user->id  ? 'selected' : ''}}>
                                                         {{ $user->name }}
                                                     </option>
-                                                @endif
+                                                {{-- @endif --}}
                                             @endforeach 
                                         </select>
                                     </div>
@@ -91,16 +123,27 @@
                                 <div class="form-group col-12">
                                     <label class="col-form-label">Days</label>
                                     <div>
-                                        <input name="days" class="form-control" type="text" value="{{ $classroom->days }}">
-                                        <span class="help-inline">@error('days'){{$message}}@enderror</span>
+                                        @php
+                                            $daysArray = explode(',', $classroom->days);
+                                        @endphp
+
+                                        @foreach ($weekdays as $weekday)
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" name="days[]" value="{{ $weekday }}" {{ in_array($weekday, $daysArray) ? 'checked' : '' }}>
+                                                <label class="form-check-label" for="days[]">{{ $weekday }}</label>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
 
                                 <div class="form-group col-12">
                                     <label class="col-form-label">Time</label>
                                     <div>
-                                        <input name="time" class="form-control" type="text" value="{{ $classroom->time }}">
-                                        <span class="help-inline">@error('time'){{$message}}@enderror</span>
+                                        <label for="from">From:</label>
+                                        <input type="time" id="from" name="from" value="{{ $classroom->from }">
+
+                                        <label for="to">To:</label>
+                                        <input type="time" id="to" name="to" value="{{ $classroom->to }">
                                     </div>
                                 </div>
 
@@ -117,38 +160,6 @@
                                     <div>
                                         <input name="fee" class="form-control" type="text" value="{{ $classroom->fee }}">
                                         <span class="help-inline">@error('fee'){{$message}}@enderror</span>
-                                    </div>
-                                </div>
-
-                                <div class="form-group col-12">
-                                    <label class="form-label" for="class_type">Class Type</label>
-                                    <br>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="class_type" id="on-campus" value="0" {{ ($classroom->class_type == '0') ? 'checked' : ''}}>
-                                        <label class="form-check-label" for="on-campus">On-Campus</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="class_type" id="online" value="1" {{ ($classroom->class_type == '1') ? 'checked' : ''}}>
-                                        <label class="form-check-label" for="online">Online</label>
-                                    </div>
-                                    <span class="help-inline">@error('class_type'){{$message}}@enderror</span>
-                                </div> 
-
-                                <div class="form-group col-12 online-div" id="online-div" style="display:none;">
-                                    <div class="form-group col-12">
-                                        <label class="col-form-label">Meeting Link</label>
-                                        <div>
-                                            <input name="meeting_link" class="form-control" type="text" value="{{ $classroom->meeting_link }}">
-                                            <span class="help-inline">@error('meeting_link'){{$message}}@enderror</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group col-12">
-                                        <label class="col-form-label">Group Chat Link</label>
-                                        <div>
-                                            <input name="group_chat_link" class="form-control" type="text" value="{{ $classroom->group_chat_link }}">
-                                            <span class="help-inline">@error('group_chat_link'){{$message}}@enderror</span>
-                                        </div>
                                     </div>
                                 </div>
 

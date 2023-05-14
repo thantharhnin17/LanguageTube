@@ -112,16 +112,23 @@
                                 <div class="form-group col-12">
                                     <label class="col-form-label">Days</label>
                                     <div>
-                                        <input name="days" class="form-control" type="text" value="{{ old('days') }}">
-                                        <span class="help-inline">@error('days'){{$message}}@enderror</span>
+                                        @foreach ($weekdays as $weekday)
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" name="days[]" value="{{$weekday}}" {{ (is_array(old('days')) && in_array($weekday, old('days'))) ? 'checked' : '' }}>
+                                                <label class="form-check-label" for="days[]">{{$weekday}}</label>
+                                            </div>
+                                        @endforeach     
                                     </div>
                                 </div>
 
                                 <div class="form-group col-12">
                                     <label class="col-form-label">Time</label>
                                     <div>
-                                        <input name="time" class="form-control" type="text" value="{{ old('time') }}">
-                                        <span class="help-inline">@error('time'){{$message}}@enderror</span>
+                                        <label for="from">From:</label>
+                                        <input type="time" id="from" name="from">
+
+                                        <label for="to">To:</label>
+                                        <input type="time" id="to" name="to">
                                     </div>
                                 </div>
 

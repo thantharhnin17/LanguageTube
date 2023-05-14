@@ -44,7 +44,7 @@
                                             @endforeach 
                                         </select>
 
-                                        <input type="hidden" name="course_language_hidden" value="{{ $course->level->language->id }}">
+                                        {{-- <input type="hidden" name="course_language_hidden" value="{{ $course->level->language->id }}"> --}}
                                         
                                         <span class="help-inline">@error('course_language'){{$message}}@enderror</span>
                                     </div>
@@ -53,17 +53,19 @@
                                 <div class="form-group col-12 level-div" id="level-div">
                                     <label class="col-form-label">Course Level</label>
                                     <div>
-                                        <select class="form-control" name="course_level" id="course_level">
+                                        <select class="form-control" name="course_level" id="course_level" disabled>
                                             <option selected value="">Choose Level</option>
                                             @foreach ($levels as $level)
-                                                @if ($course->level->language->id == $level->language_id)
+                                                {{-- @if ($course->level->language->id == $level->language_id) --}}
                                                     <option value="{{ $level->id }}" {{$course->level_id == $level->id  ? 'selected' : ''}}>
                                                         {{ $level->level_name }}
                                                     </option>
-                                                @endif
+                                                {{-- @endif --}}
                                                 
                                             @endforeach 
                                         </select>
+                                        {{-- <input type="hidden" name="course_level_hidden" value="{{ $course->level_id }}"> --}}
+
                                         <span class="help-inline">@error('course_level'){{$message}}@enderror</span>
                                     </div>
                                 </div>

@@ -260,21 +260,22 @@ class RecruitController extends Controller
             $user->user_type = 'teacher';
             $user->save();
 
-            $recruit = Recruit::findOrFail($id);
-            $teachers = $recruit->teachers;
-            return view('admin.recruit.applicant',compact('recruit','teachers'));
         } elseif ($action === 'reject') {
             $teacher->status = 'Rejected';
             $teacher->save();
             $user->user_type = 'user';
             $user->save();
 
-            $recruit = Recruit::findOrFail($id);
-            $teachers = $recruit->teachers;
-            return view('admin.recruit.applicant',compact('recruit','teachers'));
         } else {
             return back()->withInput();
         }
+
+        $recruit = Recruit::findOrFail($id);
+            $teachers = $recruit->teachers;
+            return view('admin.recruit.applicant',compact('recruit','teachers'));
+        $recruit = Recruit::findOrFail($id);
+            $teachers = $recruit->teachers;
+            return view('admin.recruit.applicant',compact('recruit','teachers'));
     }
 
     public function accept($id,$app_id) {

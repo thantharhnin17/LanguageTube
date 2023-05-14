@@ -48,6 +48,7 @@ Route::put('/recruits/recruit_details/{id}/recruit_form/', [TeacherController::c
 Route::get('/classrooms', [ClassroomController::class, 'getClassrooms']);
 Route::get('/classrooms/classroom_details/{id}',[ClassroomController::class, 'classroom_details']);
 Route::get('/classrooms/classroom_details/{id}/class_form',[ClassroomController::class, 'class_form']);
+Route::post('/classrooms/classroom_details/{id}/class_form',[ClassroomController::class, 'purchase'])->name('classroom.purchase');
 
 //////////Course////////////
 Route::resource('about', AboutController::class);
@@ -108,6 +109,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function(){
     Route::resource('classroom', ClassroomController::class);
     Route::post('classroom/get-teachers',[ClassroomController::class, 'getTeachers']);
     Route::post('classroom/status/{id}',[ClassroomController::class, 'updateStatus'])->name('classroom.status');
+    Route::get('classroom/{id}/students',[ClassroomController::class, 'getStudents'])->name('classroom.student');
+    Route::get('classroom/{id}/students/{stu_id}',[ClassroomController::class, 'getonestudent'])->name('classroom.onestudent');
+    Route::post('classroom/{id}/students/{stu_id}',[ClassroomController::class, 'process'])->name('classroom.process');
 
     //////////Payment////////////
     Route::resource('payment', PaymentMethodController::class);
