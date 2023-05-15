@@ -59,8 +59,9 @@
                                         <div class="">
                                             <h4 class="text-center">Class Features</h4>
                                             <ul class="course-features">
-                                                <li><i class="ti-book"></i> <span class="label">language</span> <span class="value">{{$classroom->course->level->language->language_name}}</span></li>
-                                                <li><i class="ti-stats-up"></i> <span class="label">level</span> <span class="value">{{$classroom->course->level->level_name}}</span></li>
+                                                <li><i class="ti-book"></i> <span class="label">Language</span> <span class="value">{{$classroom->course->level->language->language_name}}</span></li>
+                                                <li><i class="ti-stats-up"></i> <span class="label">Level</span> <span class="value">{{$classroom->course->level->level_name}}</span></li>
+                                                <li><i class="ti-tag"></i> <span class="label">Batch</span> <span class="value">{{$classroom->batch->batch_name}}</span></li>
                                                 <li><i class="ti-time"></i> <span class="label">Duration</span> <span class="value">{{$classroom->duration}}</span></li>
                                                 <li><i class="ti-stamp"></i> <span class="label">Start Date</span> <span class="value">{{$classroom->start_date}}</span></li>
                                                 <li><i class="ti-calendar"></i> <span class="label">Days</span> <span class="value">{{$classroom->days}}</span></li>
@@ -95,10 +96,10 @@
                                         <div class="teacher-bx">
                                             <div class="teacher-info">
                                                 <div class="teacher-thumb">
-                                                    <img src="{{ asset('storage/img/' . $classroom->user->photo) }}" alt=""/>
+                                                    <img src="{{ asset('storage/img/' . $classroom->teacher->photo) }}" alt=""/>
                                                 </div>
                                                 <div class="teacher-name">
-                                                    <h5>{{$classroom->user->name}}</h5>
+                                                    <h5>{{$classroom->teacher->name}}</h5>
                                                     <span>Teacher</span>
                                                 </div>
                                             </div>
@@ -107,6 +108,14 @@
                                 </div>
                                 
                             </div>
+                        </div>
+                        <div class="p-3 float-right">
+                            <button type="button" class="btn" data-toggle="tooltip" title="back">
+                                <a href="{{url('admin/classroom')}}" >
+                                    <i class="fa fa-home"></i>
+                                      Back
+                                </a>
+                            </button>
                         </div>
                     </div>
                     

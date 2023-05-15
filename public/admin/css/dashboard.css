@@ -1902,7 +1902,13 @@
 }
 
 
-/* div.dataTables_wrapper {
-	width: 800px;
-	margin: 0 auto;
-} */
+.wc-item{
+	display: flex;
+	align-items: center;
+}
+.wc-icon{
+	font-size: 30px;
+}
+.wc-stats{
+	font-size: 30px;
+}

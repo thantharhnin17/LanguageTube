@@ -69,6 +69,7 @@
                                 <ul class="course-features">
                                     <li><i class="ti-book"></i> <span class="label">language</span> <span class="value">{{$classroom->course->level->language->language_name}}</span></li>
                                     <li><i class="ti-stats-up"></i> <span class="label">level</span> <span class="value">{{$classroom->course->level->level_name}}</span></li>
+                                    <li><i class="ti-tag"></i> <span class="label">Batch</span> <span class="value">{{$classroom->batch->batch_name}}</span></li>
                                     <li><i class="ti-time"></i> <span class="label">Duration</span> <span class="value">{{$classroom->duration}}</span></li>
                                     <li><i class="ti-stamp"></i> <span class="label">Start Date</span> <span class="value">{{$classroom->start_date}}</span></li>
                                     <li><i class="ti-calendar"></i> <span class="label">Days</span> <span class="value">{{$classroom->days}}</span></li>
