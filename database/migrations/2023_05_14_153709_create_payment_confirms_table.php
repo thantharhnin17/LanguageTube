@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('payment_id');
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->string('confirmStatus')->default('Pending');
+            $table->string('confirmStatus')->default('pending');
             $table->timestamps();
 
             $table->foreign('payment_id')->references('id')->on('payments')->onDelete('cascade')->onUpdate('cascade');

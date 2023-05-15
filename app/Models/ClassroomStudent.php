@@ -12,6 +12,11 @@ class ClassroomStudent extends Model
 
     protected $table = 'classroom_students';
 
+    public function classroom()
+    {
+        return $this->belongsTo(Classroom::class);
+    }
+
     public function payment()
     {
         return $this->hasOne(Payment::class);

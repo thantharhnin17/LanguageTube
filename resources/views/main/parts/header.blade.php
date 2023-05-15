@@ -14,13 +14,13 @@
                         <div class="topbar-right">
                             @auth
                             <li class="nav-item dropdown" style="list-style: none">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <i class="fas fa-user-circle mobile_header_icon" style="font-size:2rem; color:#3D464D"></i>
-                                    {{ Auth::user()->name }}
+                                <a id="navbarDropdown" class="ttr-material-button ttr-submenu-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <span class="ttr-user-avatar"><img alt="" src="{{ asset('storage/img/' . Auth::user()->photo) }}" width="32" height="32"></span>
+                                    {{-- {{ Auth::user()->name }} --}}
                                 </a>
         
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="/profile">
+                                    <a class="dropdown-item" href="{{ route('user.profile', ['id' => Auth::user()->id]) }}">
                                         My Profile
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"

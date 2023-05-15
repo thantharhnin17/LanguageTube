@@ -224,11 +224,6 @@ class RecruitController extends Controller
 
         $recruit = Recruit::find($id);
         $teachers = $recruit->teachers;
-        // $teachers = $recruit->teachers()
-        // ->whereHas('user', function ($query) {
-        //     $query->where('user_type', 'user');
-        // })
-        // ->get();
         return view('admin.recruit.applicant',compact('recruit','teachers'));
     }
 

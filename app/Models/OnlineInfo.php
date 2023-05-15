@@ -11,6 +11,6 @@ class OnlineInfo extends Model
 
     public function classroom()
     {
-        return $this->belongsTo(Classroom::class);
+        return $this->hasOne(Classroom::class);
     }
 }

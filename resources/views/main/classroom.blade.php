@@ -101,7 +101,13 @@
                                     </div>
                                     <div class="info-bx text-center">
                                         <h5><a href="{{url('classroom/classroom_details/'.$classroom->id) }}">{{$classroom->course->course_name}}</a></h5>
-                                        <span>{{$classroom->course->level->language->language_name}}</span>
+                                        <span>
+                                            @if ($classroom->class_type == 0)
+                                                On-Campus
+                                            @else
+                                                Online
+                                            @endif
+                                        </span>
                                     </div>
                                     <div class="cours-more-info">
                                         <div class="price">

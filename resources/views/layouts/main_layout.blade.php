@@ -66,7 +66,7 @@
 <script src="{{asset ('main/js/jquery.scroller.js')}}"></script>
 <!-- <script src='assets/vendors/switcher/switcher.js'></script> -->
 @vite(['resources/js/app.js'])
-
+<script src="{{asset ('admin/js/swal.js')}}"></script>
 </head>
 
  <!-- //////////////////////header///////////////////// -->

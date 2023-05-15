@@ -27,7 +27,7 @@ class Classroom extends Model
 
     public function onlineInfo()
     {
-        return $this->hasOne(OnlineInfo::class);
+        return $this->belongsTo(OnlineInfo::class);
     }
 
     public function students()

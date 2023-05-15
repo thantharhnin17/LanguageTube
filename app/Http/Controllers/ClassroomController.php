@@ -341,7 +341,7 @@ class ClassroomController extends Controller
            $user->save();
 
            $paymentConfirm->user_id = $admin_id;
-           $paymentConfirm->confirmStatus = 'Accepted';
+           $paymentConfirm->confirmStatus = 'accepted';
            $paymentConfirm->save();
             
        } elseif ($action === 'reject') {
@@ -350,7 +350,7 @@ class ClassroomController extends Controller
            $user->save();
 
            $paymentConfirm->user_id = $admin_id;
-           $paymentConfirm->confirmStatus = 'Rejected';
+           $paymentConfirm->confirmStatus = 'rejected';
            $paymentConfirm->save();
 
        } else {

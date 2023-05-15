@@ -16,6 +16,9 @@
             <!-- Your Profile Views Chart -->
             <div class="col-lg-12 m-b30">
                 <div class="widget-box">
+                    @if(session('success_message'))
+                        <div class="alert alert-success">{{session('success_message')}}</div>
+                    @endif
                     <div class="wc-title">
                         <h4>Edit Students</h4>
                     </div>
@@ -68,7 +71,7 @@
                                         <label class="col-form-label">{{ __('Profile Photo') }}</label>
                                         <div>
                                             <img src="{{ asset('storage/img/' . $user->photo) }}" height="100" width="100">
-                                            {{-- <input type="hidden" name="db_photo" value="{{$user->photo}}"> --}}
+                                            
                                             <input name="photo" type="file" class="form-control-file" value="">
                                             @error('photo')
                                                 <span class="invalid-feedback" role="alert">
@@ -126,7 +129,7 @@
             
             
                                 <div class="col-lg-12 m-b30">
-                                    <button name="submit" type="submit" value="Submit" class="btn button-md">{{ __('Register') }}</button>
+                                    <button name="submit" type="submit" value="Submit" class="btn button-md">{{ __('Save Changes') }}</button>
                                 </div>
                                 
                             </div>

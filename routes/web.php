@@ -56,6 +56,13 @@ Route::resource('about', AboutController::class);
 //////////Course////////////
 Route::resource('contact', ContactController::class);
 
+//////////Profile////////////
+Route::get('/profile/{id}', [UserController::class, 'show'])->name('user.profile');
+Route::get('/profile/{id}/profile_classroom/{class_id}', [UserController::class, 'getClassroom'])->name('user.profile.classroom');
+Route::put('/profile/{id}', [UserController::class, 'profileUpdate'])->name('user.profile.update');
+Route::put('/profile/{id}/update-password', [UserController::class, 'updatePassword'])
+    ->name('user.profile.updatePassword');
+// Route::get('recruit/{id}/applicants/{app_id}',[RecruitController::class, 'process'])->name('recruit.process');
 
 //////////Login////////////
 // Route::get('/register', function () {

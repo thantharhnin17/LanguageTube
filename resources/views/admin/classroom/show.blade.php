@@ -74,7 +74,7 @@
                                                 <li><i class="ti-layout-media-overlay-alt"></i> <span class="label">Type</span> 
                                                     <span class="value">
                                                         @if ($classroom->class_type == 0)
-                                                            On-Compus
+                                                            On-Campus
                                                         @else
                                                             Online
                                                         @endif
