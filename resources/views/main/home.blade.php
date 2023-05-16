@@ -12,50 +12,22 @@
                     <div class="col-md-12 text-center text-white">
                         <h2>Online Language Courses To Learn</h2>
                         <h5>Own Your Feature Learning New Skills Online</h5>
-                        <form class="cours-search">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="What do you want to learn today?	">
-                                <div class="input-group-append">
-                                    <button class="btn" type="submit">Search</button> 
-                                </div>
-                            </div>
-                        </form>
+                        
                     </div>
                 </div>
                 <div class="mw800 m-auto">
                     <div class="row">
+                        @foreach($languages as $language)
                         <div class="col-md-3 col-sm-6">
                             <div class="cours-search-bx m-b30">
                                 <div class="icon-box">
                                     <h3><i class="fa-solid fa-earth-americas"></i></h3>
                                 </div>
-                                <span class="cours-search-text">English</span>
+                                <span class="cours-search-text">{{$language->language_name}}</span>
                             </div>
                         </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="cours-search-bx m-b30">
-                                <div class="icon-box">
-                                    <h3><i class="fa-solid fa-language"></i></h3>
-                                </div>
-                                <span class="cours-search-text">Japanese</span>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-12">
-                            <div class="cours-search-bx m-b30">
-                                <div class="icon-box">
-                                    <h3><i class="fa-brands fa-korvue"></i></h3>
-                                </div>
-                                <span class="cours-search-text">Korean</span>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-12">
-                            <div class="cours-search-bx m-b30">
-                                <div class="icon-box">
-                                    <h3><i class="fa-solid fa-yin-yang"></i></h3>
-                                </div>
-                                <span class="cours-search-text">Chinese</span>
-                            </div>
-                        </div>
+                        @endforeach
+                        
                         
                     </div>
                 </div>
@@ -87,6 +59,9 @@
                                     @else
                                         Online
                                     @endif
+                                </span><br>
+                                <span>
+                                    {{$classroom->batch->batch_name}}
                                 </span>
                             </div>
                             <div class="cours-more-info">
@@ -100,6 +75,9 @@
                     @endforeach
                
                 </div>
+                <div class="row mt-4 justify-content-center">
+                    <a href="{{url('classrooms')}}" class="btn button-md d-flex align-items-center">All Classroom <i class="ti-angle-double-right"></i></a>
+                </div>
             </div>
         </div>
         <!-- Latest Courses END -->
@@ -109,9 +87,8 @@
                     <div class="col-md-12">
                         <div class="join-content-bx text-white">
                             <h2>Learn a new skill online on <br> your time</h2>
-                            <h4><span class="counter">57,000</span> Online Courses</h4>
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                            <a href="#" class="btn button-md">Join Now</a>
+                            
                         </div>
                     </div>
                 </div>
@@ -141,7 +118,7 @@
                             </div>
                             <div class="cours-more-info">
                                 <div class="price">
-                                    <h5>KS 120,000</h5>
+                                    <h5></h5>
                                 </div>
                                 <a href="{{url('recruits/recruit_details/'.$recruit->id) }}" class="btn">Read More</a>
                             </div>
@@ -149,6 +126,9 @@
                     </div>
                     @endforeach
 
+                </div>
+                <div class="row mt-4 justify-content-center">
+                    <a href="{{url('recruits')}}" class="btn button-md d-flex align-items-center">All Recruitment <i class="ti-angle-double-right"></i></a>
                 </div>
             </div>
         </div>
@@ -194,48 +174,7 @@
             </div>
         </div>
         <!-- Testimonials END -->
-        <!-- Testimonials ==== -->
-        <div class="section-area section-sp2">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 heading-bx left">
-                        <h2 class="title-head text-uppercase">what people <span>say</span></h2>
-                        <p>It is a long established fact that a reader will be distracted by the readable content of a page</p>
-                    </div>
-                </div>
-                <div class="testimonial-carousel owl-carousel owl-btn-1 col-12 p-lr0">
-                    <div class="item">
-                        <div class="testimonial-bx">
-                            <div class="testimonial-thumb">
-                                <img src="assets/images/testimonials/pic1.jpg" alt="">
-                            </div>
-                            <div class="testimonial-info">
-                                <h5 class="name">Peter Packer</h5>
-                                <p>-Art Director</p>
-                            </div>
-                            <div class="testimonial-content">
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type...</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="testimonial-bx">
-                            <div class="testimonial-thumb">
-                                <img src="assets/images/testimonials/pic2.jpg" alt="">
-                            </div>
-                            <div class="testimonial-info">
-                                <h5 class="name">Peter Packer</h5>
-                                <p>-Art Director</p>
-                            </div>
-                            <div class="testimonial-content">
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type...</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Testimonials END ==== -->
+        
     </div>
     <!-- contact area END -->
 </div>

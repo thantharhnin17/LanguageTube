@@ -46,6 +46,7 @@ class LanguageController extends Controller
     {
         $request->validate([
             'language_name' => 'required|unique:languages|max:100',
+            'level_name.*' => 'required_without_all:level_name.*',
         ]);
         // Language::create($language);
 

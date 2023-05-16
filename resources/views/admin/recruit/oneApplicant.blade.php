@@ -110,6 +110,7 @@
 
                             <div class="row my-3">
                                 <div class="col-12 d-flex justify-content-end">
+                                    <a href="{{ redirect()->back()->getTargetUrl() }}" class="btn btn-secondary">Back</a>
                                     <form action="{{ route('recruit.process', ['id' => $teacher->recruit->id, 'app_id' => $teacher->id]) }}" method="post">
                                         @csrf
                                         @method('POST')

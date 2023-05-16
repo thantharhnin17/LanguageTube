@@ -7,6 +7,7 @@ use App\Models\Batch;
 use App\Models\Course;
 use App\Models\Payment;
 use App\Models\Teacher;
+use App\Models\Language;
 use App\Models\Classroom;
 use App\Models\OnlineInfo;
 use App\Models\TeacherLevel;
@@ -213,11 +214,14 @@ class ClassroomController extends Controller
      * get all classrooms
      */
     public function getClassrooms() {
-        $classrooms = Classroom::where('status', 1)->get();
+        $classrooms=Classroom::where('status', 1)->latest()->paginate(6);
+        // $classrooms = Classroom::where('status', 1)->orderBy('id','ASC')->get();
+        $languages = Language::all();
         $courses = Course::all();
         $batches = Batch::all();
         $users = User::where('user_type', 'teacher')->get();
-        return view('main.classroom',compact('classrooms', 'courses' ,'batches', 'users'));
+        return view('main.classroom',compact('classrooms','languages', 'courses' ,'batches', 'users'))
+        ->with('i', (request()->input('page', 1) - 1) * 6);
     }
 
     /**
@@ -341,7 +345,7 @@ class ClassroomController extends Controller
            $user->save();
 
            $paymentConfirm->user_id = $admin_id;
-           $paymentConfirm->confirmStatus = 'accepted';
+           $paymentConfirm->confirmStatus = 'Accepted';
            $paymentConfirm->save();
             
        } elseif ($action === 'reject') {
@@ -350,7 +354,7 @@ class ClassroomController extends Controller
            $user->save();
 
            $paymentConfirm->user_id = $admin_id;
-           $paymentConfirm->confirmStatus = 'rejected';
+           $paymentConfirm->confirmStatus = 'Rejected';
            $paymentConfirm->save();
 
        } else {

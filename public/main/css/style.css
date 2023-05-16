@@ -3494,3 +3494,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#391800', end
 	list-style: none;
   }
 
+  .language-bx ul li{
+	display: block;
+  }
+

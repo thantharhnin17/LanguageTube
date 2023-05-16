@@ -48,7 +48,6 @@
                               <th>Name</th>
                               <th>Email</th>
                               <th>Phone</th>
-                              <th>Date Of Birth</th>
                               <th>Age</th>
                               <th>Gender</th>
                               <th>Type</th>
@@ -65,7 +64,6 @@
                                     <td>{{$user->email}}</td>
                                     
                                     <td>{{$user->phone}}</td>
-                                    <td>{{$user->dob}}</td>
                                     <td>
                                         @php
                                             $dob = \Carbon\Carbon::parse($user->dob);

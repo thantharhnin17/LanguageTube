@@ -96,9 +96,9 @@
                             </div>	
                             <div class="course-buy-now text-center">
                                 @if (Auth::check())
-                                    <a href="{{url('classrooms/classroom_details/'.$classroom->id.'/class_form') }}" class="btn radius-xl text-uppercase">Register This Classroom</a>
+                                    <a href="{{url('classrooms/classroom_details/'.$classroom->id.'/class_form') }}" class="btn radius-xl text-uppercase">Enroll Now</a>
                                 @else
-                                    <a href="/login" class="btn radius-xl text-uppercase">Register This Classroom</a>
+                                    <a href="/login" class="btn radius-xl text-uppercase">Enroll Now</a>
                                 @endif
                             </div>
                             <div class="teacher-bx">

@@ -84,40 +84,10 @@
                                 </div>
                                 
 
-                                    
-
-                                
-                                    
-                                
-
-
-                                {{-- <div class="row mb-3">
-                                <div class="col-12 col-md-3">Background Education</div>
-                                <div class="col-12 col-md-9">{{$teacher->education}}</div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-12 col-md-3">Background University</div>
-                                <div class="col-12 col-md-9">{{$teacher->university}}</div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-12 col-md-3">Comment</div>
-                                <div class="col-12 col-md-9">{{$teacher->comment}}</div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-12 col-md-3">CV Form</div>
-                                <div class="col-12 col-md-9"><img src="{{ asset('storage/img/' . $teacher->cv_form) }}" width="100px" height="100px" /></div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-12 col-md-3">Certificates / Degrees</div>
-                                <div class="col-12 col-md-9">
-                                    @foreach ($teacher->teacher_certificates as $tc)
-                                        <img src="{{ asset('storage/img/' . $tc->certi_img) }}" width="100px" height="100px" />
-                                    @endforeach
-                                </div>
-                            </div> --}}
 
                             <div class="row my-3">
                                 <div class="col-12 d-flex justify-content-end">
+                                    <a href="{{ redirect()->back()->getTargetUrl() }}" class="btn btn-secondary">Back</a>
                                     <form action="{{ route('classroom.process', ['id' => $classroom->id, 'stu_id' => $student->id]) }}" method="post">
                                         @csrf
                                         @method('POST')

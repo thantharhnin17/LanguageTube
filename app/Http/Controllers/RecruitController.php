@@ -191,10 +191,11 @@ class RecruitController extends Controller
      * get all recruitment
      */
     public function getRecruits() {
-        $recruits = Recruit::all();
+        $recruits=Recruit::where('status', 1)->latest()->paginate(6);
+        // $recruits = Recruit::all();
         $languages = Language::all();
         // return $recruits;
-        return view('main.recruits',compact('recruits', 'languages'));
+        return view('main.recruits',compact('recruits', 'languages'))->with('i', (request()->input('page', 1) - 1) * 6);
     }
 
     /**

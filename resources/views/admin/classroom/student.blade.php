@@ -61,22 +61,24 @@
 
                                             <td>
                                                 @foreach ($paymentConfirms as $paymentConfirm)
-                                                    @if ($paymentConfirm->payment->classroomStudent->user_id == $student->id)
-                                                        {{ $paymentConfirm->confirmStatus }}
+                                                    @if ($paymentConfirm->payment->classroomStudent->user_id == $student->id && $paymentConfirm->payment->classroomStudent->classroom_id == $classroom->id)
+                                                        
+                                                        @if ($paymentConfirm->confirmStatus == 'Pending') 
+                                                            <p class="text-warning">Pending</p> 
+                                                        @elseif ($paymentConfirm->confirmStatus == 'Accepted')    
+                                                            <p class="text-success">Accepted</p>
+                                                        @else
+                                                            <p class="text-secondary">Rejected</p>
+                                                        @endif
+
                                                     @endif
                                                 @endforeach
 
-                                                {{-- @if ($student->payment == 'Pending') 
-                                                    <p class="text-warning">Pending</p> 
-                                                @elseif ($student->payment == 'Accepted')    
-                                                    <p class="text-success">Accepted</p>
-                                                @else
-                                                    <p class="text-secondary">Rejected</p>
-                                                @endif --}}
+                                                
                                             </td>
                                             <td>
                                                 @foreach ($paymentConfirms as $paymentConfirm)
-                                                    @if ($paymentConfirm->payment->classroomStudent->user_id == $student->id)
+                                                    @if ($paymentConfirm->payment->classroomStudent->user_id == $student->id && $paymentConfirm->payment->classroomStudent->classroom_id == $classroom->id)
                                                         @if ($paymentConfirm->user_id != null)
                                                             {{$paymentConfirm->user->name }}
                                                         @endif

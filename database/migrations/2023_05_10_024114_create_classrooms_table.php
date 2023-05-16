@@ -28,6 +28,8 @@ return new class extends Migration
             $table->boolean('status')->default(1);
             $table->timestamps();
 
+            $table->unique(['course_id', 'batch_id']); // Make the combination unique
+
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('batch_id')->references('id')->on('batches')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');

@@ -90,7 +90,7 @@
                                     </li>
                                     @foreach ($paymentConfirms as $confirm)
                                         @if ($confirm->payment->classroom_student_id == $classroom->id)
-                                            @if ($confirm->confirmStatus == 'accepted')
+                                            @if ($confirm->confirmStatus == 'Accepted')
                                                 @if ($classroom->online_info_id != null)
                                                     <li><i class="ti-desktop"></i> <span class="label">Class Meeting Link</span> <span class="value">{{$classroom->onlineInfo->meeting_link}}</span></li>
                                                     <li><i class="ti-link"></i> <span class="label">Class Group Link</span> <span class="value">{{$classroom->onlineInfo->group_chat_link}}</span></li>

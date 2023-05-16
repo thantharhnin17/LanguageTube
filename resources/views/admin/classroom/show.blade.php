@@ -88,9 +88,9 @@
                                         </div>	
                                         <div class="course-buy-now text-center">
                                             @if (Auth::check())
-                                                <a href="{{url('classrooms/classroom_details/'.$classroom->id.'/class_form') }}" class="btn radius-xl text-uppercase" name="register">Register This Classroom</a>
+                                                <a href="{{url('classrooms/classroom_details/'.$classroom->id.'/class_form') }}" class="btn radius-xl text-uppercase" name="register">Enroll Now</a>
                                             @else
-                                                <a href="/login" class="btn radius-xl text-uppercase" name="register">Register This Classroom</a>
+                                                <a href="/login" class="btn radius-xl text-uppercase" name="register">Enroll Now</a>
                                             @endif
                                         </div>
                                         <div class="teacher-bx">
@@ -110,12 +110,7 @@
                             </div>
                         </div>
                         <div class="p-3 float-right">
-                            <button type="button" class="btn" data-toggle="tooltip" title="back">
-                                <a href="{{url('admin/classroom')}}" >
-                                    <i class="fa fa-home"></i>
-                                      Back
-                                </a>
-                            </button>
+                            <a href="{{ redirect()->back()->getTargetUrl() }}" class="btn btn-secondary"><i class="fa fa-home"></i> Back</a>
                         </div>
                     </div>
                     

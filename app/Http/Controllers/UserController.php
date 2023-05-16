@@ -14,6 +14,7 @@ use Illuminate\Validation\Rule;
 use App\Models\ClassroomStudent;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -87,13 +88,21 @@ class UserController extends Controller
     public function show(string $id)
     {
         $user= User::find($id);
-        $classroomStudents = ClassroomStudent::where('user_id', $id)->get();
-        $paymentConfirms = PaymentConfirm::all();
-        return view('main.profile',compact('user','classroomStudents','paymentConfirms'));
+        if($user->user_type == "student"){
+            $classroomStudents = ClassroomStudent::where('user_id', $id)->get();
+            $paymentConfirms = PaymentConfirm::all();
+            return view('main.profile',compact('user','classroomStudents','paymentConfirms'));
+        }elseif($user->user_type == "teacher"){
+            $classrooms = Classroom::where('user_id', $id)->get();
+            return view('main.profile',compact('user','classrooms'));
+        }else{
+            return view('main.profile',compact('user'));
+        }
+        
     }
 
     /**
-     * get one applicant by recruitment
+     * get one classroom
      */
     public function getClassroom($id,$class_id) {
 
@@ -101,6 +110,19 @@ class UserController extends Controller
         $classroom = Classroom::find($class_id);
         $paymentConfirms = PaymentConfirm::all();
         return view('main.profile_classroom',compact('student','classroom','paymentConfirms'));
+    }
+
+    /**
+     * get one student list by classroom
+     */
+    public function getStuList($id,$class_id) {
+
+        $classroom = Classroom::find($class_id);
+        $students = $classroom->students;
+        $paymentConfirms = PaymentConfirm::all();
+        
+        return view('main.profile_stuList',compact('classroom','students', 'paymentConfirms'));
+        // return view('main.profile_classroom',compact('student','classroom','paymentConfirms'));
     }
 
     /**
@@ -193,76 +215,113 @@ class UserController extends Controller
      */
     public function profileUpdate(Request $request, string $id)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255'],
-            'phone'=> 'required',
-            'dob' => 'required',
-            'gender' => 'required',
-        ]);
-
-        $user = User::find($id);
-        if ($request->hasFile('photo')) 
-        {
-            if ($request->file('photo')->isValid()) 
-            {
-                $validated = $request->validate([
-                    'photo' => 'mimes:jpg,jpeg,png,gif|max:2048',
-                ]);
-                $extension = $request->photo->extension();
-                $randomName = rand().".".$extension;
-                $request->photo->storeAs('/public/img/',$randomName);
-                    $user->photo = $randomName;
-            }
-        }   
-        else{
-            $user->photo = $user->photo;
-        }
-
-        if(isset($request->password)){
-            $validated = $request->validate([
-                'password' => ['string', 'min:8'],
+        $classroomStudents = ClassroomStudent::where('user_id', $id)->get();
+        $paymentConfirms = PaymentConfirm::all();
+        
+        try {
+            $validator = $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255'],
+                'phone'=> 'required',
+                'dob' => 'required',
+                'gender' => 'required',
+                'curPw' => '',
+                'newPw' => '',
+                'confirmPw' => '',
             ]);
-            $user->password = Hash::make(request('password'));
-        }
-        else{
-            $user->password = $user->password;
-        }
+        
+            // Validation passed
+            $user = User::find($id);
+            if ($request->hasFile('photo')) 
+            {
+                if ($request->file('photo')->isValid()) 
+                {
+                    $validated = $request->validate([
+                        'photo' => 'mimes:jpg,jpeg,png,gif|max:2048',
+                    ]);
+                    $extension = $request->photo->extension();
+                    $randomName = rand().".".$extension;
+                    $request->photo->storeAs('/public/img/',$randomName);
+                        $user->photo = $randomName;
+                }
+            }   
+            else{
+                $user->photo = $user->photo;
+            }
 
-            $user->name = request('name');
-            $user->email = request('email');
-            // $user->user_type = request('user_type');
-            $user->phone = request('phone');
-            $user->dob = request('dob');
-            $user->gender = request('gender');
-         
-           $user->save();
+            if(isset($request->password)){
+                $validated = $request->validate([
+                    'password' => ['string', 'min:8'],
+                ]);
+                $user->password = Hash::make(request('password'));
+            }
+            else{
+                $user->password = $user->password;
+            }
 
-           $classroomStudents = ClassroomStudent::where('user_id', $id)->get();
-           $paymentConfirms = PaymentConfirm::all();
+                $user->name = request('name');
+                $user->email = request('email');
+                $user->phone = request('phone');
+                $user->dob = request('dob');
+                $user->gender = request('gender');
+            
+            $user->save();
 
-           return view('main.profile',compact('user','classroomStudents','paymentConfirms'))->with('success_message', 'Student update successfully.');
+            session()->flash('success_message', 'Student update successfully.');
+            return view('main.profile',compact('user','classroomStudents','paymentConfirms'));
+
+            } catch (\Illuminate\Validation\ValidationException $e) {
+                // Validation failed
+                $errors = $e->validator->errors();
+            
+                session()->flash('fail_message', $errors);
+                return view('main.profile',compact('user','classroomStudents','paymentConfirms'));
+            }
+
         }
 
         public function updatePassword(Request $request, $id)
         {
             $user = User::findOrFail($id);
+            $classroomStudents = ClassroomStudent::where('user_id', $id)->get();
+            $paymentConfirms = PaymentConfirm::all();
 
-            $request->validate([
-                'curPw' => 'required',
-                'newPw' => 'required|min:8',
-                'confirmPw' => 'required|same:newPw',
-            ]);
+            try {
+                $validator = $request->validate([
+                    'name' => '',
+                    'email' => '',
+                    'phone'=> '',
+                    'dob' => '',
+                    'gender' => '',
+                    'curPw' => 'required',
+                    'newPw' => 'required|min:8',
+                    'confirmPw' => 'required|same:newPw',
+                ]);
 
-            // Verify current password
-            if (!Hash::check($request->curPw, $user->password)) {
-                return redirect()->back()->withErrors(['curPw' => 'Incorrect current password']);
+                // Verify current password
+                if (!Hash::check($request->curPw, $user->password)) {
+
+                    session()->flash('fail_message', 'Password update Fail.Incorrect current password.');
+                    return view('main.profile',compact('user','classroomStudents','paymentConfirms'));
+                        // return redirect()->back()->withErrors(['curPw' => 'Incorrect current password']);
+                    }
+    
+                    // Update password
+                    $user->password = Hash::make($request->newPw);
+                    $user->save();
+    
+                    session()->flash('success_message', 'Password update successfully.');
+                    return view('main.profile',compact('user','classroomStudents','paymentConfirms'));
+
+            } catch (\Illuminate\Validation\ValidationException $e) {
+                // Validation failed
+                $errors = $e->validator->errors();
+            
+                session()->flash('fail_message', $errors);
+                return view('main.profile',compact('user','classroomStudents','paymentConfirms'));
             }
+                       
 
-            // Update password
-            $user->password = Hash::make($request->newPw);
-            $user->save();
-
-            return redirect()->back()->with('success', 'Password updated successfully');
+            
         }
 }

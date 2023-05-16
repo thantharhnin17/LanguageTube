@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Batch;
 use App\Models\Course;
 use App\Models\Recruit;
 use App\Models\Language;
@@ -77,11 +78,31 @@ class DashboardController extends Controller
         ->orderBy('student_count', 'desc')
         ->get();
 
+        // // Retrieve the enrollment data from the database
+        // $enrollmentData = DB::table('classrooms')
+        // ->join('classroom_students', 'classrooms.id', '=', 'classroom_students.classroom_id')
+        // ->select('classrooms.id', 'classrooms.course_id', 'classrooms.batch_id', 'classrooms.duration', 'classrooms.start_date', 'classrooms.avaliable_students', 'classrooms.fee', 'classroom_students.user_id')
+        // ->get();
+
+        // // Process the retrieved data to prepare it for the chart
+        // $processedData = [];
+        // foreach ($enrollmentData as $entry) {
+        // $classroom = Classroom::find($entry->id);
+        // $course = Course::find($entry->course_id);
+        // $batch = Batch::find($entry->batch_id);
+        // $user = User::find($entry->user_id);
+
+        // $processedData[] = [
+        //     'course' => $course->course_name,
+        //     'batch' => $batch->batch_name,
+        //     'user' => $user->name,
+        //     'enrollment' => $entry->avaliable_students,
+        // ];
+        // }
+        
+        // $enrollmentData = ['enrollmentData' => $processedData];
+
         // dd($courseWithMostStudents);
-
-        // $levels = $languages->levels;
-        // dd($languageWithMostStudents->language_name);
-
 
         // return view('admin.user.show',compact('users','classrooms'));
         return view('admin.home', compact('integerFee','classroomCount','recruitCount','userCount','languageWithMostStudents', 'courseWithMostStudents'));

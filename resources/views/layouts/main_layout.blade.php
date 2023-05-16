@@ -66,7 +66,11 @@
 <script src="{{asset ('main/js/jquery.scroller.js')}}"></script>
 <!-- <script src='assets/vendors/switcher/switcher.js'></script> -->
 @vite(['resources/js/app.js'])
-<script src="{{asset ('admin/js/swal.js')}}"></script>
+<!-- SweetAlert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{{-- ============================================= --}}
 </head>
 
  <!-- //////////////////////header///////////////////// -->

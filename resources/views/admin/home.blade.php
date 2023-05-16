@@ -101,79 +101,63 @@
         <!-- Card END -->
 
         <div class="row">
-            <!-- Your Profile Views Chart -->
-            @php
-            // Generate a random color
-            function getRandomColor() {
-            $letters = '0123456789ABCDEF';
-            $color = '#';
-            for ($i = 0; $i < 6; $i++) {
-                $color .= $letters[random_int(0, 15)];
-            }
-                return $color;
-            }
-
-            $course_labels = [];
-            $course_values = [];
-            $course_backgroundColor = [];
-            $course_hoverBackgroundColor = [];
-
-            foreach ($courseWithMostStudents as $courseWithMostStudent) {
-                        array_push($course_labels, $courseWithMostStudent->course_name);
-                        array_push($course_values, $courseWithMostStudent->student_count);
-                        array_push($course_backgroundColor, getRandomColor());
-                        array_push($course_hoverBackgroundColor, getRandomColor());
-                }
-                
-        @endphp
+            <div class="col-12 m-b30">
+                <div class="widget-box">
+                    <form action="" method="get" class="px-3 py-2">
+                        <div class="row align-items-baseline">
+                            <div class="col-lg-4 col-12">
+                                <h4>Monthly Student Enrollment</h4>
+                            </div>
+                                @csrf
+                            <div class="col-lg-3 col-4">
+                                <input type="text" placeholder="Start Month" id="start_month" onclick="this.type='month';" name="start_month" class="form form-control p-2">
+                            </div>
         
-
-            <div class="col-lg-8 m-b30">
-                <div class="widget-box">
-                    <div class="wc-title">
-                        <h4>Your Profile Views</h4>
-                    </div>
-                    <div class="widget-inner">
-                        <canvas id="course_chart" width="100" height="45"></canvas>
-                    </div>
-                </div>
-            </div>
-            <!-- Your Profile Views Chart END-->
-
-            <!-- Popular Language Chart -->
-            @php
-                // Generate a random color
-
-                $language_labels = [];
-                $language_values = [];
-                $language_backgroundColor = [];
-                $language_hoverBackgroundColor = [];
-
-                foreach ($languageWithMostStudents as $languageWithMostStudent) {
-                    array_push($language_labels, $languageWithMostStudent->language_name);
-                    array_push($language_values, $languageWithMostStudent->student_count);
-                    array_push($language_backgroundColor, getRandomColor());
-                    array_push($language_hoverBackgroundColor, getRandomColor());
-                }
+                            <div class="col-lg-3 col-4">
+                                <input type="text" placeholder="End Month" id="end_month" onclick="this.type='month';" name="end_month" class="form form-control p-2">
+                            </div>
+                            <div class="col-lg-2 col-4">
+                                <button type="submit" class="btn btn-success" onclick="validateMonthRange(event);">Generate</button>
+                            </div>
+                            
+                            @if(isset($monthly_customer))
+                            <div class="col-12 text-center text-lora text-danger fw-bold">
+                                <span>{{ $monthly_customer }}</span>
+                              </div>
+                              @endif             
+                        </div>
+        
+        
+                        <script>
+                        function validateMonthRange(event) {
+                            // Get the value of the start date and end date input elements
+                            var startMonth = document.getElementById("start_month").value;
+                            var endMonth = document.getElementById("end_month").value;
+        
+                            // Convert the date strings to Date objects
+                            var start = new Date(startMonth);
+                            var end = new Date(endMonth);
+        
+                            // Compare the dates
+                            if (end < start) {
+                                // If the end date is less than the start date, prevent the form from being submitted
+                                event.preventDefault();
+                                alert("End Month cannot be less than start month.");
+                            }
+                        }
+                        </script>
+        
+        
+        
+        
+                    </form>
                     
-            @endphp
-            
-
-            <div class="col-lg-4 m-b30">
-                <div class="widget-box">
-                    <div class="wc-title">
-                        <h4>Popular Language</h4>
-                    </div>
-                    <div class="widget-inner">
-                        <canvas id="popular_chart" width="100" height="100"></canvas>
-                    </div>
                 </div>
             </div>
-            
+        </div>
 
-            <!-- Popular Language Chart -->
-            
-            <div class="col-lg-6 m-b30">
+        <div class="row">
+            <div class="col-lg-5 m-b30">
                 <div class="widget-box">
                     <div class="wc-title">
                         <h4>New Users</h4>
@@ -246,57 +230,146 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 m-b30">
+            <!-- Enrollment Chart -->
+            @php
+                // Generate a random color
+                function getRandomColor() {
+                $letters = '0123456789ABCDEF';
+                $color = '#';
+                for ($i = 0; $i < 6; $i++) {
+                    $color .= $letters[random_int(0, 15)];
+                }
+                    return $color;
+                }
+
+                
+                $course_labels = [];
+                $course_values = [];
+                $course_backgroundColor = [];
+                $course_hoverBackgroundColor = [];
+
+                foreach ($courseWithMostStudents as $courseWithMostStudent) {
+                        array_push($course_labels, $courseWithMostStudent->course_name);
+                        array_push($course_values,(int) $courseWithMostStudent->student_count);
+                        array_push($course_backgroundColor, getRandomColor());
+                        array_push($course_hoverBackgroundColor, getRandomColor());
+                }
+                
+            @endphp
+        
+
+            <div class="col-lg-7 m-b30">
                 <div class="widget-box">
                     <div class="wc-title">
-                        <h4>Orders</h4>
+                        <h4>Enrollment Chart</h4>
                     </div>
                     <div class="widget-inner">
-                        <div class="orders-list">
+                        <canvas id="enrollment-chart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+            <!-- Enrollment Chart END-->
+        </div>
+
+        <div class="row">
+            
+            <!-- Popular Language Chart -->
+            @php
+                // Generate a random color
+
+                $language_labels = [];
+                $language_values = [];
+                $language_backgroundColor = [];
+                $language_hoverBackgroundColor = [];
+
+                foreach ($languageWithMostStudents as $languageWithMostStudent) {
+                    array_push($language_labels, $languageWithMostStudent->language_name);
+                    array_push($language_values, $languageWithMostStudent->student_count);
+                    array_push($language_backgroundColor, getRandomColor());
+                    array_push($language_hoverBackgroundColor, getRandomColor());
+                }
+                    
+            @endphp
+            
+
+            <div class="col-lg-4 m-b30">
+                <div class="widget-box">
+                    <div class="wc-title">
+                        <h4>Popular Language</h4>
+                    </div>
+                    <div class="widget-inner">
+                        <canvas id="popular_chart" width="100" height="100"></canvas>
+                    </div>
+                </div>
+            </div>
+            <!-- Popular Language Chart -->
+
+            <div class="col-lg-8 m-b30">
+                <div class="widget-box">
+                    <div class="wc-title">
+                        <h4>New Users</h4>
+                    </div>
+                    <div class="widget-inner">
+                        <div class="new-user-list">
                             <ul>
                                 <li>
-                                    <span class="orders-title">
-                                        <a href="#" class="orders-title-name">Anna Strong </a>
-                                        <span class="orders-info">Order #02357 | Date 12/08/2019</span>
+                                    <span class="new-users-pic">
+                                        <img src="assets/images/testimonials/pic1.jpg" alt=""/>
                                     </span>
-                                    <span class="orders-btn">
-                                        <a href="#" class="btn button-sm red">Unpaid</a>
+                                    <span class="new-users-text">
+                                        <a href="#" class="new-users-name">Anna Strong </a>
+                                        <span class="new-users-info">Visual Designer,Google Inc </span>
                                     </span>
-                                </li>
-                                <li>
-                                    <span class="orders-title">
-                                        <a href="#" class="orders-title-name">Revenue</a>
-                                        <span class="orders-info">Order #02357 | Date 12/08/2019</span>
-                                    </span>
-                                    <span class="orders-btn">
-                                        <a href="#" class="btn button-sm red">Unpaid</a>
+                                    <span class="new-users-btn">
+                                        <a href="#" class="btn button-sm outline">Follow</a>
                                     </span>
                                 </li>
                                 <li>
-                                    <span class="orders-title">
-                                        <a href="#" class="orders-title-name">Anna Strong </a>
-                                        <span class="orders-info">Order #02357 | Date 12/08/2019</span>
+                                    <span class="new-users-pic">
+                                        <img src="assets/images/testimonials/pic2.jpg" alt=""/>
                                     </span>
-                                    <span class="orders-btn">
-                                        <a href="#" class="btn button-sm green">Paid</a>
+                                    <span class="new-users-text">
+                                        <a href="#" class="new-users-name"> Milano Esco </a>
+                                        <span class="new-users-info">Product Designer, Apple Inc </span>
                                     </span>
-                                </li>
-                                <li>
-                                    <span class="orders-title">
-                                        <a href="#" class="orders-title-name">Revenue</a>
-                                        <span class="orders-info">Order #02357 | Date 12/08/2019</span>
-                                    </span>
-                                    <span class="orders-btn">
-                                        <a href="#" class="btn button-sm green">Paid</a>
+                                    <span class="new-users-btn">
+                                        <a href="#" class="btn button-sm outline">Follow</a>
                                     </span>
                                 </li>
                                 <li>
-                                    <span class="orders-title">
-                                        <a href="#" class="orders-title-name">Anna Strong </a>
-                                        <span class="orders-info">Order #02357 | Date 12/08/2019</span>
+                                    <span class="new-users-pic">
+                                        <img src="assets/images/testimonials/pic1.jpg" alt=""/>
                                     </span>
-                                    <span class="orders-btn">
-                                        <a href="#" class="btn button-sm green">Paid</a>
+                                    <span class="new-users-text">
+                                        <a href="#" class="new-users-name">Nick Bold  </a>
+                                        <span class="new-users-info">Web Developer, Facebook Inc </span>
+                                    </span>
+                                    <span class="new-users-btn">
+                                        <a href="#" class="btn button-sm outline">Follow</a>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="new-users-pic">
+                                        <img src="assets/images/testimonials/pic2.jpg" alt=""/>
+                                    </span>
+                                    <span class="new-users-text">
+                                        <a href="#" class="new-users-name">Wiltor Delton </a>
+                                        <span class="new-users-info">Project Manager, Amazon Inc </span>
+                                    </span>
+                                    <span class="new-users-btn">
+                                        <a href="#" class="btn button-sm outline">Follow</a>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="new-users-pic">
+                                        <img src="assets/images/testimonials/pic3.jpg" alt=""/>
+                                    </span>
+                                    <span class="new-users-text">
+                                        <a href="#" class="new-users-name">Nick Stone </a>
+                                        <span class="new-users-info">Project Manager, Amazon Inc  </span>
+                                    </span>
+                                    <span class="new-users-btn">
+                                        <a href="#" class="btn button-sm outline">Follow</a>
                                     </span>
                                 </li>
                             </ul>
@@ -304,17 +377,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-12 m-b30">
-                <div class="widget-box">
-                    <div class="wc-title">
-                        <h4>Basic Calendar</h4>
-                    </div>
-                    <div class="widget-inner">
-                        <div id="calendar"></div>
-                    </div>
-                </div>
-            </div>
         </div>
+
     </div>
 </main>
 {{-- <script src="{{asset ('admin/js/charts.js')}}"></script> --}}
@@ -340,47 +404,37 @@
         }
     });
 
-
-    const courseChart = document.getElementById('course_chart');
-  const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  const data = {
-    labels: labels,
-    datasets: [{
-      label: 'My First Dataset',
-      data: [65, 59, 80, 81, 56, 55, 40],
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
-        'rgba(255, 205, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(201, 203, 207, 0.2)'
-      ],
-      borderColor: [
-        'rgb(255, 99, 132)',
-        'rgb(255, 159, 64)',
-        'rgb(255, 205, 86)',
-        'rgb(75, 192, 192)',
-        'rgb(54, 162, 235)',
-        'rgb(153, 102, 255)',
-        'rgb(201, 203, 207)'
-      ],
-      borderWidth: 1
-    }]
-  };
-
-  var chart = new Chart(courseChart, {
+    const enrollment_chart = document.getElementById('enrollment-chart');
+    new Chart(enrollment_chart, {
     type: 'bar',
-    data: data,
+    data: {
+        labels: {!! json_encode($course_labels) !!},
+        datasets: [{
+        label: 'Enrollment',
+        data: {!! json_encode($course_values) !!},
+        backgroundColor: {!! json_encode($course_backgroundColor) !!},
+        borderColor: {!! json_encode($course_hoverBackgroundColor) !!},
+        borderWidth: 1
+        }]
+    },
     options: {
-      scales: {
+        scales: {
         y: {
-          beginAtZero: true
+            beginAtZero: true, // Start the y-axis at 0
+            type: 'linear', // Use linear scale type for numeric values
+            ticks: {
+                stepSize: 1, // Adjust the step size according to your data
+            }
         }
-      }
+        }
     }
-  });	
+    });
+
+
+
+   
+    
+    
 </script>
 
 @endsection

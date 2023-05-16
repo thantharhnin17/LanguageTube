@@ -11,9 +11,7 @@
                 <li>All Students</li>
             </ul>
         </div>	
-        {{-- @if(session('success_message'))
-                    <div class="alert alert-success">{{session('success_message')}}</div>
-                @endif --}}
+        
         @if(session('success_message'))
             <script>
                 Swal.fire({
