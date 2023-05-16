@@ -37,14 +37,14 @@
                 <div class="widget-card widget-bg3">					 
                     <div class="wc-item">
                         <div class="wc-icon">
-                            <i class="fa-solid fa-dollar-sign"></i>
+                            <i class="fa-solid fa-users-rectangle"></i>
                         </div>
                         <div class="ml-2">
                             <h4 class="wc-title">
                                 All Classrooms
                             </h4>
                             <span class="wc-des">
-                                Classroom Fee
+                                Language & Courses
                             </span>
                         </div>
                         <span class="wc-stats">
@@ -58,14 +58,14 @@
                 <div class="widget-card widget-bg2">					 
                     <div class="wc-item">
                         <div class="wc-icon">
-                            <i class="fa-solid fa-dollar-sign"></i>
+                            <i class="fa-solid fa-chalkboard-user"></i>
                         </div>
                         <div class="ml-2">
                             <h4 class="wc-title">
                                 All Recruitments
                             </h4>
                             <span class="wc-des">
-                                Classroom Fee
+                                Teacher For Classroom
                             </span>
                         </div>
                         <span class="wc-stats">
@@ -79,14 +79,14 @@
                 <div class="widget-card widget-bg4">	
                     <div class="wc-item">
                         <div class="wc-icon">
-                            <i class="fa-solid fa-dollar-sign"></i>
+                            <i class="fa-solid fa-user"></i>
                         </div>
                         <div class="ml-2">
                             <h4 class="wc-title">
                                 All Users
                             </h4>
                             <span class="wc-des">
-                                Classroom Fee
+                                Accounts
                             </span>
                         </div>
                         <span class="wc-stats">

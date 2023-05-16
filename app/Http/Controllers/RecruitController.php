@@ -165,6 +165,13 @@ class RecruitController extends Controller
     public function destroy(string $id)
     {
         $recruit= Recruit::find($id);
+        $photo = $payment->photo;
+
+        $path = "public/img/{$photo}";
+
+        if(Storage::exists($path)) {
+            Storage::delete($path);
+        }
         $recruit->delete();
         return redirect()->route('recruit.index')
         ->with('success_message','Recruitment delete successfully.');

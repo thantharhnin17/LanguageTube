@@ -31,39 +31,39 @@
             <ul>
                 <li>
                     <a href="{{url('admin/home')}}" class="ttr-material-button">
-                        <span class="ttr-icon"><i class="ti-home"></i></span>
+                        <span class="ttr-icon"><i class="fa-solid fa-house"></i></span>
                         <span class="ttr-label">Dashborad</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{url('admin/language')}}" class="ttr-material-button">
-                        <span class="ttr-icon"><i class="ti-book"></i></span>
+                        <span class="ttr-icon"><i class="fa-solid fa-book-open"></i></span>
                         <span class="ttr-label">Languages</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{url('admin/course')}}" class="ttr-material-button">
-                        <span class="ttr-icon"><i class="ti-book"></i></span>
+                        <span class="ttr-icon"><i class="fa-solid fa-book-open"></i></span>
                         <span class="ttr-label">Courses</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{url('admin/batch')}}" class="ttr-material-button">
-                        <span class="ttr-icon"><i class="ti-book"></i></span>
+                        <span class="ttr-icon"><i class="fa-solid fa-book-open"></i></span>
                         <span class="ttr-label">Batches</span>
                     </a>
                 </li>
                 <li class="ttr-seperate"></li>
                 <li>
                     <a href="{{url('admin/classroom')}}" class="ttr-material-button">
-                        <span class="ttr-icon"><i class="ti-book"></i></span>
+                        <span class="ttr-icon"><i class="fa-solid fa-users-rectangle"></i></span>
                         <span class="ttr-label">Classrooms</span>
                     </a>
                 </li>
                 <li class="ttr-seperate"></li>
                 <li>
                     <a href="{{url('admin/recruit')}}" class="ttr-material-button">
-                        <span class="ttr-icon"><i class="ti-book"></i></span>
+                        <span class="ttr-icon"><i class="fa-solid fa-chalkboard-user"></i></span>
                         <span class="ttr-label">Recruitment</span>
                     </a>
                 </li>
@@ -71,26 +71,26 @@
                 <li class="ttr-seperate"></li>
                 <li>
                     <a href="{{url('admin/payment')}}" class="ttr-material-button">
-                        <span class="ttr-icon"><i class="ti-book"></i></span>
+                        <span class="ttr-icon"><i class="fa-regular fa-credit-card"></i></span>
                         <span class="ttr-label">Payment Methods</span>
                     </a>
                 </li>
                 <li class="ttr-seperate"></li>
                 <li>
                     <a href="{{url('admin/user')}}" class="ttr-material-button">
-                        <span class="ttr-icon"><i class="ti-book"></i></span>
+                        <span class="ttr-icon"><i class="fa-regular fa-user"></i></span>
                         <span class="ttr-label">Users</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{url('admin/teacher')}}" class="ttr-material-button">
-                        <span class="ttr-icon"><i class="ti-book"></i></span>
+                        <span class="ttr-icon"><i class="fa-solid fa-user-tie"></i></span>
                         <span class="ttr-label">Teachers</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{url('admin/student')}}" class="ttr-material-button">
-                        <span class="ttr-icon"><i class="ti-book"></i></span>
+                        <span class="ttr-icon"><i class="fa-solid fa-clipboard-user"></i></span>
                         <span class="ttr-label">Students</span>
                     </a>
                 </li>

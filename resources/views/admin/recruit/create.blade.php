@@ -129,7 +129,7 @@
                             </div>
                             <div class="row wi-foot mt-3">
                                 <div class="col-12">
-                                    <button type="reset" class="btn-secondry mr-2">Clear</button>
+                                    <a href="{{ redirect()->back()->getTargetUrl() }}" class="btn btn-secondary">Back</a>
                                     <button type="submit" class="btn">Create</button>
                                 </div>
                             </div>

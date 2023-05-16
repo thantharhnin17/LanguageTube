@@ -127,7 +127,8 @@
             
             
                                 <div class="col-lg-12 m-b30">
-                                    <button name="submit" type="submit" value="Submit" class="btn button-md">{{ __('Register') }}</button>
+                                    <a href="{{ redirect()->back()->getTargetUrl() }}" class="btn btn-secondary">Back</a>
+                                    <button name="submit" type="submit" value="Submit" class="btn">{{ __('Register') }}</button>
                                 </div>
                                 
                             </div>

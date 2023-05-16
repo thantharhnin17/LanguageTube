@@ -162,33 +162,13 @@
                                         <span class="help-inline">@error('fee'){{$message}}@enderror</span>
                                     </div>
                                 </div>
-
-                                {{-- <div class=" collapse {{ (old('class_type') == 'online') ? 'show' : ''}} chosen_hiden chosen_online">
-
-                                    <div class="form-group col-12">
-                                        <label class="col-form-label">Meeting Link</label>
-                                        <div>
-                                            <input name="meeting_link" class="form-control" type="text" value="{{ old('meeting_link') }}">
-                                            <span class="help-inline">@error('meeting_link'){{$message}}@enderror</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group col-12">
-                                        <label class="col-form-label">Group Chat Link</label>
-                                        <div>
-                                            <input name="group_chat_link" class="form-control" type="text" value="{{ old('group_chat_link') }}">
-                                            <span class="help-inline">@error('group_chat_link'){{$message}}@enderror</span>
-                                        </div>
-                                    </div>
-
-                                </div> --}}
                                 
                                 <div class="seperator"></div>
                                 
                             </div>
                             <div class="row wi-foot mt-3">
                                 <div class="col-12">
-                                    <button type="reset" class="btn-secondry mr-2">Clear</button>
+                                    <a href="{{ redirect()->back()->getTargetUrl() }}" class="btn btn-secondary">Back</a>
                                     <button type="submit" class="btn">Create</button>
                                 </div>
                             </div>
