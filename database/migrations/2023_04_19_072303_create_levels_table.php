@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('level_name');
             $table->unsignedBigInteger('language_id');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade')->onUpdate('cascade');
         });

@@ -25,10 +25,18 @@ class ClassroomController extends Controller
      */
     public function index()
     {
-        $classrooms = Classroom::all();
+        $classrooms = Classroom::orderByDesc('id')->get();
         $courses = Course::all();
         $batches = Batch::all();
         $users = User::where('user_type', 'teacher')->get();
+
+        foreach($classrooms as $classroom){
+            if($classroom->avaliable_students == $classroom->accept_students){
+                $classroom->status = 0;
+                $classroom->save();
+            }
+        }
+
         return view('admin.classroom.index',compact('classrooms', 'courses' ,'batches', 'users'));
     }
 
@@ -214,7 +222,7 @@ class ClassroomController extends Controller
      * get all classrooms
      */
     public function getClassrooms() {
-        $classrooms=Classroom::where('status', 1)->latest()->paginate(6);
+        $classrooms=Classroom::where('status', 1)->orderBy('id','DESC')->paginate(6);
         // $classrooms = Classroom::where('status', 1)->orderBy('id','ASC')->get();
         $languages = Language::all();
         $courses = Course::all();
@@ -299,7 +307,7 @@ class ClassroomController extends Controller
     public function getStudents($id) {
 
         $classroom = Classroom::find($id);
-        $students = $classroom->students;
+        $students = $classroom->students->sortByDesc('id');
         $paymentConfirms = PaymentConfirm::all();
         
         return view('admin.classroom.student',compact('classroom','students', 'paymentConfirms'));
@@ -322,6 +330,8 @@ class ClassroomController extends Controller
     */
    public function process($id, $stu_id, Request $request)
    {
+        $classroom = Classroom::findOrFail($id);
+
        $action = $request->input('action');
        $admin_id = $request->input('admin_id');
 
@@ -333,12 +343,6 @@ class ClassroomController extends Controller
 
        $paymentConfirm = PaymentConfirm::where('payment_id', $paymentId)->first();
 
-    //    dd($admin_id);
-
-       
-
-
-       // dd($action);
 
        if ($action === 'accept') {
            $user->user_type = 'student';
@@ -347,6 +351,9 @@ class ClassroomController extends Controller
            $paymentConfirm->user_id = $admin_id;
            $paymentConfirm->confirmStatus = 'Accepted';
            $paymentConfirm->save();
+
+           $classroom->accept_students += 1;
+           $classroom->save();
             
        } elseif ($action === 'reject') {
 
@@ -362,7 +369,7 @@ class ClassroomController extends Controller
        }
        
 
-        $classroom = Classroom::findOrFail($id);
+        
         $students = $classroom->students;
         $paymentConfirms = PaymentConfirm::all();
             

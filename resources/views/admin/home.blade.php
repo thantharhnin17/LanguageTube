@@ -18,17 +18,17 @@
                         <div class="wc-icon">
                             <i class="fa-solid fa-dollar-sign"></i>
                         </div>
-                        <div class="ml-2">
-                            <h4 class="wc-title">
-                                Total Income
-                            </h4>
-                            <span class="wc-des">
-                                Classroom Fee
-                            </span>
+                        <div>
+                            <span class="wc-stats d-block">
+                                <span class="counter">{{ $integerFee }}</span> K
+                            </span>	
+                            <div class="">
+                                <h4 class="wc-title">
+                                    Total Income
+                                </h4>
+                            </div>
                         </div>
-                        <span class="wc-stats">
-                            <span class="counter">{{ $integerFee }}</span> K
-                        </span>		
+                        	
                         
                     </div>				      
                 </div>
@@ -100,15 +100,17 @@
         </div>
         <!-- Card END -->
 
+        {{-- Monthly Student Enrollment --}}
         <div class="row">
             <div class="col-12 m-b30">
                 <div class="widget-box">
-                    <form action="" method="get" class="px-3 py-2">
+                    <form action="{{route('dashboard.monthly_student')}}" method="GET" enctype="multipart/form-data" class="px-3 py-2">
                         <div class="row align-items-baseline">
                             <div class="col-lg-4 col-12">
                                 <h4>Monthly Student Enrollment</h4>
                             </div>
                                 @csrf
+                                @method('GET')
                             <div class="col-lg-3 col-4">
                                 <input type="text" placeholder="Start Month" id="start_month" onclick="this.type='month';" name="start_month" class="form form-control p-2">
                             </div>
@@ -120,9 +122,9 @@
                                 <button type="submit" class="btn btn-success" onclick="validateMonthRange(event);">Generate</button>
                             </div>
                             
-                            @if(isset($monthly_customer))
+                            @if(isset($monthly_student))
                             <div class="col-12 text-center text-lora text-danger fw-bold">
-                                <span>{{ $monthly_customer }}</span>
+                                <span>{{ $monthly_student }}</span>
                               </div>
                               @endif             
                         </div>
@@ -157,136 +159,139 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-5 m-b30">
-                <div class="widget-box">
-                    <div class="wc-title">
-                        <h4>New Users</h4>
-                    </div>
-                    <div class="widget-inner">
-                        <div class="new-user-list">
-                            <ul>
-                                <li>
-                                    <span class="new-users-pic">
-                                        <img src="assets/images/testimonials/pic1.jpg" alt=""/>
-                                    </span>
-                                    <span class="new-users-text">
-                                        <a href="#" class="new-users-name">Anna Strong </a>
-                                        <span class="new-users-info">Visual Designer,Google Inc </span>
-                                    </span>
-                                    <span class="new-users-btn">
-                                        <a href="#" class="btn button-sm outline">Follow</a>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="new-users-pic">
-                                        <img src="assets/images/testimonials/pic2.jpg" alt=""/>
-                                    </span>
-                                    <span class="new-users-text">
-                                        <a href="#" class="new-users-name"> Milano Esco </a>
-                                        <span class="new-users-info">Product Designer, Apple Inc </span>
-                                    </span>
-                                    <span class="new-users-btn">
-                                        <a href="#" class="btn button-sm outline">Follow</a>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="new-users-pic">
-                                        <img src="assets/images/testimonials/pic1.jpg" alt=""/>
-                                    </span>
-                                    <span class="new-users-text">
-                                        <a href="#" class="new-users-name">Nick Bold  </a>
-                                        <span class="new-users-info">Web Developer, Facebook Inc </span>
-                                    </span>
-                                    <span class="new-users-btn">
-                                        <a href="#" class="btn button-sm outline">Follow</a>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="new-users-pic">
-                                        <img src="assets/images/testimonials/pic2.jpg" alt=""/>
-                                    </span>
-                                    <span class="new-users-text">
-                                        <a href="#" class="new-users-name">Wiltor Delton </a>
-                                        <span class="new-users-info">Project Manager, Amazon Inc </span>
-                                    </span>
-                                    <span class="new-users-btn">
-                                        <a href="#" class="btn button-sm outline">Follow</a>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="new-users-pic">
-                                        <img src="assets/images/testimonials/pic3.jpg" alt=""/>
-                                    </span>
-                                    <span class="new-users-text">
-                                        <a href="#" class="new-users-name">Nick Stone </a>
-                                        <span class="new-users-info">Project Manager, Amazon Inc  </span>
-                                    </span>
-                                    <span class="new-users-btn">
-                                        <a href="#" class="btn button-sm outline">Follow</a>
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <!-- Enrollment Chart -->
             @php
                 // Generate a random color
-                function getRandomColor() {
-                $letters = '0123456789ABCDEF';
-                $color = '#';
-                for ($i = 0; $i < 6; $i++) {
-                    $color .= $letters[random_int(0, 15)];
-                }
-                    return $color;
-                }
-
+                
                 
                 $course_labels = [];
                 $course_values = [];
-                $course_backgroundColor = [];
-                $course_hoverBackgroundColor = [];
 
                 foreach ($courseWithMostStudents as $courseWithMostStudent) {
                         array_push($course_labels, $courseWithMostStudent->course_name);
                         array_push($course_values,(int) $courseWithMostStudent->student_count);
-                        array_push($course_backgroundColor, getRandomColor());
-                        array_push($course_hoverBackgroundColor, getRandomColor());
                 }
-                
+
+                // dd(json_encode($course_labels));               
             @endphp
         
 
-            <div class="col-lg-7 m-b30">
+            <div class="col-lg-12 m-b30">
                 <div class="widget-box">
                     <div class="wc-title">
-                        <h4>Enrollment Chart</h4>
+                        <h4>Student Enrollment Chart</h4>
                     </div>
                     <div class="widget-inner">
-                        <canvas id="enrollment-chart" width="400" height="200"></canvas>
+                        <canvas id="enrollment-chart" width="400" height="100"></canvas>
                     </div>
                 </div>
             </div>
             <!-- Enrollment Chart END-->
+            
+            <!-- Enrollment Tabel -->
+            <div class="col-12 m-b30">
+                <div class="widget-box">
+                    <div class="wc-title">
+                        <h4>Student Enrollment Table</h4>
+                    </div>
+                    <div class="widget-inner">
+                        <table id="example" class="table table-hover">
+                            <thead class="thead-light">
+                            <tr>
+                              <th>#</th>
+                              <th>Courses</th>
+                              <th>No of enrollment</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php $no=1; ?>
+                                @foreach ($courseWithMostStudents as $courseWithMostStudent)
+                                <tr>
+                                    <td>{{$no++}}</td>
+                                    <td>{{$courseWithMostStudent->course_name}}</td>
+                                    <td>{{$courseWithMostStudent->student_count}}</td>
+                                    
+                                </tr>   
+                                @endforeach
+                                
+          
+                            </tbody>
+                            
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Enrollment Tabel END-->
+
+        </div>
+        {{-- Monthly Student Enrollment End --}}
+
+        {{-- Monthly Popular Language --}}
+        <div class="row">
+            <div class="col-12 m-b30">
+                <div class="widget-box">
+                    <form action="{{route('dashboard.monthly_language')}}" method="GET" enctype="multipart/form-data" class="px-3 py-2">
+                        <div class="row align-items-baseline">
+                            <div class="col-lg-4 col-12">
+                                <h4>Monthly Popular Language</h4>
+                            </div>
+                                @csrf
+                                @method('GET')
+                            <div class="col-lg-3 col-4">
+                                <input type="text" placeholder="Start Month" id="start_month" onclick="this.type='month';" name="start_month" class="form form-control p-2">
+                            </div>
+        
+                            <div class="col-lg-3 col-4">
+                                <input type="text" placeholder="End Month" id="end_month" onclick="this.type='month';" name="end_month" class="form form-control p-2">
+                            </div>
+                            <div class="col-lg-2 col-4">
+                                <button type="submit" class="btn btn-success" onclick="validateMonthRange(event);">Generate</button>
+                            </div>
+                            
+                            @if(isset($monthly_student))
+                            <div class="col-12 text-center text-lora text-danger fw-bold">
+                                <span>{{ $monthly_student }}</span>
+                              </div>
+                              @endif             
+                        </div>
+        
+        
+                        <script>
+                        function validateMonthRange(event) {
+                            // Get the value of the start date and end date input elements
+                            var startMonth = document.getElementById("start_month").value;
+                            var endMonth = document.getElementById("end_month").value;
+        
+                            // Convert the date strings to Date objects
+                            var start = new Date(startMonth);
+                            var end = new Date(endMonth);
+        
+                            // Compare the dates
+                            if (end < start) {
+                                // If the end date is less than the start date, prevent the form from being submitted
+                                event.preventDefault();
+                                alert("End Month cannot be less than start month.");
+                            }
+                        }
+                        </script>
+        
+                    </form>
+                    
+                </div>
+            </div>
         </div>
 
         <div class="row">
             
             <!-- Popular Language Chart -->
             @php
-                // Generate a random color
 
                 $language_labels = [];
                 $language_values = [];
-                $language_backgroundColor = [];
-                $language_hoverBackgroundColor = [];
 
                 foreach ($languageWithMostStudents as $languageWithMostStudent) {
                     array_push($language_labels, $languageWithMostStudent->language_name);
                     array_push($language_values, $languageWithMostStudent->student_count);
-                    array_push($language_backgroundColor, getRandomColor());
-                    array_push($language_hoverBackgroundColor, getRandomColor());
                 }
                     
             @endphp
@@ -295,7 +300,7 @@
             <div class="col-lg-4 m-b30">
                 <div class="widget-box">
                     <div class="wc-title">
-                        <h4>Popular Language</h4>
+                        <h4>Popular Language Chart</h4>
                     </div>
                     <div class="widget-inner">
                         <canvas id="popular_chart" width="100" height="100"></canvas>
@@ -307,92 +312,177 @@
             <div class="col-lg-8 m-b30">
                 <div class="widget-box">
                     <div class="wc-title">
-                        <h4>New Users</h4>
+                        <h4>Popular Language Table</h4>
                     </div>
                     <div class="widget-inner">
-                        <div class="new-user-list">
-                            <ul>
-                                <li>
-                                    <span class="new-users-pic">
-                                        <img src="assets/images/testimonials/pic1.jpg" alt=""/>
-                                    </span>
-                                    <span class="new-users-text">
-                                        <a href="#" class="new-users-name">Anna Strong </a>
-                                        <span class="new-users-info">Visual Designer,Google Inc </span>
-                                    </span>
-                                    <span class="new-users-btn">
-                                        <a href="#" class="btn button-sm outline">Follow</a>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="new-users-pic">
-                                        <img src="assets/images/testimonials/pic2.jpg" alt=""/>
-                                    </span>
-                                    <span class="new-users-text">
-                                        <a href="#" class="new-users-name"> Milano Esco </a>
-                                        <span class="new-users-info">Product Designer, Apple Inc </span>
-                                    </span>
-                                    <span class="new-users-btn">
-                                        <a href="#" class="btn button-sm outline">Follow</a>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="new-users-pic">
-                                        <img src="assets/images/testimonials/pic1.jpg" alt=""/>
-                                    </span>
-                                    <span class="new-users-text">
-                                        <a href="#" class="new-users-name">Nick Bold  </a>
-                                        <span class="new-users-info">Web Developer, Facebook Inc </span>
-                                    </span>
-                                    <span class="new-users-btn">
-                                        <a href="#" class="btn button-sm outline">Follow</a>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="new-users-pic">
-                                        <img src="assets/images/testimonials/pic2.jpg" alt=""/>
-                                    </span>
-                                    <span class="new-users-text">
-                                        <a href="#" class="new-users-name">Wiltor Delton </a>
-                                        <span class="new-users-info">Project Manager, Amazon Inc </span>
-                                    </span>
-                                    <span class="new-users-btn">
-                                        <a href="#" class="btn button-sm outline">Follow</a>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="new-users-pic">
-                                        <img src="assets/images/testimonials/pic3.jpg" alt=""/>
-                                    </span>
-                                    <span class="new-users-text">
-                                        <a href="#" class="new-users-name">Nick Stone </a>
-                                        <span class="new-users-info">Project Manager, Amazon Inc  </span>
-                                    </span>
-                                    <span class="new-users-btn">
-                                        <a href="#" class="btn button-sm outline">Follow</a>
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
+                        <table id="example" class="table table-hover">
+                            <thead class="thead-light">
+                            <tr>
+                              <th>#</th>
+                              <th>Languages</th>
+                              <th>No of Student</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php $no=1; ?>
+                                @foreach ($languageWithMostStudents as $languageWithMostStudent)
+                                <tr>
+                                    <td>{{$no++}}</td>
+                                    <td>{{$languageWithMostStudent->language_name}}</td>
+                                    <td>{{$languageWithMostStudent->student_count}}</td>
+                                    
+                                </tr>   
+                                @endforeach
+                                
+          
+                            </tbody>
+                            
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
+        {{-- Monthly Popular Language End --}}
+
+        {{-- Number of Teachers --}}
+        <div class="row">
+            <div class="col-12 m-b30">
+                <div class="widget-box p-2">
+                    <h4>Number of Teachers</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            
+            <!-- Teacher Chart -->
+            @php
+
+                $teacher_labels = [];
+                $teacher_values = [];
+
+                foreach ($teacherReports as $teacherReport) {
+                    array_push($teacher_labels, $teacherReport->language_name);
+                    array_push($teacher_values, $teacherReport->teacher_count);
+                }
+                    
+            @endphp
+            
+            <div class="col-lg-4 m-b30">
+                <div class="widget-box">
+                    <div class="wc-title">
+                        <h4>Teacher Table</h4>
+                    </div>
+                    <div class="widget-inner">
+                        <table id="example" class="table table-hover">
+                            <thead class="thead-light">
+                            <tr>
+                              <th>#</th>
+                              <th>Languages</th>
+                              <th>No of Teachers</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php $no=1; ?>
+                                @foreach ($teacherReports as $teacherReport)
+                                <tr>
+                                    <td>{{$no++}}</td>
+                                    <td>{{$teacherReport->language_name}}</td>
+                                    <td>{{$teacherReport->teacher_count}}</td>
+                                    
+                                </tr>   
+                                @endforeach
+                                
+          
+                            </tbody>
+                            
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Teacher Chart -->
+            <div class="col-lg-8 m-b30">
+                <div class="widget-box">
+                    <div class="wc-title">
+                        <h4>Teacher Chart</h4>
+                    </div>
+                    <div class="widget-inner">
+                        <canvas id="teacher-chart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+            <!-- Teacher Chart End -->
+
+        </div>
+        {{-- Number of Teachers End --}}
 
     </div>
 </main>
 {{-- <script src="{{asset ('admin/js/charts.js')}}"></script> --}}
 
 <script>
-    const popular_chart = document.getElementById('popular_chart');
+    var enrollChart = document.getElementById('enrollment-chart').getContext('2d');
+    new Chart(enrollChart, {
+        type: 'bar',
+        data: {
+            labels: {!! json_encode($course_labels) !!},
+            datasets: [{
+                label: 'Monthly Student Enrollment Report',
+                data: {!! json_encode($course_values) !!},
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+    const popular_chart = document.getElementById('popular_chart').getContext('2d');
     new Chart(popular_chart, {
         type: 'pie',
         data: {
             labels: {!! json_encode($language_labels) !!},
             datasets: [{
                 data: {!! json_encode($language_values) !!},
-                backgroundColor: {!! json_encode($language_backgroundColor) !!},
-                hoverBackgroundColor: {!! json_encode($language_hoverBackgroundColor) !!},
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                hoverBackgroundColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
             }]
         },
         options: {
@@ -404,35 +494,43 @@
         }
     });
 
-    const enrollment_chart = document.getElementById('enrollment-chart');
-    new Chart(enrollment_chart, {
-    type: 'bar',
-    data: {
-        labels: {!! json_encode($course_labels) !!},
-        datasets: [{
-        label: 'Enrollment',
-        data: {!! json_encode($course_values) !!},
-        backgroundColor: {!! json_encode($course_backgroundColor) !!},
-        borderColor: {!! json_encode($course_hoverBackgroundColor) !!},
-        borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-        y: {
-            beginAtZero: true, // Start the y-axis at 0
-            type: 'linear', // Use linear scale type for numeric values
-            ticks: {
-                stepSize: 1, // Adjust the step size according to your data
+    var teacherChart = document.getElementById('teacher-chart').getContext('2d');
+    new Chart(teacherChart, {
+        type: 'bar',
+        data: {
+            labels: {!! json_encode($teacher_labels) !!},
+            datasets: [{
+                label: 'Number Of Teachers',
+                data: {!! json_encode($teacher_values) !!},
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
             }
         }
-        }
-    }
     });
-
-
-
-   
     
     
 </script>

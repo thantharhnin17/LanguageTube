@@ -27,7 +27,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $users = User::where('user_type', 'student')->get();
+        $users = User::where('user_type', 'student')->orderByDesc('id')->get();
         // $students = Student::all();
         return view('admin.student.show',compact('users'));
     }

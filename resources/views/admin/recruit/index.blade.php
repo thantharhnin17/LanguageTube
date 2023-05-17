@@ -51,6 +51,7 @@
                               <th>Time</th>
                               <th>Salary</th>
                               <th>Total Person</th>
+                              <th>Accept Person</th>
                               <th>Status</th>
                               <th>Author</th>
                               <th>Lists</th>
@@ -81,6 +82,7 @@
                                     </td>
                                     <td>{{$recruit->salary}}</td>
                                     <td>{{$recruit->total_person}}</td>
+                                    <td>{{$recruit->accept_person}}</td>
                                     <td>
                                         <form id="{{$recruit->id}}" action="{{route('recruit.status',$recruit->id)}}" method="post">
                                             @csrf

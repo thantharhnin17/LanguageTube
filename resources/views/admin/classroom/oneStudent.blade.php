@@ -60,11 +60,11 @@
         
                                         <div class="row mb-3">
                                             <div class="col-12 col-md-3">Classroom Fee</div>
-                                            <div class="col-12 col-md-9">KS {{ $classroom->fee }}</div>
+                                            <div class="col-12 col-md-9">KS {{number_format($classroom->fee)}}</div>
                                         </div>
         
                                         @foreach ($payments as $payment)
-                                            @if ($payment->classroomStudent->user_id == $student->id)
+                                            @if ($payment->classroomStudent->user_id == $student->id && $payment->classroomStudent->classroom_id == $classroom->id )
                                             <div class="row mb-3">
                                                 <div class="col-12 col-md-3">Payment Type</div>
                                                 <div class="col-12 col-md-9">{{ $payment->paymentMethod->payName }}</div>

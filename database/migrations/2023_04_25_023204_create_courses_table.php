@@ -19,6 +19,7 @@ return new class extends Migration
             $table->longtext('description');
             $table->unsignedBigInteger('level_id');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('level_id')->references('id')->on('levels')->onDelete('cascade')->onUpdate('cascade');
             $table->unique('level_id');

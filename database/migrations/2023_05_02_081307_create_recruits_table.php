@@ -23,8 +23,10 @@ return new class extends Migration
             $table->longtext('description');
             $table->longtext('requirement');
             $table->integer('total_person');
+            $table->integer('accept_person')->default(0);
             $table->boolean('status')->default(1);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade')->onUpdate('cascade');

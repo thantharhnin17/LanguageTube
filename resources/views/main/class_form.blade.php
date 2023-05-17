@@ -88,7 +88,7 @@
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-lg-4 col-12"><label class="col-form-label">Classroom Fee</label></div>
-                                        <div class="col-lg-8 col-12">KS {{$classroom->fee}}</div>
+                                        <div class="col-lg-8 col-12">KS {{number_format($classroom->fee)}}</div>
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-lg-4 col-12"><label for="">Payment Type</label></div>

@@ -24,7 +24,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::all();
+        $courses = Course::orderByDesc('id')->get();
         $languages = Language::all();
         $levels = Level::all();
         return view('admin.course.show',compact('courses','languages', 'levels'));

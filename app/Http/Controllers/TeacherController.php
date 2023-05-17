@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Level;
+use App\Models\Recruit;
 use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\Language;
@@ -20,7 +21,7 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        $users = User::where('user_type', 'teacher')->get();
+        $users = User::where('user_type', 'teacher')->orderByDesc('id')->get();
         // $students = Student::all();
         return view('admin.teacher.show',compact('users'));
     }
@@ -233,41 +234,39 @@ class TeacherController extends Controller
     /**
      * apply job
      */
-    public function apply(Request $request)
+    public function apply(Request $request,string $id)
     {
-        $user_id = $request->input('user_id');
+        $user = User::find($id);
         $recruit_id = $request->input('recruit_id');
         $type = $request->input('type');
         $time = $request->input('time');
 
+        // Check if the teacher has already applied for the given recruitment
+        $existingApplication = Teacher::where('recruit_id', $recruit_id)
+        ->where('user_id', $user->id)
+        ->first();
+
+        if ($existingApplication) {
+            return view('main.recruit_form_complete')->with(['error_message' => 'You have already applied for this job']);
+        } else {
+            
+
     //////////
 
-        // $request->validate([
-        //     'name' => ['required', 'string', 'max:255'],
-        //     'email' => ['required', 'string', 'email', 'max:255'],
-        //     'phone'=> 'required',
-        //     'dob' => 'required',
-        //     'gender' => 'required',
-        //     'education' => 'required',
-        //     'university' => 'required',
-        //     'teach_language' => 'required',
-        //     'levels' => 'required',
-        //     'cv_form' => 'required',
-        //     'certis' => 'required',
-        // ]);
 
-        $user = User::find($user_id);
+        // $user = User::find($user_id);
         if ($request->hasFile('photo')) 
         {
             if ($request->file('photo')->isValid()) 
             {
                 $validated = $request->validate([
-                    'photo' => 'mimes:jpg,jpeg,png,gif|max:2048',
+                    'photo' => 'mimes:jpg,jpeg,png,gif',
                 ]);
                 $extension = $request->photo->extension();
                 $randomName = rand().".".$extension;
                 $request->photo->storeAs('/public/img/',$randomName);
                     $user->photo = $randomName;
+
             }
         }   
         else{
@@ -288,7 +287,7 @@ class TeacherController extends Controller
             if ($request->file('cv_form')->isValid()) 
             {
                 $validated = $request->validate([
-                    'cv_form' => 'mimes:jpg,jpeg,png,gif,pdf|max:2048',
+                    'cvform' => 'mimes:doc,docx,pdf|max:5120',
                 ]);
                 $extension = $request->cv_form->extension();
                 $randomCV = rand().".".$extension;
@@ -298,7 +297,7 @@ class TeacherController extends Controller
         }
 
         $teacher = new Teacher();
-        $teacher->user_id = $user_id;
+        $teacher->user_id = $user->id;
         $teacher->type = $type;
         $teacher->time = $time;
         $teacher->recruit_id = $recruit_id;
@@ -311,12 +310,7 @@ class TeacherController extends Controller
 
         ///////////////
 
-        // $levels = $request->input('levels');
-        // foreach ($levels as $level) {
-        //     $teacher->levels()->createMany([
-        //         ['teacher_id' => $teacher->id, 'level_id' => $level->id],
-        //     ]);
-        // }
+        
 
         $levels = $request->input('levels');
         $levelData = [];
@@ -337,19 +331,14 @@ class TeacherController extends Controller
             $randomCerti = rand() . "." . $extension;
             $certi->storeAs('/public/img/', $randomCerti);
 
-            // $teacherCerti = new TeacherCertificate();
-            // $teacherCerti->teacher_id = $teacher->id;
-            // $teacherCerti->certi_img = $randomCerti;
-            // dd($randomCerti);
-            // dd($certi);
             $teacher->teacher_certificates()->createMany([
                 ['teacher_id' => $teacher->id, 'certi_img' => $randomCerti],
             ]);
         }
 
 
-        return redirect('/')
-        ->with('success_message','You apply successfully.');
+        return view('main.recruit_form_complete')->with(['success_message' => 'You apply successfully. We will inform you soon']);
     }
+}
 
 }

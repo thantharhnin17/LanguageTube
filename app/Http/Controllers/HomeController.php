@@ -16,8 +16,8 @@ class HomeController extends Controller
     public function index()
     {
         $languages = Language::all()->take(4);
-        $classrooms = Classroom::where('status', 1)->orderBy('id','ASC')->take(4)->get();
-        $recruits = Recruit::where('status', 1)->orderBy('id','ASC')->take(3)->get();
+        $classrooms = Classroom::where('status', 1)->orderBy('id','DESC')->take(4)->get();
+        $recruits = Recruit::where('status', 1)->orderBy('id','DESC')->take(3)->get();
         return view('main.home',compact('languages','classrooms','recruits'));
     }
 

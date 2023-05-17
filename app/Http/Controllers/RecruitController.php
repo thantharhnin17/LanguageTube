@@ -25,7 +25,15 @@ class RecruitController extends Controller
      */
     public function index()
     {
-        $recruits = Recruit::all();
+        $recruits = Recruit::orderByDesc('id')->get();
+
+        foreach($recruits as $recruit){
+            if($recruit->total_person == $recruit->accept_person){
+                $recruit->status = 0;
+                $recruit->save();
+            }
+        }
+        
         return view('admin.recruit.index',compact('recruits'));
     }
 
@@ -250,6 +258,8 @@ class RecruitController extends Controller
      */
     public function process($id, $app_id, Request $request)
     {
+        $recruit = Recruit::findOrFail($id);
+
         $action = $request->input('action');
 
         $teacher = Teacher::find($app_id);
@@ -262,6 +272,8 @@ class RecruitController extends Controller
             $teacher->save();
             $user->user_type = 'teacher';
             $user->save();
+            $recruit->accept_person += 1;
+            $recruit->save();
 
         } elseif ($action === 'reject') {
             $teacher->status = 'Rejected';
@@ -273,10 +285,7 @@ class RecruitController extends Controller
             return back()->withInput();
         }
 
-        $recruit = Recruit::findOrFail($id);
-            $teachers = $recruit->teachers;
-            return view('admin.recruit.applicant',compact('recruit','teachers'));
-        $recruit = Recruit::findOrFail($id);
+        
             $teachers = $recruit->teachers;
             return view('admin.recruit.applicant',compact('recruit','teachers'));
     }

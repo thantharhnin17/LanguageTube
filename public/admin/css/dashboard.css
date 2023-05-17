@@ -772,7 +772,7 @@
 	font-size:24px;
 	line-height:28px;
 	font-weight:500;
-	position:absolute;
+	/* position:absolute; */
 	right:20px;
 	top:20px;
 }
@@ -1905,9 +1905,10 @@
 .wc-item{
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 }
 .wc-icon{
-	font-size: 30px;
+	font-size: 38px;
 }
 .wc-stats{
 	font-size: 30px;

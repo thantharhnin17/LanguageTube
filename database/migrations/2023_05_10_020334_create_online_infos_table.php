@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('meeting_link');
             $table->string('group_chat_link');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

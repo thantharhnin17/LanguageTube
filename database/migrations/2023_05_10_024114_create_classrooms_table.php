@@ -22,11 +22,13 @@ return new class extends Migration
             $table->string('from');
             $table->string('to');
             $table->integer('avaliable_students');
+            $table->integer('accept_students')->default(0);
             $table->string('fee');
             $table->boolean('class_type')->default(0);
             $table->unsignedBigInteger('online_info_id')->nullable();
             $table->boolean('status')->default(1);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->unique(['course_id', 'batch_id']); // Make the combination unique
 

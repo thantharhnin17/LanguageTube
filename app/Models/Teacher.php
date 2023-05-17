@@ -14,7 +14,7 @@ class Teacher extends Model
     // Define the one-to-one relationship with the User model
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     //One(recruit) to Many(teacher)
@@ -30,10 +30,12 @@ class Teacher extends Model
     {
         return $this->belongsToMany(Level::class, 'teacher_levels');
     }
-    // public function levels()
-    // {
-    //     return $this->belongsToMany(Level::class, 'teacher_level', 'teacher_id', 'level_id');
-    // }
+
+    public function teacherLevels()
+    {
+        return $this->hasMany(TeacherLevel::class);
+    }
+
 
     //One to Many
     //Teacher can have many certificates

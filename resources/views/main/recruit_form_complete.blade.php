@@ -1,6 +1,6 @@
 @extends('layouts.main_layout')
 
-@section('title', 'Classroom Form')
+@section('title', 'Recruitform')
 
 @section('content')
 <!-- Content -->
@@ -9,7 +9,7 @@
     <div class="page-banner ovbl-dark" style="background-image:url(assets/images/banner/banner2.jpg);">
         <div class="container">
             <div class="page-banner-entry">
-                <h1 class="text-white">Classroom Purchasment Complete</h1>
+                <h1 class="text-white">Recruitment Form Complete</h1>
              </div>
         </div>
     </div>
@@ -18,9 +18,9 @@
         <div class="container">
             <ul class="list-inline">
                 <li><a href="{{url('/')}}">Home</a></li>
-                <li><a href="{{url('classrooms')}}">Classrooms</a></li>
-                {{-- <li><a href="{{url('classrooms')}}">Classroom Detail</a></li> --}}
-                <li>Classroom Form Complete</li>
+                <li><a href="{{url('recruits')}}">Recruitments</a></li>
+                {{-- <li><a href="{{url('recruits/recruit_details/'.$recruit_id) }}}">Recruitment Details</a></li> --}}
+                <li>Recruitment Form Complete</li>
             </ul>
         </div>
     </div>
@@ -34,17 +34,21 @@
                     <div class="col-lg-8 col-xl-6">
                       <div class="card rounded-3">
                         <div class="card-body p-4 p-md-5">
-                          <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2 text-center text-success">
-                            <i class="fa-regular fa-circle-check text-success"></i>
-                            Classroom Parchasement Is Completed
-                            </h3>
               
-                        @if(session('error_message'))
-                            <div class="alert alert-danger">{{session('error_message')}}</div>
-                        @endif
-                        @if(session('success_message'))
-                            <div class="alert alert-success">{{session('success_message')}}</div>
-                        @endif
+                        @if(isset($error_message))
+                            <div class="alert alert-danger">
+                                <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2 text-center text-success">
+                                    {{$error_message}}
+                                </h3>
+                            </div>
+                          @endif
+                          @if(isset($success_message))
+                            <div class="alert alert-danger">
+                                <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2 text-center text-success">
+                                    {{$success_message}}
+                                </h3>
+                            </div>
+                          @endif
           
                           <div class="d-flex justify-content-center">
                               <a href="/" >

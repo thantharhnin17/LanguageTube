@@ -176,8 +176,7 @@
                                                 <div class="clearfix">
                                                     <ul id="masonry" class="ttr-gallery-listing magnific-image row">
                                                         @foreach ($classrooms as $classroom)
-                                                            <li
-                                                                class="action-card col-xl-4 col-lg-6 col-md-12 col-sm-6">
+                                                            <li class="action-card col-xl-4 col-lg-6 col-md-12 col-sm-6">
                                                                 <div class="cours-bx">
                                                                     <div class="action-box">
                                                                         <img src="{{ asset('storage/img/' . $classroom->course->course_img) }}"
@@ -201,7 +200,8 @@
                                                                     </div>
                                                                     <div class="cours-more-info">
                                                                         <div class="price">
-                                                                            <h5>KS {{ $classroom->fee }}</h5>
+                                                                            <h5>KS {{ number_format($classroom->fee) }}
+                                                                            </h5>
                                                                         </div>
                                                                         <a href="{{ route('user.profile.stuList', ['id' => $user->id, 'class_id' => $classroom]) }}"
                                                                             class="btn">View Student List</a>

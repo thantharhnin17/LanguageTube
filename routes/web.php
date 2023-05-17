@@ -63,22 +63,6 @@ Route::get('/profile/{id}/profile_stuList/{class_id}', [UserController::class, '
 Route::put('/profile/{id}', [UserController::class, 'profileUpdate'])->name('user.profile.update');
 Route::put('/profile/{id}/update-password', [UserController::class, 'updatePassword'])
     ->name('user.profile.updatePassword');
-// Route::get('recruit/{id}/applicants/{app_id}',[RecruitController::class, 'process'])->name('recruit.process');
-
-//////////Login////////////
-// Route::get('/register', function () {
-//         return view('register');
-//     });
-// Route::get('/register/admin', 'Auth\RegisterController@showAdminRegistrationForm')->name('register.admin');
-// Route::post('/register/admin', 'Auth\RegisterController@registerAdmin')->name('register.admin.submit');
-
-// // 'Auth\RegisterController@showStudentRegistrationForm'
-// Route::get('/register/student', [RegisterController::class, 'showStudentRegistrationForm'])->name('register.student');
-// Route::post('/register/student', [RegisterController::class, 'registerStudent'])->name('register.student.submit');
-
-// Route::get('/register/teacher', [RegisterController::class, 'showTeacherRegistrationForm'])->name('register.teacher');
-// Route::get('/register/teacher/get-teach-levels/{id}',[RegisterController::class, 'getLevels']);
-// Route::post('/register/teacher', [RegisterController::class, 'registerTeacher'])->name('register.teacher.submit');
 
 
 //////////Backend/////////////
@@ -88,6 +72,8 @@ Auth::routes();
 Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function(){
 
     Route::get('/home', [DashboardController::class, 'index'])->name('home');
+    Route::get('/home/monthlyStudent',[DashboardController::class,'showMonthlyStudent'])->name('dashboard.monthly_student');
+    Route::get('/home/monthlyLanguage',[DashboardController::class,'showMonthlyLanguage'])->name('dashboard.monthly_language');
 
     //////////Language////////////
     Route::resource('language', LanguageController::class);

@@ -50,6 +50,7 @@
                               <th>Phone</th>
                               <th>Age</th>
                               <th>Gender</th>
+                              <th>Teach Language</th>
                               <th>Work Type</th>
                               <th>Work Time</th>
                               <th></th>
@@ -72,6 +73,8 @@
                                         {{ $dob->diffInYears(\Carbon\Carbon::now()) }}
                                     </td>
                                     <td>{{$user->gender}}</td>
+
+                                    <td>{{$user->teacher->levels->first()->language->language_name}}</td>
 
                                     <td>
                                         @if ($user->teacher->type == 0)
@@ -115,7 +118,7 @@
           
                             </tbody>
                             
-                          </table>
+                        </table>
                     </div>
                 </div>
             </div>

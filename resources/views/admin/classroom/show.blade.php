@@ -84,7 +84,7 @@
                                         </div>
             
                                         <div class="course-price">
-                                            <h4 class="price">KS {{$classroom->fee}}</h4>
+                                            <h4 class="price">KS {{number_format($classroom->fee)}}</h4>
                                         </div>	
                                         <div class="course-buy-now text-center">
                                             @if (Auth::check())

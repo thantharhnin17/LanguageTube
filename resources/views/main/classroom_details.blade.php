@@ -82,7 +82,7 @@
                                     <li><i class="ti-layout-media-overlay-alt"></i> <span class="label">Type</span> 
                                         <span class="value">
                                             @if ($classroom->class_type == 0)
-                                                On-Compus
+                                                On-Campus
                                             @else
                                                 Online
                                             @endif
@@ -92,7 +92,7 @@
                             </div>
 
                             <div class="course-price">
-                                <h4 class="price">KS {{$classroom->fee}}</h4>
+                                <h4 class="price">KS {{number_format($classroom->fee)}}</h4>
                             </div>	
                             <div class="course-buy-now text-center">
                                 @if (Auth::check())

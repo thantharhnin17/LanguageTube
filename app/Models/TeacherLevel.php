@@ -13,11 +13,13 @@ class TeacherLevel extends Model
 
     public function teacher()
     {
-        return $this->belongsTo(Teacher::class);
+        return $this->belongsTo(Teacher::class, 'teacher_id');
     }
 
     public function level()
     {
         return $this->belongsTo(Level::class);
     }
+
+    
 }

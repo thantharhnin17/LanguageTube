@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('batch_name');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -97,13 +97,15 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="col-12 col-md-3">CV Form</div>
-                                <div class="col-12 col-md-9"><img src="{{ asset('storage/img/' . $teacher->cv_form) }}" width="100px" height="100px" /></div>
+                                <div class="col-12 col-md-9">
+                                    <a style="text-decoration: underline;" onclick="return confirm('Want to download cv file?')" href="{{URL::asset('storage/img/' . $teacher->cv_form)}}" download="{{$teacher->cv_form}}">Download CV Form</a>
+                                </div>
                             </div>
                             <div class="row mb-3">
                                 <div class="col-12 col-md-3">Certificates / Degrees</div>
                                 <div class="col-12 col-md-9">
                                     @foreach($teacher->teacher_certificates as $tc)
-                                        <img src="{{ asset('storage/img/' . $tc->certi_img) }}" width="100px" height="100px" />
+                                        <img src="{{ asset('storage/img/' . $tc->certi_img) }}" width="auto" height="auto" /><br>
                                     @endforeach
                                 </div>
                             </div>

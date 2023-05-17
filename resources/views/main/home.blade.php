@@ -66,7 +66,7 @@
                             </div>
                             <div class="cours-more-info">
                                 <div class="price">
-                                    <h5>KS {{$classroom->fee}}</h5>
+                                    <h5>KS {{number_format($classroom->fee)}}</h5>
                                 </div>
                                 <a href="{{url('classrooms/classroom_details/'.$classroom->id) }}" class="btn">Read More</a>
                             </div>

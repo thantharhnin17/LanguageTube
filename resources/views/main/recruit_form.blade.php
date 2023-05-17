@@ -18,8 +18,8 @@
         <div class="container">
             <ul class="list-inline">
                 <li><a href="{{url('/')}}">Home</a></li>
-                <li>Recruitments</li>
-                <li>Recruitment Details</li>
+                <li><a href="{{url('recruits')}}">Recruitments</a></li>
+                <li><a href="{{url('recruits/recruit_details/'.$recruit->id) }}}">Recruitment Details</a></li>
                 <li>Recruitment Form</li>
             </ul>
         </div>
@@ -191,23 +191,12 @@
                                     </div>
                                 </div>
 
-                                {{-- <div class="col-lg-12">
-                                    <div class="form-group level-div" id="level-div">
-                                        <label class="form-label">{{ __('Teach Level') }}</label><br>
-                                        @foreach ($levels as $level)
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" name="level[]" value="{{ $level->id }}">
-                                                <label class="form-check-label" for="level[]">{{ $level->level_name }}</label>
-                                            </div>
-                                        @endforeach 
-                                    </div>
-                                </div> --}}
-
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="col-form-label">{{ __('CV Form') }}</label>
                                         <div>
-                                            <input name="cv_form" type="file" class="form-control-file" value="">
+                                            <input name="cv_form" type="file" class="form-control-file" value="" accept=".pdf,.doc,.docx">
+                                            <span>Please upload .pdf,.doc,.docx file</span>
                                         </div>
                                     </div>
                                 </div>
@@ -239,7 +228,7 @@
             
             
                                 <div class="col-lg-12 m-b30 d-flex justify-content-center">
-                                    <button type="button" id="reset" class="btn button-md mr-4">Reset</button>
+                                    <a href="{{ redirect()->back()->getTargetUrl() }}" class="btn btn-secondary button-md mr-2">Back</a>
                                     <button name="submit" type="submit" value="Submit" class="btn button-md">{{ __('Apply Job') }}</button>
                                 </div>
                                 

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('payImg');
 
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('classroom_student_id')->references('id')->on('classroom_students')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('payment_method_id')->references('id')->on('payment_methods')->onDelete('cascade')->onUpdate('cascade');

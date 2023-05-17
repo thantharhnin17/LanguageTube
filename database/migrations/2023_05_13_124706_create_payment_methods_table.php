@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('accNo');
             $table->string('logo');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -30,8 +30,6 @@
                               <th>#</th>
                               <th>Image</th>
                               <th>Name</th>
-                              <th>Summary</th>
-                              <th>Description</th>
                               <th>Language</th>
                               <th>Level</th>
                               <th></th>
@@ -44,8 +42,6 @@
                                     <td>{{$no++}}</td>
                                     <td><img src="{{ asset('storage/img/' . $course->course_img) }}" width="100px" height="100px" /></td>
                                     <td>{{$course->course_name}}</td>
-                                    <td><p> {!! $course->summary !!} </p></td>
-                                    <td><p> {!! $course->description !!} </p></td>
                                     <td>{{$course->level->language->language_name}}</td>
                                     <td>{{$course->level->level_name}}</td>
                                     <td class="tb-action">

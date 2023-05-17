@@ -57,7 +57,7 @@ class User extends Authenticatable
     // Define the one-to-one relationship with the Teacher model
     public function teacher()
     {
-        return $this->hasOne(Teacher::class);
+        return $this->hasOne(Teacher::class, 'user_id');
     }
 
     // One to Many
@@ -91,4 +91,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(PaymentConfirm::class);
     }
+
+    public function teacherLevels()
+{
+    return $this->hasMany(TeacherLevel::class);
+}
+
 }

@@ -99,7 +99,7 @@
                                         @endif
                                     @endforeach
                                     <li><i class="ti-user"></i> <span class="label">Teacher</span> <span class="value">{{$classroom->teacher->name}}</span></li>
-                                    <li><i class="ti-money"></i> <span class="label">Fee</span> <span class="value">{{$classroom->fee}}</span></li>
+                                    <li><i class="ti-money"></i> <span class="label">Fee</span> <span class="value">{{number_format($classroom->fee)}}</span></li>
 
                                 </ul>
                             </div>

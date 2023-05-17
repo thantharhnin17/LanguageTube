@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('level_id');
 
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('level_id')->references('id')->on('levels')->onDelete('cascade')->onUpdate('cascade');

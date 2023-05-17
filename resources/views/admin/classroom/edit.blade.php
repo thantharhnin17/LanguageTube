@@ -140,10 +140,10 @@
                                     <label class="col-form-label">Time</label>
                                     <div>
                                         <label for="from">From:</label>
-                                        <input type="time" id="from" name="from" value="{{ $classroom->from }">
+                                        <input type="time" id="from" name="from" value="{{ $classroom->from }}">
 
                                         <label for="to">To:</label>
-                                        <input type="time" id="to" name="to" value="{{ $classroom->to }">
+                                        <input type="time" id="to" name="to" value="{{ $classroom->to }}">
                                     </div>
                                 </div>
 

@@ -24,7 +24,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::where('user_type', 'user')->get();
+        $users = User::where('user_type', 'user')->orderByDesc('id')->get();
         return view('admin.user.show',compact('users'));
     }
 

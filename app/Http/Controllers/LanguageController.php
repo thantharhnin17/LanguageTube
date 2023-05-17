@@ -24,7 +24,7 @@ class LanguageController extends Controller
      */
     public function index()
     {
-        $languages = Language::all();
+        $languages = Language::orderByDesc('id')->get();
         $levels = Level::all();
         return view('admin.language.show',compact('languages', 'levels'));
     }

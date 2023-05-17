@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('status')->default('Pending')->nullable();
 
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('recruit_id')->references('id')->on('recruits')->onUpdate('cascade');
