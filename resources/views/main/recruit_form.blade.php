@@ -217,7 +217,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-12">
+                                <div class="col-lg-12 ml-4">
                                     <div class="form-group">
                                         <input class="form-check-input" type="checkbox" name="agree" id="agree" required>
                                         <label class="form-check-label" for="agree">

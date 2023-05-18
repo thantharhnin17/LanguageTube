@@ -42,18 +42,8 @@ class DashboardController extends Controller
             $allFee += $classroom->fee * $classroom->accept_students;
         }
 
-        // dd($allFee);
-
-        // $allFeeStr = (string) $allFee; // Convert number to string
-        // $zeroCount = substr_count($allFeeStr, '0'); // Count the number of zeros
-        // if ($zeroCount > 4) {
-        //     $formattedFee = number_format($allFee/1000, 1); // Divide by 1000 and add 'k'
-        // } else {
-        //     $formattedFee = number_format($allFee); // Format the number with commas
-        // }
 
         $integerFee = number_format($allFee / 1000, 1);
-        // $integerFee = (int) $allFee; // Convert to integer
 
         // Get the count of users
         $userCount = User::count();

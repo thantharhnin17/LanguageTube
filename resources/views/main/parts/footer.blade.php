@@ -51,10 +51,21 @@
                             <div class="widget footer_widget">
                                 <h5 class="footer-title">School</h5>
                                 <ul>
-                                    <li><a href="{{url('/')}}">Home</a></li>
-                                    <li><a href="all.html">All Courses</a></li>
-                                    <li><a href="about-1.html">About</a></li>
-                                    <li><a href="contact-1.html">Contact</a></li>
+                                    <li class="{{ request()->is('/') ? 'active' : '' }}">
+                                        <a href="{{url('/')}}">Home</a>
+                                    </li>
+                                    <li class="{{ request()->is('classrooms') ? 'active' : '' }}">
+                                        <a href="{{url('classrooms')}}">All Classrooms</a>
+                                    </li>
+                                    <li class="{{ request()->is('recruits') ? 'active' : '' }}">
+                                        <a href="{{url('recruits')}}">Recruitment</a>
+                                    </li>
+                                    <li class="{{ request()->is('about') ? 'active' : '' }}">
+                                        <a href="{{url('about')}}">About</a>
+                                    </li>
+                                    <li class="{{ request()->is('contact') ? 'active' : '' }}">
+                                        <a href="{{url('contact')}}">Contact Us</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -69,24 +80,6 @@
                                     <li><a href="profile.html">Chinese</a></li>
                                 </ul>
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-12 col-sm-12 footer-col-4">
-                    <div class="widget">
-                        <h5 class="footer-title">Sign Up For A Newsletter</h5>
-                        <p class="text-capitalize m-b20">Weekly Breaking news analysis and cutting edge advices on job searching.</p>
-                        <div class="subscribe-form m-b20">
-                            <form class="subscription-form" action="http://educhamp.themetrades.com/demo/assets/script/mailchamp.php" method="post">
-                                <div class="ajax-message"></div>
-                                <div class="input-group">
-                                    <input name="email" required="required"  class="form-control" placeholder="Your Email Address" type="email">
-                                    <span class="input-group-btn">
-                                        <button name="submit" value="Submit" type="submit" class="btn"><i class="fa fa-arrow-right"></i></button>
-                                    </span> 
-                                </div>
-                            </form>
                         </div>
                     </div>
                 </div>

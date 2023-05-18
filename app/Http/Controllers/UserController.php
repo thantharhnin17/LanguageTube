@@ -225,9 +225,9 @@ class UserController extends Controller
                 'phone'=> 'required',
                 'dob' => 'required',
                 'gender' => 'required',
-                'curPw' => '',
-                'newPw' => '',
-                'confirmPw' => '',
+                'currentPassword' => '',
+                'newPassword' => '',
+                'confirmPassword' => '',
             ]);
         
             // Validation passed
@@ -293,21 +293,20 @@ class UserController extends Controller
                     'phone'=> '',
                     'dob' => '',
                     'gender' => '',
-                    'curPw' => 'required',
-                    'newPw' => 'required|min:8',
-                    'confirmPw' => 'required|same:newPw',
+                    'currentPassword' => 'required',
+                    'newPassword' => 'required|min:8',
+                    'confirmPassword' => 'required|same:newPassword',
                 ]);
 
                 // Verify current password
-                if (!Hash::check($request->curPw, $user->password)) {
+                if (!Hash::check($request->currentPassword, $user->password)) {
 
                     session()->flash('fail_message', 'Password update Fail.Incorrect current password.');
                     return view('main.profile',compact('user','classroomStudents','paymentConfirms'));
-                        // return redirect()->back()->withErrors(['curPw' => 'Incorrect current password']);
                     }
     
                     // Update password
-                    $user->password = Hash::make($request->newPw);
+                    $user->password = Hash::make($request->newPassword);
                     $user->save();
     
                     session()->flash('success_message', 'Password update successfully.');

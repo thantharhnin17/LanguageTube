@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Recruit;
 use App\Models\Language;
 use App\Models\Classroom;
@@ -15,10 +16,15 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $languageCount = Language::all()->count();
+        $classroomCount = Classroom::all()->count();
+        $studentCount = User::where('user_type', 'student')->count();
+        $teacherCount = User::where('user_type', 'teacher')->count();
+
         $languages = Language::all()->take(4);
         $classrooms = Classroom::where('status', 1)->orderBy('id','DESC')->take(4)->get();
         $recruits = Recruit::where('status', 1)->orderBy('id','DESC')->take(3)->get();
-        return view('main.home',compact('languages','classrooms','recruits'));
+        return view('main.home',compact('languages','classrooms','recruits', 'languageCount', 'classroomCount', 'studentCount', 'teacherCount'));
     }
 
     /**

@@ -222,14 +222,12 @@ class ClassroomController extends Controller
      * get all classrooms
      */
     public function getClassrooms() {
-        $classrooms=Classroom::where('status', 1)->orderBy('id','DESC')->paginate(6);
-        // $classrooms = Classroom::where('status', 1)->orderBy('id','ASC')->get();
+        $classrooms=Classroom::where('status', 1)->orderBy('id','DESC')->get();
         $languages = Language::all();
         $courses = Course::all();
         $batches = Batch::all();
         $users = User::where('user_type', 'teacher')->get();
-        return view('main.classroom',compact('classrooms','languages', 'courses' ,'batches', 'users'))
-        ->with('i', (request()->input('page', 1) - 1) * 6);
+        return view('main.classroom',compact('classrooms','languages', 'courses' ,'batches', 'users'));
     }
 
     /**
@@ -248,8 +246,6 @@ class ClassroomController extends Controller
     {
         $classroom = Classroom::find($id);
         $payments = PaymentMethod::all();
-        // $languages = Language::all();
-        // $levels = Level::all();
         return view('main.class_form',compact('classroom', 'payments'));
     }
 
@@ -297,7 +293,7 @@ class ClassroomController extends Controller
         $paymentConfirm->save();
 
         return view('main.class_form_complete')->with('success_message', 'Payment created successfully.');
-        // return view('main.home');
+ 
     }
 
 

@@ -5,19 +5,6 @@
 @section('content')
     <!-- Content -->
     <div class="page-content bg-white">
-        {{-- @if (session('success_message'))
-            <script>
-                Swal.fire({
-                    icon: 'success',
-                    title: '{{session('success_message')}}',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    position: 'top-end',
-                    toast: true,
-            });
-            </script>      
-        @endif --}}
-
 
         <!-- inner page banner -->
         <div class="page-banner ovbl-dark" style="background-image:url(assets/images/banner/banner1.jpg);">
@@ -78,6 +65,9 @@
                                             </li>
                                         @endif
 
+                                        @if ($user->user_type == 'student')
+
+                                        @endif
 
                                         <li class="nav-item">
                                             <a class="nav-link @if ($user->user_type == 'user') active @endif"
@@ -372,9 +362,9 @@
                                                     <label class="col-12 col-sm-4 col-md-4 col-lg-3 col-form-label">Current
                                                         Password</label>
                                                     <div class="col-12 col-sm-8 col-md-8 col-lg-7">
-                                                        <input name="curPw" class="form-control" type="password"
+                                                        <input name="currentPassword" class="form-control" type="password"
                                                             value="">
-                                                        @error('curPw')
+                                                        @error('currentPassword')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
                                                             </span>
@@ -385,9 +375,9 @@
                                                     <label class="col-12 col-sm-4 col-md-4 col-lg-3 col-form-label">New
                                                         Password</label>
                                                     <div class="col-12 col-sm-8 col-md-8 col-lg-7">
-                                                        <input name="newPw" class="form-control" type="password"
+                                                        <input name="newPassword" class="form-control" type="password"
                                                             value="">
-                                                        @error('newPw')
+                                                        @error('newPassword')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
                                                             </span>
@@ -398,8 +388,8 @@
                                                     <label class="col-12 col-sm-4 col-md-4 col-lg-3 col-form-label">Re Type
                                                         New Password</label>
                                                     <div class="col-12 col-sm-8 col-md-8 col-lg-7">
-                                                        <input class="form-control" type="password" value="">
-                                                        @error('newPw')
+                                                        <input name="confirmPassword" class="form-control" type="password" value="">
+                                                        @error('confirmPassword')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
                                                             </span>

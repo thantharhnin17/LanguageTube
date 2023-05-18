@@ -90,7 +90,7 @@ class BatchController extends Controller
      */
     public function destroy(string $id)
     {
-        $batch= Batch::find($id);
+        $batch= Batch::findOrFail($id);
         $batch->delete();
         return redirect()->route('batch.index')->with('success_message','Batch has been deleted');
         // return redirect('/batch')->with('success_message', 'Batch created successfully');

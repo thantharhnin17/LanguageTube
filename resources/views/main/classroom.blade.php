@@ -89,7 +89,7 @@
 
                         </ul>
 
-                        {{ $classrooms->links('layouts.paginationlinks') }}
+                        {{-- {{ $classrooms->links('layouts.paginationlinks') }} --}}
 
                         
                     </div>

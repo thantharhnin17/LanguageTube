@@ -34,8 +34,6 @@ class LanguageController extends Controller
      */
     public function create()
     {
-        // $languages = Language::all();
-        // $levels = Level::all();
         return view('admin.language.create');
     }
 
@@ -53,10 +51,6 @@ class LanguageController extends Controller
         $language = new Language();
         $language->language_name = $request->input('language_name');
         $language->save();
-        //dd($language->id);
-
-        // $level = new Level();
-        // $level->name = $request->input('levelname');
 
         $levelNames = $request->input('level_name');
         foreach ($levelNames as $ln) {
@@ -64,15 +58,6 @@ class LanguageController extends Controller
                 ['level_name' => $ln, 'language_id' => $language->id],
             ]);
         }
-
-        // $levelNames = $request->input('levelname');
-        // foreach ($levelNames as $ln) {
-        //     $level = new Level();
-        //     $level->name = $ln;
-        //     $level->language_id = $language->id;
-
-        //     $level->save();
-        // }
 
         return redirect()->route('language.index')->with('success', 'Course created successfully.');
         
@@ -101,10 +86,6 @@ class LanguageController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // $request->validate(
-        //     [
-        //         "name"=>'required',
-        //     ]);
     
         $language= Language::find($id);
         $language->language_name=request('language_name');
@@ -118,21 +99,7 @@ class LanguageController extends Controller
             );
         }
 
-        // $levelIds = $request->input('levelid');
-        // foreach($levelIds as $levelId){
-        //     dd($levelId);
-        // }
-
-        // $levelIds = $request->input('levelid');
-        // foreach($levelIds as $levelId){
-        //     $lel = Level::where('id', $levelId)->get('name');;
-        //     // dd($lel);
-        //     $level = Level::updateOrCreate(
-        //                 ['id' => $levelId, 'name' => $lel, 'language_id' => $language->id], 
-        //                 ['name' => $lel, 'language_id' => $language->id]
-        //             );
-
-        // }
+        
         
 
         return redirect()->route('language.index');

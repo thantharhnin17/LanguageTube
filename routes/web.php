@@ -38,11 +38,6 @@ Route::get('/recruits/recruit_details/{id}/recruit_form/',[RecruitController::cl
 //////////Teacher Apply////////////
 Route::put('/recruits/recruit_details/{id}/recruit_form/', [TeacherController::class, 'apply'])->name('apply.teacher.submit');
 
-//////////Home////////////
-// Route::get('/', function () {
-//     return view('home');
-// });
-// Route::get('/', [HomeController::class, 'index']);
 
 //////////Classroom////////////
 Route::get('/classrooms', [ClassroomController::class, 'getClassrooms']);
@@ -69,7 +64,7 @@ Route::put('/profile/{id}/update-password', [UserController::class, 'updatePassw
 
 Auth::routes();
 
-Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function(){
+Route::group(['middleware' => (['auth', 'isAdmin']), 'prefix' => 'admin'], function(){
 
     Route::get('/home', [DashboardController::class, 'index'])->name('home');
     Route::get('/home/monthlyStudent',[DashboardController::class,'showMonthlyStudent'])->name('dashboard.monthly_student');
@@ -77,8 +72,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function(){
 
     //////////Language////////////
     Route::resource('language', LanguageController::class);
-    // Route::get('language/create',[LanguageController::class, 'create']);
-    // Route::post('languages/store',[LanguageController::class, 'create'])->name('language.store');
 
     //////////Level////////////
     Route::resource('Level', LevelController::class);
@@ -121,7 +114,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function(){
     //////////Teacher////////////
     Route::resource('teacher', TeacherController::class);
     Route::get('teacher/get-levels/{id}',[TeacherController::class, 'getLevels']);
-    // Route::get('teacher/teacher/{id}/edit/get-levels/{id}',[TeacherController::class, 'getLevels']);
 
 });
 

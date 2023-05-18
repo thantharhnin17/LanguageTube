@@ -77,7 +77,6 @@
 
                         </ul>
 
-                        {{ $recruits->links('layouts.paginationlinks') }}
 
                         
                     </div>

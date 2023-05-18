@@ -9,7 +9,7 @@
     <div class="page-banner ovbl-dark" style="background-image:url(assets/images/banner/banner3.jpg);">
         <div class="container">
             <div class="page-banner-entry">
-                <h1 class="text-white">About Us 2</h1>
+                <h1 class="text-white">About Us </h1>
              </div>
         </div>
     </div>
@@ -17,7 +17,7 @@
         <div class="container">
             <ul class="list-inline">
                 <li><a href="#">Home</a></li>
-                <li>About Us 2</li>
+                <li>About Us </li>
             </ul>
         </div>
     </div>

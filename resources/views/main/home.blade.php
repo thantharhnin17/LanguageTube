@@ -141,33 +141,33 @@
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6 m-b30">
                             <div class="counter-style-1">
                                 <div class="text-white">
-                                    <span class="counter">3000</span><span>+</span>
+                                    <span class="counter">{{$languageCount}}</span><span>+</span>
                                 </div>
-                                <span class="counter-text">Completed Projects</span>
+                                <span class="counter-text">Languages</span>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6 m-b30">
                             <div class="counter-style-1">
                                 <div class="text-white">
-                                    <span class="counter">2500</span><span>+</span>
+                                    <span class="counter">{{$classroomCount}}</span><span>+</span>
                                 </div>
-                                <span class="counter-text">Happy Clients</span>
+                                <span class="counter-text">Classrooms</span>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6 m-b30">
                             <div class="counter-style-1">
                                 <div class="text-white">
-                                    <span class="counter">1500</span><span>+</span>
+                                    <span class="counter">{{$studentCount}}</span><span>+</span>
                                 </div>
-                                <span class="counter-text">Questions Answered</span>
+                                <span class="counter-text">Students</span>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6 m-b30">
                             <div class="counter-style-1">
                                 <div class="text-white">
-                                    <span class="counter">1000</span><span>+</span>
+                                    <span class="counter">{{$teacherCount}}</span><span>+</span>
                                 </div>
-                                <span class="counter-text">Ordered Coffee's</span>
+                                <span class="counter-text">Teachers</span>
                             </div>
                         </div>
                     </div>

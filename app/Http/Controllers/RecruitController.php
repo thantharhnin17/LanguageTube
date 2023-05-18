@@ -16,10 +16,7 @@ class RecruitController extends Controller
      *
      * @return void
      */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+    
     /**
      * Display a listing of the resource.
      */
@@ -198,19 +195,15 @@ class RecruitController extends Controller
             $recruit->status = 1; 
         }
         $recruit->save();
-        // return redirect()->route('recruit.index')
-        //     ->with('success_message', 'Status update successfully.');
     }
 
     /**
      * get all recruitment
      */
     public function getRecruits() {
-        $recruits=Recruit::where('status', 1)->latest()->paginate(6);
-        // $recruits = Recruit::all();
+        $recruits=Recruit::where('status', 1)->orderBy('id','DESC')->get();
         $languages = Language::all();
-        // return $recruits;
-        return view('main.recruits',compact('recruits', 'languages'))->with('i', (request()->input('page', 1) - 1) * 6);
+        return view('main.recruits',compact('recruits', 'languages'));
     }
 
     /**
