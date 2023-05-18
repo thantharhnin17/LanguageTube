@@ -217,6 +217,7 @@ class UserController extends Controller
     {
         $classroomStudents = ClassroomStudent::where('user_id', $id)->get();
         $paymentConfirms = PaymentConfirm::all();
+        $classrooms = Classroom::where('user_id', $id)->get();
         
         try {
             $validator = $request->validate([
@@ -268,14 +269,27 @@ class UserController extends Controller
             $user->save();
 
             session()->flash('success_message', 'Student update successfully.');
-            return view('main.profile',compact('user','classroomStudents','paymentConfirms'));
+            if($user->user_type == "student"){
+                return view('main.profile',compact('user','classroomStudents','paymentConfirms'));
+            }elseif($user->user_type == "teacher"){
+                return view('main.profile',compact('user','classrooms'));
+            }else{
+                return view('main.profile',compact('user'));
+            }
 
             } catch (\Illuminate\Validation\ValidationException $e) {
                 // Validation failed
                 $errors = $e->validator->errors();
             
-                session()->flash('fail_message', $errors);
+                session()->flash('fail_message', $errors);                
+            }
+
+            if($user->user_type == "student"){
                 return view('main.profile',compact('user','classroomStudents','paymentConfirms'));
+            }elseif($user->user_type == "teacher"){
+                return view('main.profile',compact('user','classrooms'));
+            }else{
+                return view('main.profile',compact('user'));
             }
 
         }
@@ -285,6 +299,7 @@ class UserController extends Controller
             $user = User::findOrFail($id);
             $classroomStudents = ClassroomStudent::where('user_id', $id)->get();
             $paymentConfirms = PaymentConfirm::all();
+            $classrooms = Classroom::where('user_id', $id)->get();
 
             try {
                 $validator = $request->validate([
@@ -302,7 +317,6 @@ class UserController extends Controller
                 if (!Hash::check($request->currentPassword, $user->password)) {
 
                     session()->flash('fail_message', 'Password update Fail.Incorrect current password.');
-                    return view('main.profile',compact('user','classroomStudents','paymentConfirms'));
                     }
     
                     // Update password
@@ -310,16 +324,22 @@ class UserController extends Controller
                     $user->save();
     
                     session()->flash('success_message', 'Password update successfully.');
-                    return view('main.profile',compact('user','classroomStudents','paymentConfirms'));
 
             } catch (\Illuminate\Validation\ValidationException $e) {
                 // Validation failed
                 $errors = $e->validator->errors();
             
                 session()->flash('fail_message', $errors);
-                return view('main.profile',compact('user','classroomStudents','paymentConfirms'));
             }
-                       
+
+
+              if($user->user_type == "student"){
+                    return view('main.profile',compact('user','classroomStudents','paymentConfirms'));
+                }elseif($user->user_type == "teacher"){
+                    return view('main.profile',compact('user','classrooms'));
+                }else{
+                    return view('main.profile',compact('user'));
+                }         
 
             
         }

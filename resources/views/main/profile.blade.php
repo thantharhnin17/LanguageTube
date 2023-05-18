@@ -36,7 +36,7 @@
                                 <div class="alert alert-success">{{ session('success_message') }}</div>
                             @endif
 
-                            @if (session('fail_message'))
+                            @if (session('fail_message') && !session('success_message'))
                                 <div class="alert alert-danger">{{ session('fail_message') }}</div>
                             @endif
                         </div>
