@@ -52,11 +52,11 @@
                                             <td><img src="{{ asset('storage/img/' . $payment->logo) }}" width="50px" height="50px" /></td>
                                             <td>{{$payment->accName}}</td>
                                             <td>
-                                                <p id="copy-text">{{ $payment->accNo }}</p>
+                                                <p id="copy-text{{$payment->id}}">{{ $payment->accNo }}</p>
                                             </td>
                                             <td>
-                                                <button class="copyBtn" onclick="copyText()">Copy</button><br>
-                                                <span id="toggle-text" class="copyTxt text-success" style="display: none;">Copied!</span>
+                                                <button class="copyBtn" onclick="copyText({{$payment->id}})">Copy</button><br>
+                                                <span id="toggle-text{{$payment->id}}" class="copyTxt text-success" style="display: none;">Copied!</span>
                                             </td>
 
                                         </tr>
