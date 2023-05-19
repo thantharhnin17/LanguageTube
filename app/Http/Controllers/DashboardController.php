@@ -107,7 +107,7 @@ class DashboardController extends Controller
         $allFee = 0;
 
         foreach ($classrooms as $classroom) {
-            $allFee += $classroom->fee;
+            $allFee += $classroom->fee * $classroom->accept_students;
         }
 
         $allFeeStr = (string) $allFee; // Convert number to string
@@ -201,7 +201,7 @@ class DashboardController extends Controller
         $allFee = 0;
 
         foreach ($classrooms as $classroom) {
-            $allFee += $classroom->fee;
+            $allFee += $classroom->fee * $classroom->accept_students;
         }
 
         $allFeeStr = (string) $allFee; // Convert number to string

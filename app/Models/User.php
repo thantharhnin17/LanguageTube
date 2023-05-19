@@ -48,12 +48,6 @@ class User extends Authenticatable
     ];
 
 
-    // One to One
-    // public function student()
-    // {
-    //     return $this->hasOne(Student::class);
-    // }
-
     // Define the one-to-one relationship with the Teacher model
     public function teacher()
     {
@@ -70,11 +64,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(CourseBatch::class);
     }
-
-    // public function classrooms()
-    // {
-    //     return $this->hasMany(Classroom::class);
-    // }
 
     public function payments()
     {
